@@ -108,8 +108,8 @@ Seviye  Kural                        Ceza        Açıklama
 ------  -----                        ----        --------
 1       Müsaitlik ihlali             200,000     Kapalı slota atama
 1       Müsaitlik fairness           1,000       Herkes kapalıysa tie-breaker
-1       İdeal -2 altı                140,000     Çok az nöbet alma
-1       İdeal +2 üstü                120,000     Çok fazla nöbet alma
+1       İdeal -2 altı                60,000      Çok az nöbet alma
+1       İdeal +2 üstü                60,000      Çok fazla nöbet alma
 1       Sıfır nöbet                  80,000      0 nöbet kalma
 2       3+ ardışık gün               7,000       Üst üste 3 gün nöbet
 3       İdeal ±1 soft                4,000       İdealden ±1 sapma

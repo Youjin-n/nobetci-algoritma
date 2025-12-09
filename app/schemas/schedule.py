@@ -15,12 +15,12 @@ from pydantic import BaseModel, Field
 
 class DutyType(str, Enum):
     """Nöbet türleri - Hafta içi: A/B/C, Hafta sonu: D/E/F"""
-    A = "A"  # 08:00-17:00 (gündüz - desk/operator ayrımı var)
-    B = "B"  # 17:00-00:00 (akşam)
-    C = "C"  # 00:00-08:00 (gece)
-    D = "D"  # Hafta sonu 08:00-17:00
-    E = "E"  # Hafta sonu 17:00-00:00
-    F = "F"  # Hafta sonu 00:00-08:00 (gece)
+    A = "A"  # 08:30-17:30 (gündüz - desk/operator ayrımı var)
+    B = "B"  # 17:30-23:30 (akşam)
+    C = "C"  # 23:30-08:30 (gece)
+    D = "D"  # Hafta sonu 08:00-16:00
+    E = "E"  # Hafta sonu 16:00-23:30
+    F = "F"  # Hafta sonu 23:30-08:00 (gece)
 
 
 class DayType(str, Enum):

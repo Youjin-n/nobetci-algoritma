@@ -138,8 +138,8 @@ interface AÖScheduleResponse {
 |-------|------|---------|-------------|
 | **1** | Unavailability violation | 200,000 | Assigning to blocked slot |
 | **1** | Unavailability fairness | 1,000 | Tie-breaker when all blocked |
-| **1** | Below ideal -2 | 140,000 | Getting too few shifts |
-| **1** | Above ideal +2 | 120,000 | Getting too many shifts |
+| **1** | Below ideal -2 | 60,000 | Getting too few shifts |
+| **1** | Above ideal +2 | 60,000 | Getting too many shifts |
 | **1** | Zero shifts | 80,000 | Someone getting 0 shifts |
 | **2** | 3+ consecutive days | 7,000 | Shifts on 3+ consecutive days |
 | **3** | Ideal ±1 soft | 4,000 | ±1 from ideal shift count |
