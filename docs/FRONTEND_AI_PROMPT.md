@@ -193,35 +193,75 @@ Same `ScheduleResponse` format as main endpoint. `seatRole` contains "DESK" or "
 
 ---
 
-## Duty Types Explained
+## AÖ (Asistan Öğrenci) Algorithm Rules
 
-| Type | Time | Day |
-|------|------|-----|
-| **A** | 08:00-17:00 | Weekday (uses DESK/OPERATOR roles) |
-| **B** | 17:00-00:00 | Weekday evening |
-| **C** | 00:00-08:00 | Weekday **night** |
-| **D** | 08:00-17:00 | Weekend morning |
-| **E** | 17:00-00:00 | Weekend evening |
-| **F** | 00:00-08:00 | Weekend **night** |
+### Duty Types
 
----
+| Type | Time | Day | Description |
+|------|------|-----|-------------|
+| **A** | 08:30-17:30 | Weekday | Daytime (DESK/OPERATOR roles) |
+| **B** | 17:30-23:30 | Weekday | Evening |
+| **C** | 23:30-08:30 | Weekday | **Night** |
+| **D** | 08:00-16:00 | Weekend | Morning |
+| **E** | 16:00-23:30 | Weekend | Evening |
+| **F** | 23:20-08:00 | Weekend | **Night** |
 
-## Algorithm Rules (Priority Order)
+### A-Shift DESK/OPERATOR Distribution (AÖ)
+
+| People | DESK | OPERATOR |
+|--------|------|----------|
+| 1 | 0 | 1 |
+| 2 | 1 | 1 |
+| 3 | 1 | 2 |
+| 4 | 2 | 2 |
+| 5 | 3 | 2 |
+| 6 | 3 | 3 |
+| 7 | 4 | 3 |
 
 ### Hard Constraints (Never Violated)
-1. **Coverage**: Every seat in every slot must be filled
-2. **Forbidden transitions**: No C→A, C→D, F→A, F→D (no morning after night)
-3. **Max consecutive**: No 3+ shifts in consecutive days
-4. **Max shifts**: No one gets more than base+2 shifts
 
-### Soft Constraints (Optimized)
-| Priority | Rule | Penalty |
-|----------|------|---------|
-| 1 | Respect unavailability | 200,000 |
-| 2 | Keep shifts ≤ base+1 | 60,000-80,000 |
-| 3 | Balance A/B/C/Weekend/Night counts | 1,000-3,000 |
-| 4 | Avoid weekly clustering | 100 |
-| 5 | Honor preferences (likesNight, etc.) | 5-10 |
+1. **Coverage**: Every seat in every slot must be filled
+2. **Forbidden transitions**: No C→A, C→D, F→A, F→D (no morning after night shift)
+3. **Max 2 shifts/day**: Same day max 2 shifts (ABC or DEF auto-blocked)
+4. **Max shifts**: No one gets more than base+2 shifts (hard limit)
+
+### Soft Penalties (Priority Order)
+
+| Level | Rule | Penalty | Description |
+|-------|------|---------|-------------|
+| **1** | Unavailability violation | 200,000 | Assigning to blocked slot |
+| **1** | Unavailability fairness | 1,000 | Tie-breaker when all blocked |
+| **1** | Below ideal -2 | 140,000 | Getting too few shifts |
+| **1** | Above ideal +2 | 120,000 | Getting too many shifts |
+| **1** | Zero shifts | 80,000 | Someone getting 0 shifts |
+| **2** | 3+ consecutive days | 7,000 | Shifts on 3+ consecutive days |
+| **3** | Ideal ±1 soft | 4,000 | Light penalty for ±1 from ideal |
+| **3** | History fairness | 3,000 | Historical balance (expectedTotal) |
+| **3** | Duty type fairness | 1,000 | A/B/C counts balanced across users |
+| **3** | Night fairness | 1,000 | C+F (night) counts balanced |
+| **3** | Weekend slot fairness | 50 | D/E/F individually balanced |
+| **4** | Weekly clustering | 100 | More than 2 shifts per week |
+| **4** | Same day 2 shifts | 100 | 2 shifts on same day |
+| **4** | Consecutive nights | 100 | Back-to-back night shifts |
+| **5** | dislikesWeekend | +10 | Weekend hater gets weekend |
+| **5** | likesNight | -5 | Night lover gets night (bonus) |
+
+### Fairness Calculation (expectedTotal)
+
+```
+fark = totalAllTime - expectedTotal
+ideal = base - fark
+```
+
+**Example (Period 4, base=9):**
+
+| User | Total | Expected | Diff | Ideal |
+|------|-------|----------|------|-------|
+| Ahmet (old) | 29 | 27 | +2 | 7 (less) |
+| Ayşe (old) | 25 | 27 | -2 | 11 (more) |
+| Mehmet (new) | 0 | 0 | 0 | 9 (normal) |
+
+**New users start fair** - they don't get overloaded.
 
 ---
 
