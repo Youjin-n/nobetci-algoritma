@@ -2,200 +2,24 @@
 
 ## Overview
 
-This is a **Python FastAPI** backend service that provides optimal shift scheduling using Google OR-Tools CP-SAT constraint solver. The frontend should send scheduling data and receive optimized assignments.
+This backend provides **TWO SEPARATE scheduling algorithms**:
+
+1. **AÖ (Asistan Öğrenci) Scheduler** - Full shift distribution (A/B/C/D/E/F)
+2. **NA (Nöbetçi Asistan) Scheduler** - Half-shift distribution (MORNING/EVENING segments)
 
 **Base URL**: `https://nobeta-a-goritma.onrender.com`
 
 ---
 
-## API Endpoints
+# ALGORITHM 1: AÖ (Asistan Öğrenci) Scheduler
 
-### 1. Main Schedule Endpoint
+**Endpoint**: `POST /schedule/compute`
 
-**POST** `/schedule/compute`
+## AÖ Overview
 
-Distributes shifts for all duty types (A, B, C for weekdays; D, E, F for weekends).
+Distributes **6 different shift types** across weekdays and weekends for research assistants.
 
-#### Request Body
-
-```typescript
-interface ScheduleRequest {
-  period: {
-    id: string;              // Unique period ID
-    name: string;            // Display name (e.g., "8 Aralık - 4 Ocak 2026")
-    startDate: string;       // ISO date "YYYY-MM-DD"
-    endDate: string;         // ISO date "YYYY-MM-DD"
-  };
-  users: User[];             // Array of users to assign shifts
-  slots: Slot[];             // Array of shift slots to fill
-  unavailability: Array<{    // Users' blocked slots
-    userId: string;
-    slotId: string;
-  }>;
-}
-
-interface User {
-  id: string;
-  name: string;
-  email?: string;
-  likesNight: boolean;       // Prefers night shifts (C, F)?
-  dislikesWeekend: boolean;  // Avoids weekend shifts (D, E, F)?
-  history: {
-    weekdayCount: number;    // Total historical weekday shifts
-    weekendCount: number;    // Total historical weekend shifts
-    expectedTotal?: number;  // Expected total (for fairness calculation)
-    slotTypeCounts: {
-      A: number;             // Historical count per duty type
-      B: number;
-      C: number;
-      D: number;
-      E: number;
-      F: number;
-    };
-  };
-}
-
-interface Slot {
-  id: string;
-  date: string;              // ISO date "YYYY-MM-DD"
-  dutyType: "A" | "B" | "C" | "D" | "E" | "F";
-  dayType: "WEEKDAY" | "WEEKEND";
-  seats: Array<{
-    id: string;
-    role: "DESK" | "OPERATOR" | null;  // Role for A-shift only
-  }>;
-}
-```
-
-#### Response Body
-
-```typescript
-interface ScheduleResponse {
-  assignments: Array<{
-    slotId: string;
-    seatId: string;
-    userId: string;
-    seatRole: "DESK" | "OPERATOR" | null;
-    isExtra: boolean;        // True if user exceeded base shifts
-  }>;
-  meta: {
-    base: number;            // Base shifts per person (floor of total/users)
-    maxShifts: number;       // Highest shift count among users
-    minShifts: number;       // Lowest shift count among users
-    totalSlots: number;
-    totalAssignments: number;
-    usersAtBasePlus2: number; // Users who got base+2 shifts (soft limit)
-    unavailabilityViolations: number;  // Forced violations count
-    warnings: string[];
-    solverStatus: "OPTIMAL" | "FEASIBLE" | "INFEASIBLE" | string;
-    solveTimeMs: number;
-  };
-}
-```
-
----
-
-### 2. Senior Schedule Endpoint (Nöbetçi Asistan / NA)
-
-**POST** `/schedule/compute-senior`
-
-Distributes **A-shift segments** for "Nöbetçi Asistan" users. Each day has MORNING (08:30-13:00) and EVENING (13:00-17:30) segments.
-
-#### Segments
-
-| Segment | Time | Description |
-|---------|------|-------------|
-| **MORNING** | 08:30-13:00 | Morning half-shift |
-| **EVENING** | 13:00-17:30 | Afternoon half-shift |
-
-#### Request Body
-
-```typescript
-interface SeniorScheduleRequest {
-  period: {
-    id: string;
-    name: string;
-    startDate: string;       // "YYYY-MM-DD"
-    endDate: string;
-  };
-  users: SeniorUser[];
-  slots: SeniorSlot[];
-  unavailability: Array<{
-    userId: string;
-    slotId: string;
-  }>;
-}
-
-interface SeniorUser {
-  id: string;
-  name: string;
-  email?: string;
-  role: string;                    // "SENIOR_ASSISTANT"
-  likesMorning: boolean;           // Prefers morning segment?
-  likesEvening: boolean;           // Prefers afternoon segment?
-  history: {
-    totalAllTime: number;          // Total half-A count (all time)
-    countAAllTime: number;         // Same as totalAllTime for seniors
-    countMorningAllTime: number;   // Morning segment count
-    countEveningAllTime: number;   // Afternoon segment count
-  };
-}
-
-interface SeniorSlot {
-  id: string;
-  date: string;                    // "YYYY-MM-DD"
-  dutyType: "A";                   // Always "A"
-  segment: "MORNING" | "EVENING";  // Which half?
-  seats: Array<{
-    id: string;
-    role: "DESK" | "OPERATOR" | null;  // Can specify role or null
-  }>;
-}
-```
-
-#### NA Algorithm Rules
-
-**Hard Constraints:**
-1. Coverage: Every segment filled completely
-2. Max base+2 half-shifts per person
-3. Max 2 segments per day (morning + afternoon allowed)
-
-**Soft Penalties (Priority Order):**
-| Priority | Rule | Penalty |
-|----------|------|---------|
-| 1 | Unavailability violation | 200,000 |
-| 2 | 3+ consecutive days | 7,000 |
-| 3 | Fairness (equal distribution) | 1,000-3,000 |
-| 4 | Same day both segments | 100 |
-| 5 | Preferences (likesMorning/likesEvening) | -5 bonus |
-
-#### DESK/OPERATOR Assignment (NA)
-
-| People | DESK | OPERATOR |
-|--------|------|----------|
-| 1 | 0 | 1 |
-| 2 | 1 | 1 |
-| 3 | 2 | 1 |
-
-#### Response
-
-Same `ScheduleResponse` format as main endpoint. `seatRole` contains "DESK" or "OPERATOR".
-
----
-
-### 3. Health Check Endpoints
-
-| Endpoint | Purpose |
-|----------|---------|
-| `GET /` | API info (name, version, docs URL) |
-| `GET /schedule/health` | Main scheduler health |
-| `GET /schedule/health-senior` | Senior scheduler health |
-
----
-
-## AÖ (Asistan Öğrenci) Algorithm Rules
-
-### Duty Types
+## AÖ Duty Types
 
 | Type | Time | Day | Description |
 |------|------|-----|-------------|
@@ -206,7 +30,90 @@ Same `ScheduleResponse` format as main endpoint. `seatRole` contains "DESK" or "
 | **E** | 16:00-23:30 | Weekend | Evening |
 | **F** | 23:20-08:00 | Weekend | **Night** |
 
-### A-Shift DESK/OPERATOR Distribution (AÖ)
+## AÖ Request Schema
+
+```typescript
+interface AÖScheduleRequest {
+  period: {
+    id: string;
+    name: string;
+    startDate: string;       // "YYYY-MM-DD"
+    endDate: string;
+  };
+  users: AÖUser[];
+  slots: AÖSlot[];
+  unavailability: Array<{
+    userId: string;
+    slotId: string;
+  }>;
+}
+
+interface AÖUser {
+  id: string;
+  name: string;
+  email?: string;
+  likesNight: boolean;         // Prefers night shifts (C, F)?
+  dislikesWeekend: boolean;    // Avoids weekend shifts (D, E, F)?
+  history: {
+    totalAllTime: number;      // Total shifts all time
+    expectedTotal: number;     // Expected total for fairness
+    weekdayCount: number;
+    weekendCount: number;
+    countAAllTime: number;
+    countBAllTime: number;
+    countCAllTime: number;
+    countNightAllTime: number; // C + F
+    countWeekendAllTime: number; // D + E + F
+    slotTypeCounts: {
+      A: number;
+      B: number;
+      C: number;
+      D: number;
+      E: number;
+      F: number;
+    };
+  };
+}
+
+interface AÖSlot {
+  id: string;
+  date: string;                // "YYYY-MM-DD"
+  dutyType: "A" | "B" | "C" | "D" | "E" | "F";
+  dayType: "WEEKDAY" | "WEEKEND";
+  seats: Array<{
+    id: string;
+    role: "DESK" | "OPERATOR" | null;  // Only for A-shift
+  }>;
+}
+```
+
+## AÖ Response Schema
+
+```typescript
+interface AÖScheduleResponse {
+  assignments: Array<{
+    slotId: string;
+    seatId: string;
+    userId: string;
+    seatRole: "DESK" | "OPERATOR" | null;
+    isExtra: boolean;          // True if exceeded base+1
+  }>;
+  meta: {
+    base: number;              // Base shifts per person
+    maxShifts: number;
+    minShifts: number;
+    totalSlots: number;
+    totalAssignments: number;
+    usersAtBasePlus2: number;
+    unavailabilityViolations: number;
+    warnings: string[];
+    solverStatus: "OPTIMAL" | "FEASIBLE" | "INFEASIBLE";
+    solveTimeMs: number;
+  };
+}
+```
+
+## AÖ DESK/OPERATOR Distribution
 
 | People | DESK | OPERATOR |
 |--------|------|----------|
@@ -218,14 +125,14 @@ Same `ScheduleResponse` format as main endpoint. `seatRole` contains "DESK" or "
 | 6 | 3 | 3 |
 | 7 | 4 | 3 |
 
-### Hard Constraints (Never Violated)
+## AÖ Hard Constraints (Never Violated)
 
-1. **Coverage**: Every seat in every slot must be filled
-2. **Forbidden transitions**: No C→A, C→D, F→A, F→D (no morning after night shift)
-3. **Max 2 shifts/day**: Same day max 2 shifts (ABC or DEF auto-blocked)
-4. **Max shifts**: No one gets more than base+2 shifts (hard limit)
+1. **Coverage**: Every seat must be filled
+2. **Forbidden transitions**: C→A, C→D, F→A, F→D BANNED (no morning after night)
+3. **Max 2 shifts/day**: Same calendar day max 2 shifts
+4. **Base+2 limit**: No one gets more than base+2 shifts
 
-### Soft Penalties (Priority Order)
+## AÖ Soft Penalties
 
 | Level | Rule | Penalty | Description |
 |-------|------|---------|-------------|
@@ -235,107 +142,153 @@ Same `ScheduleResponse` format as main endpoint. `seatRole` contains "DESK" or "
 | **1** | Above ideal +2 | 120,000 | Getting too many shifts |
 | **1** | Zero shifts | 80,000 | Someone getting 0 shifts |
 | **2** | 3+ consecutive days | 7,000 | Shifts on 3+ consecutive days |
-| **3** | Ideal ±1 soft | 4,000 | Light penalty for ±1 from ideal |
-| **3** | History fairness | 3,000 | Historical balance (expectedTotal) |
-| **3** | Duty type fairness | 1,000 | A/B/C counts balanced across users |
-| **3** | Night fairness | 1,000 | C+F (night) counts balanced |
+| **3** | Ideal ±1 soft | 4,000 | ±1 from ideal shift count |
+| **3** | History fairness | 3,000 | Historical balance |
+| **3** | Duty type fairness | 1,000 | A/B/C balanced across users |
+| **3** | Night fairness | 1,000 | C+F balanced |
 | **3** | Weekend slot fairness | 50 | D/E/F individually balanced |
-| **4** | Weekly clustering | 100 | More than 2 shifts per week |
+| **4** | Weekly clustering | 100 | >2 shifts per week |
 | **4** | Same day 2 shifts | 100 | 2 shifts on same day |
-| **4** | Consecutive nights | 100 | Back-to-back night shifts |
+| **4** | Consecutive nights | 100 | Back-to-back C or F |
 | **5** | dislikesWeekend | +10 | Weekend hater gets weekend |
 | **5** | likesNight | -5 | Night lover gets night (bonus) |
 
-### Fairness Calculation (expectedTotal)
+## AÖ Fairness Calculation
 
 ```
 fark = totalAllTime - expectedTotal
 ideal = base - fark
 ```
 
-**Example (Period 4, base=9):**
-
-| User | Total | Expected | Diff | Ideal |
-|------|-------|----------|------|-------|
-| Ahmet (old) | 29 | 27 | +2 | 7 (less) |
-| Ayşe (old) | 25 | 27 | -2 | 11 (more) |
-| Mehmet (new) | 0 | 0 | 0 | 9 (normal) |
-
-**New users start fair** - they don't get overloaded.
+**New users start with expectedTotal=0, so they get normal base shifts.**
 
 ---
 
-## Example Request (TypeScript/Fetch)
+# ALGORITHM 2: NA (Nöbetçi Asistan) Scheduler
+
+**Endpoint**: `POST /schedule/compute-senior`
+
+## NA Overview
+
+Distributes **A-shift HALF segments** for senior assistants. They only work weekday daytime.
+
+## NA Segments
+
+| Segment | Time | Description |
+|---------|------|-------------|
+| **MORNING** | 08:30-13:00 | Morning half-shift |
+| **EVENING** | 13:00-17:30 | Afternoon half-shift |
+
+**NOTE**: NA does NOT have night shifts, weekend shifts, B/C/D/E/F - only A-shift halves.
+
+## NA Request Schema
 
 ```typescript
-const response = await fetch('https://nobeta-a-goritma.onrender.com/schedule/compute', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-    period: {
-      id: 'p1',
-      name: 'Aralık 2025',
-      startDate: '2025-12-01',
-      endDate: '2025-12-31'
-    },
-    users: [
-      {
-        id: 'u1',
-        name: 'Ali Yılmaz',
-        email: 'ali@example.com',
-        likesNight: false,
-        dislikesWeekend: true,
-        history: {
-          weekdayCount: 10,
-          weekendCount: 4,
-          expectedTotal: 14,
-          slotTypeCounts: { A: 3, B: 4, C: 3, D: 2, E: 1, F: 1 }
-        }
-      }
-      // ... more users
-    ],
-    slots: [
-      {
-        id: 's1',
-        date: '2025-12-01',
-        dutyType: 'A',
-        dayType: 'WEEKDAY',
-        seats: [
-          { id: 'seat1', role: 'DESK' },
-          { id: 'seat2', role: 'OPERATOR' },
-          { id: 'seat3', role: null }
-        ]
-      }
-      // ... more slots
-    ],
-    unavailability: [
-      { userId: 'u1', slotId: 's1' }
-    ]
-  })
-});
+interface NAScheduleRequest {
+  period: {
+    id: string;
+    name: string;
+    startDate: string;       // "YYYY-MM-DD"
+    endDate: string;
+  };
+  users: NAUser[];
+  slots: NASlot[];
+  unavailability: Array<{
+    userId: string;
+    slotId: string;
+  }>;
+}
 
-const result = await response.json();
-// result.assignments -> [{slotId, seatId, userId, seatRole, isExtra}, ...]
-// result.meta -> {base, maxShifts, minShifts, solverStatus, ...}
+interface NAUser {
+  id: string;
+  name: string;
+  email?: string;
+  role: string;                    // "SENIOR_ASSISTANT"
+  likesMorning: boolean;           // Prefers morning segment?
+  likesEvening: boolean;           // Prefers afternoon segment?
+  history: {
+    totalAllTime: number;          // Total half-A count
+    countAAllTime: number;         // Same as totalAllTime
+    countMorningAllTime: number;   // Morning segment count
+    countEveningAllTime: number;   // Afternoon segment count
+  };
+}
+
+interface NASlot {
+  id: string;
+  date: string;                    // "YYYY-MM-DD"
+  dutyType: "A";                   // Always "A"
+  segment: "MORNING" | "EVENING";
+  seats: Array<{
+    id: string;
+    role: "DESK" | "OPERATOR" | null;
+  }>;
+}
 ```
 
+## NA Response Schema
+
+Same structure as AÖ response. `seatRole` contains "DESK" or "OPERATOR".
+
+## NA DESK/OPERATOR Distribution
+
+| People | DESK | OPERATOR |
+|--------|------|----------|
+| 1 | 0 | 1 |
+| 2 | 1 | 1 |
+| 3 | 2 | 1 |
+
+**NOTE**: NA has different DESK/OPERATOR ratio than AÖ!
+
+## NA Hard Constraints (Never Violated)
+
+1. **Coverage**: Every segment seat must be filled
+2. **Base+2 limit**: No one gets more than base+2 half-shifts
+3. **Max 2 segments/day**: Same day max 2 (morning + afternoon OK)
+
+## NA Soft Penalties
+
+| Level | Rule | Penalty | Description |
+|-------|------|---------|-------------|
+| **1** | Unavailability violation | 200,000 | Assigning to blocked segment |
+| **1** | Above ideal +2 | 120,000 | Too many half-shifts |
+| **2** | 3+ consecutive days | 7,000 | Segments on 3+ days in a row |
+| **3** | Half-A fairness | 1,000 | Segment count balanced |
+| **3** | History fairness | 3,000 | Historical A count balanced |
+| **4** | Weekly clustering | 100 | >2 segments per week |
+| **4** | Same day both segments | 100 | Full day (morning+evening) |
+| **5** | likesMorning | -5 | Morning lover gets morning |
+| **5** | likesEvening | -5 | Afternoon lover gets afternoon |
+
+**NOTE**: NA does NOT have likesNight or dislikesWeekend - these don't apply!
+
 ---
 
-## Important Notes for Frontend
+# Health Check Endpoints
 
-1. **One slot per (date, dutyType)**: Each date has max 6 slots (A-F for weekdays, D-F for weekends)
-2. **Seats determine capacity**: `slot.seats.length` = number of people needed for that slot
-3. **History is cumulative**: Include all historical data for fair distribution
-4. **Unavailability**: Users can block specific slots; algorithm respects these unless impossible
-5. **Response validation**: Check `meta.solverStatus === "OPTIMAL"` for best solution
-6. **Weekend/weekday**: Set `dayType` based on actual day type (holidays can be WEEKEND)
-7. **Role assignment**: For A-shifts, you can specify DESK/OPERATOR roles on seats
+| Endpoint | Purpose |
+|----------|---------|
+| `GET /` | API info |
+| `GET /schedule/health` | AÖ scheduler health |
+| `GET /schedule/health-senior` | NA scheduler health |
 
 ---
 
-## Swagger/OpenAPI Docs
+# Key Differences: AÖ vs NA
 
-Interactive API documentation available at:
+| Feature | AÖ | NA |
+|---------|----|----|
+| **Endpoint** | `/schedule/compute` | `/schedule/compute-senior` |
+| **Shift types** | A, B, C, D, E, F | MORNING, EVENING only |
+| **Works weekends?** | Yes (D, E, F) | No |
+| **Night shifts?** | Yes (C, F) | No |
+| **Preferences** | likesNight, dislikesWeekend | likesMorning, likesEvening |
+| **DESK/OPERATOR** | 3p = 1D/2O | 3p = 2D/1O |
+| **Solver file** | solver.py | senior_solver.py |
+
+---
+
+# Swagger/OpenAPI
+
 - **Swagger UI**: https://nobeta-a-goritma.onrender.com/docs
 - **ReDoc**: https://nobeta-a-goritma.onrender.com/redoc
-- **OpenAPI JSON**: https://nobeta-a-goritma.onrender.com/openapi.json
