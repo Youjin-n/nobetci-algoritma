@@ -1,0 +1,141 @@
+======================================================================
+ALGORİTMA TEST SONUÇLARI
+======================================================================
+
+## AÖ - Gerçekçi Hastane
+
+| Metrik | Değer |
+|--------|-------|
+| Status | FEASIBLE |
+| Base | 9 |
+| Min/Max | 9/10 |
+| Fark | 1 |
+| Toplam Slot | 84 |
+| Toplam Atama | 228 |
+| Unavailability Violation | 0 |
+| Base+2'ye Ulaşan | 0 |
+| Çözüm Süresi | 60651.85ms |
+
+Kullanıcı Dağılımı:
+  ao_00: 9 nöbet
+  ao_01: 9 nöbet
+  ao_02: 9 nöbet
+  ao_03: 9 nöbet
+  ao_04: 9 nöbet
+  ao_05: 9 nöbet
+  ao_06: 9 nöbet
+  ao_07: 9 nöbet
+  ao_08: 9 nöbet
+  ao_09: 9 nöbet
+  ao_10: 9 nöbet
+  ao_11: 9 nöbet
+  ao_12: 9 nöbet
+  ao_13: 9 nöbet
+  ao_14: 9 nöbet
+  ao_15: 9 nöbet
+  ao_16: 9 nöbet
+  ao_17: 9 nöbet
+  ao_18: 9 nöbet
+  ao_19: 9 nöbet
+  ao_20: 10 nöbet
+  ao_21: 10 nöbet
+  ao_22: 9 nöbet
+  ao_23: 10 nöbet
+  ao_24: 9 nöbet
+
+----------------------------------------------------------------------
+
+## NA - Gerçekçi Poliklinik
+
+| Metrik | Değer |
+|--------|-------|
+| Status | OPTIMAL |
+| Base | 8 |
+| Min/Max | 8/10 |
+| Fark | 2 |
+| Toplam Slot | 42 |
+| Toplam Atama | 84 |
+| Unavailability Violation | 0 |
+| Base+2'ye Ulaşan | 2 |
+| Çözüm Süresi | 543.68ms |
+
+Kullanıcı Dağılımı:
+  na_00: 8 nöbet
+  na_01: 8 nöbet
+  na_02: 8 nöbet
+  na_03: 8 nöbet
+  na_04: 8 nöbet
+  na_05: 8 nöbet
+  na_06: 8 nöbet
+  na_07: 8 nöbet
+  na_08: 10 nöbet
+  na_09: 10 nöbet
+
+Warnings: 2 nöbetçi asistan were pushed to base+2 total half A shifts.
+----------------------------------------------------------------------
+
+## AÖ - Aşırı Yığılma
+
+| Metrik | Değer |
+|--------|-------|
+| Status | FEASIBLE |
+| Base | 4 |
+| Min/Max | 4/5 |
+| Fark | 1 |
+| Toplam Slot | 42 |
+| Toplam Atama | 90 |
+| Unavailability Violation | 28 |
+| Base+2'ye Ulaşan | 0 |
+| Çözüm Süresi | 60231.48ms |
+
+Kullanıcı Dağılımı:
+  ao_00: 4 nöbet
+  ao_01: 5 nöbet
+  ao_02: 5 nöbet
+  ao_03: 4 nöbet
+  ao_04: 5 nöbet
+  ao_05: 4 nöbet
+  ao_06: 5 nöbet
+  ao_07: 4 nöbet
+  ao_08: 4 nöbet
+  ao_09: 4 nöbet
+  ao_10: 4 nöbet
+  ao_11: 5 nöbet
+  ao_12: 5 nöbet
+  ao_13: 5 nöbet
+  ao_14: 4 nöbet
+  ao_15: 4 nöbet
+  ao_16: 5 nöbet
+  ao_17: 5 nöbet
+  ao_18: 5 nöbet
+  ao_19: 4 nöbet
+
+Warnings: 28 assignment(s) had to ignore user unavailability.
+----------------------------------------------------------------------
+
+## NA - Aşırı Yığılma
+
+| Metrik | Değer |
+|--------|-------|
+| Status | OPTIMAL |
+| Base | 5 |
+| Min/Max | 5/5 |
+| Fark | 0 |
+| Toplam Slot | 20 |
+| Toplam Atama | 40 |
+| Unavailability Violation | 24 |
+| Base+2'ye Ulaşan | 0 |
+| Çözüm Süresi | 228.47ms |
+
+Kullanıcı Dağılımı:
+  na_00: 5 nöbet
+  na_01: 5 nöbet
+  na_02: 5 nöbet
+  na_03: 5 nöbet
+  na_04: 5 nöbet
+  na_05: 5 nöbet
+  na_06: 5 nöbet
+  na_07: 5 nöbet
+
+Warnings: 24 assignment(s) had to ignore unavailability for nöbetçi asistanlar.
+----------------------------------------------------------------------

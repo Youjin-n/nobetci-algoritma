@@ -1,0 +1,3794 @@
+{
+  "period": {
+    "id": "dec-2025",
+    "name": "Aralık 2025",
+    "startDate": "2025-12-01",
+    "endDate": "2025-12-28"
+  },
+  "users": [
+    {
+      "id": "ao_00",
+      "name": "Dr. Asistan 1",
+      "email": null,
+      "likesNight": true,
+      "dislikesWeekend": true,
+      "history": {
+        "weekdayCount": 0,
+        "weekendCount": 0,
+        "expectedTotal": 0,
+        "slotTypeCounts": {
+          "A": 0,
+          "B": 0,
+          "C": 0,
+          "D": 0,
+          "E": 0,
+          "F": 0
+        }
+      }
+    },
+    {
+      "id": "ao_01",
+      "name": "Dr. Asistan 2",
+      "email": null,
+      "likesNight": false,
+      "dislikesWeekend": false,
+      "history": {
+        "weekdayCount": 0,
+        "weekendCount": 0,
+        "expectedTotal": 0,
+        "slotTypeCounts": {
+          "A": 0,
+          "B": 0,
+          "C": 0,
+          "D": 0,
+          "E": 0,
+          "F": 0
+        }
+      }
+    },
+    {
+      "id": "ao_02",
+      "name": "Dr. Asistan 3",
+      "email": null,
+      "likesNight": false,
+      "dislikesWeekend": false,
+      "history": {
+        "weekdayCount": 0,
+        "weekendCount": 0,
+        "expectedTotal": 0,
+        "slotTypeCounts": {
+          "A": 0,
+          "B": 0,
+          "C": 0,
+          "D": 0,
+          "E": 0,
+          "F": 0
+        }
+      }
+    },
+    {
+      "id": "ao_03",
+      "name": "Dr. Asistan 4",
+      "email": null,
+      "likesNight": false,
+      "dislikesWeekend": false,
+      "history": {
+        "weekdayCount": 0,
+        "weekendCount": 0,
+        "expectedTotal": 0,
+        "slotTypeCounts": {
+          "A": 0,
+          "B": 0,
+          "C": 0,
+          "D": 0,
+          "E": 0,
+          "F": 0
+        }
+      }
+    },
+    {
+      "id": "ao_04",
+      "name": "Dr. Asistan 5",
+      "email": null,
+      "likesNight": false,
+      "dislikesWeekend": true,
+      "history": {
+        "weekdayCount": 0,
+        "weekendCount": 0,
+        "expectedTotal": 0,
+        "slotTypeCounts": {
+          "A": 0,
+          "B": 0,
+          "C": 0,
+          "D": 0,
+          "E": 0,
+          "F": 0
+        }
+      }
+    },
+    {
+      "id": "ao_05",
+      "name": "Dr. Asistan 6",
+      "email": null,
+      "likesNight": true,
+      "dislikesWeekend": false,
+      "history": {
+        "weekdayCount": 0,
+        "weekendCount": 0,
+        "expectedTotal": 0,
+        "slotTypeCounts": {
+          "A": 0,
+          "B": 0,
+          "C": 0,
+          "D": 0,
+          "E": 0,
+          "F": 0
+        }
+      }
+    },
+    {
+      "id": "ao_06",
+      "name": "Dr. Asistan 7",
+      "email": null,
+      "likesNight": false,
+      "dislikesWeekend": false,
+      "history": {
+        "weekdayCount": 0,
+        "weekendCount": 0,
+        "expectedTotal": 0,
+        "slotTypeCounts": {
+          "A": 0,
+          "B": 0,
+          "C": 0,
+          "D": 0,
+          "E": 0,
+          "F": 0
+        }
+      }
+    },
+    {
+      "id": "ao_07",
+      "name": "Dr. Asistan 8",
+      "email": null,
+      "likesNight": false,
+      "dislikesWeekend": false,
+      "history": {
+        "weekdayCount": 0,
+        "weekendCount": 0,
+        "expectedTotal": 0,
+        "slotTypeCounts": {
+          "A": 0,
+          "B": 0,
+          "C": 0,
+          "D": 0,
+          "E": 0,
+          "F": 0
+        }
+      }
+    },
+    {
+      "id": "ao_08",
+      "name": "Dr. Asistan 9",
+      "email": null,
+      "likesNight": false,
+      "dislikesWeekend": true,
+      "history": {
+        "weekdayCount": 0,
+        "weekendCount": 0,
+        "expectedTotal": 0,
+        "slotTypeCounts": {
+          "A": 0,
+          "B": 0,
+          "C": 0,
+          "D": 0,
+          "E": 0,
+          "F": 0
+        }
+      }
+    },
+    {
+      "id": "ao_09",
+      "name": "Dr. Asistan 10",
+      "email": null,
+      "likesNight": false,
+      "dislikesWeekend": false,
+      "history": {
+        "weekdayCount": 0,
+        "weekendCount": 0,
+        "expectedTotal": 0,
+        "slotTypeCounts": {
+          "A": 0,
+          "B": 0,
+          "C": 0,
+          "D": 0,
+          "E": 0,
+          "F": 0
+        }
+      }
+    },
+    {
+      "id": "ao_10",
+      "name": "Dr. Asistan 11",
+      "email": null,
+      "likesNight": true,
+      "dislikesWeekend": false,
+      "history": {
+        "weekdayCount": 0,
+        "weekendCount": 0,
+        "expectedTotal": 0,
+        "slotTypeCounts": {
+          "A": 0,
+          "B": 0,
+          "C": 0,
+          "D": 0,
+          "E": 0,
+          "F": 0
+        }
+      }
+    },
+    {
+      "id": "ao_11",
+      "name": "Dr. Asistan 12",
+      "email": null,
+      "likesNight": false,
+      "dislikesWeekend": false,
+      "history": {
+        "weekdayCount": 0,
+        "weekendCount": 0,
+        "expectedTotal": 0,
+        "slotTypeCounts": {
+          "A": 0,
+          "B": 0,
+          "C": 0,
+          "D": 0,
+          "E": 0,
+          "F": 0
+        }
+      }
+    },
+    {
+      "id": "ao_12",
+      "name": "Dr. Asistan 13",
+      "email": null,
+      "likesNight": false,
+      "dislikesWeekend": true,
+      "history": {
+        "weekdayCount": 0,
+        "weekendCount": 0,
+        "expectedTotal": 0,
+        "slotTypeCounts": {
+          "A": 0,
+          "B": 0,
+          "C": 0,
+          "D": 0,
+          "E": 0,
+          "F": 0
+        }
+      }
+    },
+    {
+      "id": "ao_13",
+      "name": "Dr. Asistan 14",
+      "email": null,
+      "likesNight": false,
+      "dislikesWeekend": false,
+      "history": {
+        "weekdayCount": 0,
+        "weekendCount": 0,
+        "expectedTotal": 0,
+        "slotTypeCounts": {
+          "A": 0,
+          "B": 0,
+          "C": 0,
+          "D": 0,
+          "E": 0,
+          "F": 0
+        }
+      }
+    },
+    {
+      "id": "ao_14",
+      "name": "Dr. Asistan 15",
+      "email": null,
+      "likesNight": false,
+      "dislikesWeekend": false,
+      "history": {
+        "weekdayCount": 0,
+        "weekendCount": 0,
+        "expectedTotal": 0,
+        "slotTypeCounts": {
+          "A": 0,
+          "B": 0,
+          "C": 0,
+          "D": 0,
+          "E": 0,
+          "F": 0
+        }
+      }
+    },
+    {
+      "id": "ao_15",
+      "name": "Dr. Asistan 16",
+      "email": null,
+      "likesNight": true,
+      "dislikesWeekend": false,
+      "history": {
+        "weekdayCount": 0,
+        "weekendCount": 0,
+        "expectedTotal": 0,
+        "slotTypeCounts": {
+          "A": 0,
+          "B": 0,
+          "C": 0,
+          "D": 0,
+          "E": 0,
+          "F": 0
+        }
+      }
+    },
+    {
+      "id": "ao_16",
+      "name": "Dr. Asistan 17",
+      "email": null,
+      "likesNight": false,
+      "dislikesWeekend": true,
+      "history": {
+        "weekdayCount": 0,
+        "weekendCount": 0,
+        "expectedTotal": 0,
+        "slotTypeCounts": {
+          "A": 0,
+          "B": 0,
+          "C": 0,
+          "D": 0,
+          "E": 0,
+          "F": 0
+        }
+      }
+    },
+    {
+      "id": "ao_17",
+      "name": "Dr. Asistan 18",
+      "email": null,
+      "likesNight": false,
+      "dislikesWeekend": false,
+      "history": {
+        "weekdayCount": 0,
+        "weekendCount": 0,
+        "expectedTotal": 0,
+        "slotTypeCounts": {
+          "A": 0,
+          "B": 0,
+          "C": 0,
+          "D": 0,
+          "E": 0,
+          "F": 0
+        }
+      }
+    },
+    {
+      "id": "ao_18",
+      "name": "Dr. Asistan 19",
+      "email": null,
+      "likesNight": false,
+      "dislikesWeekend": false,
+      "history": {
+        "weekdayCount": 0,
+        "weekendCount": 0,
+        "expectedTotal": 0,
+        "slotTypeCounts": {
+          "A": 0,
+          "B": 0,
+          "C": 0,
+          "D": 0,
+          "E": 0,
+          "F": 0
+        }
+      }
+    },
+    {
+      "id": "ao_19",
+      "name": "Dr. Asistan 20",
+      "email": null,
+      "likesNight": false,
+      "dislikesWeekend": false,
+      "history": {
+        "weekdayCount": 0,
+        "weekendCount": 0,
+        "expectedTotal": 0,
+        "slotTypeCounts": {
+          "A": 0,
+          "B": 0,
+          "C": 0,
+          "D": 0,
+          "E": 0,
+          "F": 0
+        }
+      }
+    },
+    {
+      "id": "ao_20",
+      "name": "Dr. Asistan 21",
+      "email": null,
+      "likesNight": true,
+      "dislikesWeekend": true,
+      "history": {
+        "weekdayCount": 0,
+        "weekendCount": 0,
+        "expectedTotal": 0,
+        "slotTypeCounts": {
+          "A": 0,
+          "B": 0,
+          "C": 0,
+          "D": 0,
+          "E": 0,
+          "F": 0
+        }
+      }
+    },
+    {
+      "id": "ao_21",
+      "name": "Dr. Asistan 22",
+      "email": null,
+      "likesNight": false,
+      "dislikesWeekend": false,
+      "history": {
+        "weekdayCount": 0,
+        "weekendCount": 0,
+        "expectedTotal": 0,
+        "slotTypeCounts": {
+          "A": 0,
+          "B": 0,
+          "C": 0,
+          "D": 0,
+          "E": 0,
+          "F": 0
+        }
+      }
+    },
+    {
+      "id": "ao_22",
+      "name": "Dr. Asistan 23",
+      "email": null,
+      "likesNight": false,
+      "dislikesWeekend": false,
+      "history": {
+        "weekdayCount": 0,
+        "weekendCount": 0,
+        "expectedTotal": 0,
+        "slotTypeCounts": {
+          "A": 0,
+          "B": 0,
+          "C": 0,
+          "D": 0,
+          "E": 0,
+          "F": 0
+        }
+      }
+    },
+    {
+      "id": "ao_23",
+      "name": "Dr. Asistan 24",
+      "email": null,
+      "likesNight": false,
+      "dislikesWeekend": false,
+      "history": {
+        "weekdayCount": 0,
+        "weekendCount": 0,
+        "expectedTotal": 0,
+        "slotTypeCounts": {
+          "A": 0,
+          "B": 0,
+          "C": 0,
+          "D": 0,
+          "E": 0,
+          "F": 0
+        }
+      }
+    },
+    {
+      "id": "ao_24",
+      "name": "Dr. Asistan 25",
+      "email": null,
+      "likesNight": false,
+      "dislikesWeekend": true,
+      "history": {
+        "weekdayCount": 0,
+        "weekendCount": 0,
+        "expectedTotal": 0,
+        "slotTypeCounts": {
+          "A": 0,
+          "B": 0,
+          "C": 0,
+          "D": 0,
+          "E": 0,
+          "F": 0
+        }
+      }
+    }
+  ],
+  "slots": [
+    {
+      "id": "A_2025-12-01",
+      "slot_date": "2025-12-01",
+      "dutyType": "A",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "A_2025-12-01_s0",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-01_s1",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-01_s2",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-01_s3",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "B_2025-12-01",
+      "slot_date": "2025-12-01",
+      "dutyType": "B",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "B_2025-12-01_s0",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-01_s1",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-01_s2",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "C_2025-12-01",
+      "slot_date": "2025-12-01",
+      "dutyType": "C",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "C_2025-12-01_s0",
+          "role": null
+        },
+        {
+          "id": "C_2025-12-01_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "A_2025-12-02",
+      "slot_date": "2025-12-02",
+      "dutyType": "A",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "A_2025-12-02_s0",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-02_s1",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-02_s2",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-02_s3",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "B_2025-12-02",
+      "slot_date": "2025-12-02",
+      "dutyType": "B",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "B_2025-12-02_s0",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-02_s1",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-02_s2",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "C_2025-12-02",
+      "slot_date": "2025-12-02",
+      "dutyType": "C",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "C_2025-12-02_s0",
+          "role": null
+        },
+        {
+          "id": "C_2025-12-02_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "A_2025-12-03",
+      "slot_date": "2025-12-03",
+      "dutyType": "A",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "A_2025-12-03_s0",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-03_s1",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-03_s2",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-03_s3",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "B_2025-12-03",
+      "slot_date": "2025-12-03",
+      "dutyType": "B",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "B_2025-12-03_s0",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-03_s1",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-03_s2",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "C_2025-12-03",
+      "slot_date": "2025-12-03",
+      "dutyType": "C",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "C_2025-12-03_s0",
+          "role": null
+        },
+        {
+          "id": "C_2025-12-03_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "A_2025-12-04",
+      "slot_date": "2025-12-04",
+      "dutyType": "A",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "A_2025-12-04_s0",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-04_s1",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-04_s2",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-04_s3",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "B_2025-12-04",
+      "slot_date": "2025-12-04",
+      "dutyType": "B",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "B_2025-12-04_s0",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-04_s1",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-04_s2",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "C_2025-12-04",
+      "slot_date": "2025-12-04",
+      "dutyType": "C",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "C_2025-12-04_s0",
+          "role": null
+        },
+        {
+          "id": "C_2025-12-04_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "A_2025-12-05",
+      "slot_date": "2025-12-05",
+      "dutyType": "A",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "A_2025-12-05_s0",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-05_s1",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-05_s2",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-05_s3",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "B_2025-12-05",
+      "slot_date": "2025-12-05",
+      "dutyType": "B",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "B_2025-12-05_s0",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-05_s1",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-05_s2",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "C_2025-12-05",
+      "slot_date": "2025-12-05",
+      "dutyType": "C",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "C_2025-12-05_s0",
+          "role": null
+        },
+        {
+          "id": "C_2025-12-05_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "D_2025-12-06",
+      "slot_date": "2025-12-06",
+      "dutyType": "D",
+      "dayType": "WEEKEND",
+      "seats": [
+        {
+          "id": "D_2025-12-06_s0",
+          "role": null
+        },
+        {
+          "id": "D_2025-12-06_s1",
+          "role": null
+        },
+        {
+          "id": "D_2025-12-06_s2",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "E_2025-12-06",
+      "slot_date": "2025-12-06",
+      "dutyType": "E",
+      "dayType": "WEEKEND",
+      "seats": [
+        {
+          "id": "E_2025-12-06_s0",
+          "role": null
+        },
+        {
+          "id": "E_2025-12-06_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "F_2025-12-06",
+      "slot_date": "2025-12-06",
+      "dutyType": "F",
+      "dayType": "WEEKEND",
+      "seats": [
+        {
+          "id": "F_2025-12-06_s0",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "D_2025-12-07",
+      "slot_date": "2025-12-07",
+      "dutyType": "D",
+      "dayType": "WEEKEND",
+      "seats": [
+        {
+          "id": "D_2025-12-07_s0",
+          "role": null
+        },
+        {
+          "id": "D_2025-12-07_s1",
+          "role": null
+        },
+        {
+          "id": "D_2025-12-07_s2",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "E_2025-12-07",
+      "slot_date": "2025-12-07",
+      "dutyType": "E",
+      "dayType": "WEEKEND",
+      "seats": [
+        {
+          "id": "E_2025-12-07_s0",
+          "role": null
+        },
+        {
+          "id": "E_2025-12-07_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "F_2025-12-07",
+      "slot_date": "2025-12-07",
+      "dutyType": "F",
+      "dayType": "WEEKEND",
+      "seats": [
+        {
+          "id": "F_2025-12-07_s0",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "A_2025-12-08",
+      "slot_date": "2025-12-08",
+      "dutyType": "A",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "A_2025-12-08_s0",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-08_s1",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-08_s2",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-08_s3",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "B_2025-12-08",
+      "slot_date": "2025-12-08",
+      "dutyType": "B",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "B_2025-12-08_s0",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-08_s1",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-08_s2",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "C_2025-12-08",
+      "slot_date": "2025-12-08",
+      "dutyType": "C",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "C_2025-12-08_s0",
+          "role": null
+        },
+        {
+          "id": "C_2025-12-08_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "A_2025-12-09",
+      "slot_date": "2025-12-09",
+      "dutyType": "A",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "A_2025-12-09_s0",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-09_s1",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-09_s2",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-09_s3",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "B_2025-12-09",
+      "slot_date": "2025-12-09",
+      "dutyType": "B",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "B_2025-12-09_s0",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-09_s1",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-09_s2",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "C_2025-12-09",
+      "slot_date": "2025-12-09",
+      "dutyType": "C",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "C_2025-12-09_s0",
+          "role": null
+        },
+        {
+          "id": "C_2025-12-09_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "A_2025-12-10",
+      "slot_date": "2025-12-10",
+      "dutyType": "A",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "A_2025-12-10_s0",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-10_s1",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-10_s2",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-10_s3",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "B_2025-12-10",
+      "slot_date": "2025-12-10",
+      "dutyType": "B",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "B_2025-12-10_s0",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-10_s1",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-10_s2",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "C_2025-12-10",
+      "slot_date": "2025-12-10",
+      "dutyType": "C",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "C_2025-12-10_s0",
+          "role": null
+        },
+        {
+          "id": "C_2025-12-10_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "A_2025-12-11",
+      "slot_date": "2025-12-11",
+      "dutyType": "A",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "A_2025-12-11_s0",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-11_s1",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-11_s2",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-11_s3",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "B_2025-12-11",
+      "slot_date": "2025-12-11",
+      "dutyType": "B",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "B_2025-12-11_s0",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-11_s1",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-11_s2",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "C_2025-12-11",
+      "slot_date": "2025-12-11",
+      "dutyType": "C",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "C_2025-12-11_s0",
+          "role": null
+        },
+        {
+          "id": "C_2025-12-11_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "A_2025-12-12",
+      "slot_date": "2025-12-12",
+      "dutyType": "A",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "A_2025-12-12_s0",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-12_s1",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-12_s2",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-12_s3",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "B_2025-12-12",
+      "slot_date": "2025-12-12",
+      "dutyType": "B",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "B_2025-12-12_s0",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-12_s1",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-12_s2",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "C_2025-12-12",
+      "slot_date": "2025-12-12",
+      "dutyType": "C",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "C_2025-12-12_s0",
+          "role": null
+        },
+        {
+          "id": "C_2025-12-12_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "D_2025-12-13",
+      "slot_date": "2025-12-13",
+      "dutyType": "D",
+      "dayType": "WEEKEND",
+      "seats": [
+        {
+          "id": "D_2025-12-13_s0",
+          "role": null
+        },
+        {
+          "id": "D_2025-12-13_s1",
+          "role": null
+        },
+        {
+          "id": "D_2025-12-13_s2",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "E_2025-12-13",
+      "slot_date": "2025-12-13",
+      "dutyType": "E",
+      "dayType": "WEEKEND",
+      "seats": [
+        {
+          "id": "E_2025-12-13_s0",
+          "role": null
+        },
+        {
+          "id": "E_2025-12-13_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "F_2025-12-13",
+      "slot_date": "2025-12-13",
+      "dutyType": "F",
+      "dayType": "WEEKEND",
+      "seats": [
+        {
+          "id": "F_2025-12-13_s0",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "D_2025-12-14",
+      "slot_date": "2025-12-14",
+      "dutyType": "D",
+      "dayType": "WEEKEND",
+      "seats": [
+        {
+          "id": "D_2025-12-14_s0",
+          "role": null
+        },
+        {
+          "id": "D_2025-12-14_s1",
+          "role": null
+        },
+        {
+          "id": "D_2025-12-14_s2",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "E_2025-12-14",
+      "slot_date": "2025-12-14",
+      "dutyType": "E",
+      "dayType": "WEEKEND",
+      "seats": [
+        {
+          "id": "E_2025-12-14_s0",
+          "role": null
+        },
+        {
+          "id": "E_2025-12-14_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "F_2025-12-14",
+      "slot_date": "2025-12-14",
+      "dutyType": "F",
+      "dayType": "WEEKEND",
+      "seats": [
+        {
+          "id": "F_2025-12-14_s0",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "A_2025-12-15",
+      "slot_date": "2025-12-15",
+      "dutyType": "A",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "A_2025-12-15_s0",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-15_s1",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-15_s2",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-15_s3",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "B_2025-12-15",
+      "slot_date": "2025-12-15",
+      "dutyType": "B",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "B_2025-12-15_s0",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-15_s1",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-15_s2",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "C_2025-12-15",
+      "slot_date": "2025-12-15",
+      "dutyType": "C",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "C_2025-12-15_s0",
+          "role": null
+        },
+        {
+          "id": "C_2025-12-15_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "A_2025-12-16",
+      "slot_date": "2025-12-16",
+      "dutyType": "A",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "A_2025-12-16_s0",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-16_s1",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-16_s2",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-16_s3",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "B_2025-12-16",
+      "slot_date": "2025-12-16",
+      "dutyType": "B",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "B_2025-12-16_s0",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-16_s1",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-16_s2",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "C_2025-12-16",
+      "slot_date": "2025-12-16",
+      "dutyType": "C",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "C_2025-12-16_s0",
+          "role": null
+        },
+        {
+          "id": "C_2025-12-16_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "A_2025-12-17",
+      "slot_date": "2025-12-17",
+      "dutyType": "A",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "A_2025-12-17_s0",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-17_s1",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-17_s2",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-17_s3",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "B_2025-12-17",
+      "slot_date": "2025-12-17",
+      "dutyType": "B",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "B_2025-12-17_s0",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-17_s1",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-17_s2",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "C_2025-12-17",
+      "slot_date": "2025-12-17",
+      "dutyType": "C",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "C_2025-12-17_s0",
+          "role": null
+        },
+        {
+          "id": "C_2025-12-17_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "A_2025-12-18",
+      "slot_date": "2025-12-18",
+      "dutyType": "A",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "A_2025-12-18_s0",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-18_s1",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-18_s2",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-18_s3",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "B_2025-12-18",
+      "slot_date": "2025-12-18",
+      "dutyType": "B",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "B_2025-12-18_s0",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-18_s1",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-18_s2",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "C_2025-12-18",
+      "slot_date": "2025-12-18",
+      "dutyType": "C",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "C_2025-12-18_s0",
+          "role": null
+        },
+        {
+          "id": "C_2025-12-18_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "A_2025-12-19",
+      "slot_date": "2025-12-19",
+      "dutyType": "A",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "A_2025-12-19_s0",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-19_s1",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-19_s2",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-19_s3",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "B_2025-12-19",
+      "slot_date": "2025-12-19",
+      "dutyType": "B",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "B_2025-12-19_s0",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-19_s1",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-19_s2",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "C_2025-12-19",
+      "slot_date": "2025-12-19",
+      "dutyType": "C",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "C_2025-12-19_s0",
+          "role": null
+        },
+        {
+          "id": "C_2025-12-19_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "D_2025-12-20",
+      "slot_date": "2025-12-20",
+      "dutyType": "D",
+      "dayType": "WEEKEND",
+      "seats": [
+        {
+          "id": "D_2025-12-20_s0",
+          "role": null
+        },
+        {
+          "id": "D_2025-12-20_s1",
+          "role": null
+        },
+        {
+          "id": "D_2025-12-20_s2",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "E_2025-12-20",
+      "slot_date": "2025-12-20",
+      "dutyType": "E",
+      "dayType": "WEEKEND",
+      "seats": [
+        {
+          "id": "E_2025-12-20_s0",
+          "role": null
+        },
+        {
+          "id": "E_2025-12-20_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "F_2025-12-20",
+      "slot_date": "2025-12-20",
+      "dutyType": "F",
+      "dayType": "WEEKEND",
+      "seats": [
+        {
+          "id": "F_2025-12-20_s0",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "D_2025-12-21",
+      "slot_date": "2025-12-21",
+      "dutyType": "D",
+      "dayType": "WEEKEND",
+      "seats": [
+        {
+          "id": "D_2025-12-21_s0",
+          "role": null
+        },
+        {
+          "id": "D_2025-12-21_s1",
+          "role": null
+        },
+        {
+          "id": "D_2025-12-21_s2",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "E_2025-12-21",
+      "slot_date": "2025-12-21",
+      "dutyType": "E",
+      "dayType": "WEEKEND",
+      "seats": [
+        {
+          "id": "E_2025-12-21_s0",
+          "role": null
+        },
+        {
+          "id": "E_2025-12-21_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "F_2025-12-21",
+      "slot_date": "2025-12-21",
+      "dutyType": "F",
+      "dayType": "WEEKEND",
+      "seats": [
+        {
+          "id": "F_2025-12-21_s0",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "A_2025-12-22",
+      "slot_date": "2025-12-22",
+      "dutyType": "A",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "A_2025-12-22_s0",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-22_s1",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-22_s2",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-22_s3",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "B_2025-12-22",
+      "slot_date": "2025-12-22",
+      "dutyType": "B",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "B_2025-12-22_s0",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-22_s1",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-22_s2",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "C_2025-12-22",
+      "slot_date": "2025-12-22",
+      "dutyType": "C",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "C_2025-12-22_s0",
+          "role": null
+        },
+        {
+          "id": "C_2025-12-22_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "A_2025-12-23",
+      "slot_date": "2025-12-23",
+      "dutyType": "A",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "A_2025-12-23_s0",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-23_s1",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-23_s2",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-23_s3",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "B_2025-12-23",
+      "slot_date": "2025-12-23",
+      "dutyType": "B",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "B_2025-12-23_s0",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-23_s1",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-23_s2",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "C_2025-12-23",
+      "slot_date": "2025-12-23",
+      "dutyType": "C",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "C_2025-12-23_s0",
+          "role": null
+        },
+        {
+          "id": "C_2025-12-23_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "A_2025-12-24",
+      "slot_date": "2025-12-24",
+      "dutyType": "A",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "A_2025-12-24_s0",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-24_s1",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-24_s2",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-24_s3",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "B_2025-12-24",
+      "slot_date": "2025-12-24",
+      "dutyType": "B",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "B_2025-12-24_s0",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-24_s1",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-24_s2",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "C_2025-12-24",
+      "slot_date": "2025-12-24",
+      "dutyType": "C",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "C_2025-12-24_s0",
+          "role": null
+        },
+        {
+          "id": "C_2025-12-24_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "A_2025-12-25",
+      "slot_date": "2025-12-25",
+      "dutyType": "A",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "A_2025-12-25_s0",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-25_s1",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-25_s2",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-25_s3",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "B_2025-12-25",
+      "slot_date": "2025-12-25",
+      "dutyType": "B",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "B_2025-12-25_s0",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-25_s1",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-25_s2",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "C_2025-12-25",
+      "slot_date": "2025-12-25",
+      "dutyType": "C",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "C_2025-12-25_s0",
+          "role": null
+        },
+        {
+          "id": "C_2025-12-25_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "A_2025-12-26",
+      "slot_date": "2025-12-26",
+      "dutyType": "A",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "A_2025-12-26_s0",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-26_s1",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-26_s2",
+          "role": null
+        },
+        {
+          "id": "A_2025-12-26_s3",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "B_2025-12-26",
+      "slot_date": "2025-12-26",
+      "dutyType": "B",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "B_2025-12-26_s0",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-26_s1",
+          "role": null
+        },
+        {
+          "id": "B_2025-12-26_s2",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "C_2025-12-26",
+      "slot_date": "2025-12-26",
+      "dutyType": "C",
+      "dayType": "WEEKDAY",
+      "seats": [
+        {
+          "id": "C_2025-12-26_s0",
+          "role": null
+        },
+        {
+          "id": "C_2025-12-26_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "D_2025-12-27",
+      "slot_date": "2025-12-27",
+      "dutyType": "D",
+      "dayType": "WEEKEND",
+      "seats": [
+        {
+          "id": "D_2025-12-27_s0",
+          "role": null
+        },
+        {
+          "id": "D_2025-12-27_s1",
+          "role": null
+        },
+        {
+          "id": "D_2025-12-27_s2",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "E_2025-12-27",
+      "slot_date": "2025-12-27",
+      "dutyType": "E",
+      "dayType": "WEEKEND",
+      "seats": [
+        {
+          "id": "E_2025-12-27_s0",
+          "role": null
+        },
+        {
+          "id": "E_2025-12-27_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "F_2025-12-27",
+      "slot_date": "2025-12-27",
+      "dutyType": "F",
+      "dayType": "WEEKEND",
+      "seats": [
+        {
+          "id": "F_2025-12-27_s0",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "D_2025-12-28",
+      "slot_date": "2025-12-28",
+      "dutyType": "D",
+      "dayType": "WEEKEND",
+      "seats": [
+        {
+          "id": "D_2025-12-28_s0",
+          "role": null
+        },
+        {
+          "id": "D_2025-12-28_s1",
+          "role": null
+        },
+        {
+          "id": "D_2025-12-28_s2",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "E_2025-12-28",
+      "slot_date": "2025-12-28",
+      "dutyType": "E",
+      "dayType": "WEEKEND",
+      "seats": [
+        {
+          "id": "E_2025-12-28_s0",
+          "role": null
+        },
+        {
+          "id": "E_2025-12-28_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "F_2025-12-28",
+      "slot_date": "2025-12-28",
+      "dutyType": "F",
+      "dayType": "WEEKEND",
+      "seats": [
+        {
+          "id": "F_2025-12-28_s0",
+          "role": null
+        }
+      ]
+    }
+  ],
+  "unavailability": [
+    {
+      "userId": "ao_00",
+      "slotId": "A_2025-12-03"
+    },
+    {
+      "userId": "ao_00",
+      "slotId": "B_2025-12-03"
+    },
+    {
+      "userId": "ao_01",
+      "slotId": "A_2025-12-03"
+    },
+    {
+      "userId": "ao_01",
+      "slotId": "B_2025-12-03"
+    },
+    {
+      "userId": "ao_02",
+      "slotId": "A_2025-12-03"
+    },
+    {
+      "userId": "ao_02",
+      "slotId": "B_2025-12-03"
+    },
+    {
+      "userId": "ao_03",
+      "slotId": "A_2025-12-03"
+    },
+    {
+      "userId": "ao_03",
+      "slotId": "B_2025-12-03"
+    },
+    {
+      "userId": "ao_04",
+      "slotId": "A_2025-12-03"
+    },
+    {
+      "userId": "ao_04",
+      "slotId": "B_2025-12-03"
+    },
+    {
+      "userId": "ao_05",
+      "slotId": "A_2025-12-03"
+    },
+    {
+      "userId": "ao_05",
+      "slotId": "B_2025-12-03"
+    },
+    {
+      "userId": "ao_06",
+      "slotId": "A_2025-12-03"
+    },
+    {
+      "userId": "ao_06",
+      "slotId": "B_2025-12-03"
+    },
+    {
+      "userId": "ao_07",
+      "slotId": "A_2025-12-03"
+    },
+    {
+      "userId": "ao_07",
+      "slotId": "B_2025-12-03"
+    },
+    {
+      "userId": "ao_08",
+      "slotId": "A_2025-12-03"
+    },
+    {
+      "userId": "ao_08",
+      "slotId": "B_2025-12-03"
+    },
+    {
+      "userId": "ao_09",
+      "slotId": "A_2025-12-03"
+    },
+    {
+      "userId": "ao_09",
+      "slotId": "B_2025-12-03"
+    },
+    {
+      "userId": "ao_10",
+      "slotId": "A_2025-12-03"
+    },
+    {
+      "userId": "ao_10",
+      "slotId": "B_2025-12-03"
+    },
+    {
+      "userId": "ao_11",
+      "slotId": "A_2025-12-03"
+    },
+    {
+      "userId": "ao_11",
+      "slotId": "B_2025-12-03"
+    },
+    {
+      "userId": "ao_12",
+      "slotId": "A_2025-12-03"
+    },
+    {
+      "userId": "ao_12",
+      "slotId": "B_2025-12-03"
+    },
+    {
+      "userId": "ao_13",
+      "slotId": "A_2025-12-03"
+    },
+    {
+      "userId": "ao_13",
+      "slotId": "B_2025-12-03"
+    },
+    {
+      "userId": "ao_14",
+      "slotId": "A_2025-12-03"
+    },
+    {
+      "userId": "ao_14",
+      "slotId": "B_2025-12-03"
+    },
+    {
+      "userId": "ao_15",
+      "slotId": "A_2025-12-03"
+    },
+    {
+      "userId": "ao_15",
+      "slotId": "B_2025-12-03"
+    },
+    {
+      "userId": "ao_16",
+      "slotId": "A_2025-12-03"
+    },
+    {
+      "userId": "ao_16",
+      "slotId": "B_2025-12-03"
+    },
+    {
+      "userId": "ao_17",
+      "slotId": "A_2025-12-03"
+    },
+    {
+      "userId": "ao_17",
+      "slotId": "B_2025-12-03"
+    },
+    {
+      "userId": "ao_18",
+      "slotId": "A_2025-12-03"
+    },
+    {
+      "userId": "ao_18",
+      "slotId": "B_2025-12-03"
+    },
+    {
+      "userId": "ao_19",
+      "slotId": "A_2025-12-03"
+    },
+    {
+      "userId": "ao_19",
+      "slotId": "B_2025-12-03"
+    },
+    {
+      "userId": "ao_00",
+      "slotId": "B_2025-12-05"
+    },
+    {
+      "userId": "ao_00",
+      "slotId": "C_2025-12-05"
+    },
+    {
+      "userId": "ao_01",
+      "slotId": "B_2025-12-05"
+    },
+    {
+      "userId": "ao_01",
+      "slotId": "C_2025-12-05"
+    },
+    {
+      "userId": "ao_02",
+      "slotId": "B_2025-12-05"
+    },
+    {
+      "userId": "ao_02",
+      "slotId": "C_2025-12-05"
+    },
+    {
+      "userId": "ao_03",
+      "slotId": "B_2025-12-05"
+    },
+    {
+      "userId": "ao_03",
+      "slotId": "C_2025-12-05"
+    },
+    {
+      "userId": "ao_04",
+      "slotId": "B_2025-12-05"
+    },
+    {
+      "userId": "ao_04",
+      "slotId": "C_2025-12-05"
+    },
+    {
+      "userId": "ao_05",
+      "slotId": "B_2025-12-05"
+    },
+    {
+      "userId": "ao_05",
+      "slotId": "C_2025-12-05"
+    },
+    {
+      "userId": "ao_06",
+      "slotId": "B_2025-12-05"
+    },
+    {
+      "userId": "ao_06",
+      "slotId": "C_2025-12-05"
+    },
+    {
+      "userId": "ao_07",
+      "slotId": "B_2025-12-05"
+    },
+    {
+      "userId": "ao_07",
+      "slotId": "C_2025-12-05"
+    },
+    {
+      "userId": "ao_08",
+      "slotId": "B_2025-12-05"
+    },
+    {
+      "userId": "ao_08",
+      "slotId": "C_2025-12-05"
+    },
+    {
+      "userId": "ao_09",
+      "slotId": "B_2025-12-05"
+    },
+    {
+      "userId": "ao_09",
+      "slotId": "C_2025-12-05"
+    },
+    {
+      "userId": "ao_10",
+      "slotId": "B_2025-12-05"
+    },
+    {
+      "userId": "ao_10",
+      "slotId": "C_2025-12-05"
+    },
+    {
+      "userId": "ao_11",
+      "slotId": "B_2025-12-05"
+    },
+    {
+      "userId": "ao_11",
+      "slotId": "C_2025-12-05"
+    },
+    {
+      "userId": "ao_12",
+      "slotId": "B_2025-12-05"
+    },
+    {
+      "userId": "ao_12",
+      "slotId": "C_2025-12-05"
+    },
+    {
+      "userId": "ao_13",
+      "slotId": "B_2025-12-05"
+    },
+    {
+      "userId": "ao_13",
+      "slotId": "C_2025-12-05"
+    },
+    {
+      "userId": "ao_14",
+      "slotId": "B_2025-12-05"
+    },
+    {
+      "userId": "ao_14",
+      "slotId": "C_2025-12-05"
+    },
+    {
+      "userId": "ao_00",
+      "slotId": "D_2025-12-06"
+    },
+    {
+      "userId": "ao_00",
+      "slotId": "E_2025-12-06"
+    },
+    {
+      "userId": "ao_01",
+      "slotId": "D_2025-12-06"
+    },
+    {
+      "userId": "ao_01",
+      "slotId": "E_2025-12-06"
+    },
+    {
+      "userId": "ao_02",
+      "slotId": "D_2025-12-06"
+    },
+    {
+      "userId": "ao_02",
+      "slotId": "E_2025-12-06"
+    },
+    {
+      "userId": "ao_03",
+      "slotId": "D_2025-12-06"
+    },
+    {
+      "userId": "ao_03",
+      "slotId": "E_2025-12-06"
+    },
+    {
+      "userId": "ao_04",
+      "slotId": "D_2025-12-06"
+    },
+    {
+      "userId": "ao_04",
+      "slotId": "E_2025-12-06"
+    },
+    {
+      "userId": "ao_05",
+      "slotId": "D_2025-12-06"
+    },
+    {
+      "userId": "ao_05",
+      "slotId": "E_2025-12-06"
+    },
+    {
+      "userId": "ao_06",
+      "slotId": "D_2025-12-06"
+    },
+    {
+      "userId": "ao_06",
+      "slotId": "E_2025-12-06"
+    },
+    {
+      "userId": "ao_07",
+      "slotId": "D_2025-12-06"
+    },
+    {
+      "userId": "ao_07",
+      "slotId": "E_2025-12-06"
+    },
+    {
+      "userId": "ao_08",
+      "slotId": "D_2025-12-06"
+    },
+    {
+      "userId": "ao_08",
+      "slotId": "E_2025-12-06"
+    },
+    {
+      "userId": "ao_09",
+      "slotId": "D_2025-12-06"
+    },
+    {
+      "userId": "ao_09",
+      "slotId": "E_2025-12-06"
+    },
+    {
+      "userId": "ao_10",
+      "slotId": "D_2025-12-06"
+    },
+    {
+      "userId": "ao_10",
+      "slotId": "E_2025-12-06"
+    },
+    {
+      "userId": "ao_11",
+      "slotId": "D_2025-12-06"
+    },
+    {
+      "userId": "ao_11",
+      "slotId": "E_2025-12-06"
+    },
+    {
+      "userId": "ao_12",
+      "slotId": "D_2025-12-06"
+    },
+    {
+      "userId": "ao_12",
+      "slotId": "E_2025-12-06"
+    },
+    {
+      "userId": "ao_13",
+      "slotId": "D_2025-12-06"
+    },
+    {
+      "userId": "ao_13",
+      "slotId": "E_2025-12-06"
+    },
+    {
+      "userId": "ao_14",
+      "slotId": "D_2025-12-06"
+    },
+    {
+      "userId": "ao_14",
+      "slotId": "E_2025-12-06"
+    },
+    {
+      "userId": "ao_15",
+      "slotId": "D_2025-12-06"
+    },
+    {
+      "userId": "ao_15",
+      "slotId": "E_2025-12-06"
+    },
+    {
+      "userId": "ao_16",
+      "slotId": "D_2025-12-06"
+    },
+    {
+      "userId": "ao_16",
+      "slotId": "E_2025-12-06"
+    },
+    {
+      "userId": "ao_17",
+      "slotId": "D_2025-12-06"
+    },
+    {
+      "userId": "ao_17",
+      "slotId": "E_2025-12-06"
+    },
+    {
+      "userId": "ao_00",
+      "slotId": "A_2025-12-10"
+    },
+    {
+      "userId": "ao_00",
+      "slotId": "B_2025-12-10"
+    },
+    {
+      "userId": "ao_01",
+      "slotId": "A_2025-12-10"
+    },
+    {
+      "userId": "ao_01",
+      "slotId": "B_2025-12-10"
+    },
+    {
+      "userId": "ao_02",
+      "slotId": "A_2025-12-10"
+    },
+    {
+      "userId": "ao_02",
+      "slotId": "B_2025-12-10"
+    },
+    {
+      "userId": "ao_03",
+      "slotId": "A_2025-12-10"
+    },
+    {
+      "userId": "ao_03",
+      "slotId": "B_2025-12-10"
+    },
+    {
+      "userId": "ao_04",
+      "slotId": "A_2025-12-10"
+    },
+    {
+      "userId": "ao_04",
+      "slotId": "B_2025-12-10"
+    },
+    {
+      "userId": "ao_05",
+      "slotId": "A_2025-12-10"
+    },
+    {
+      "userId": "ao_05",
+      "slotId": "B_2025-12-10"
+    },
+    {
+      "userId": "ao_06",
+      "slotId": "A_2025-12-10"
+    },
+    {
+      "userId": "ao_06",
+      "slotId": "B_2025-12-10"
+    },
+    {
+      "userId": "ao_07",
+      "slotId": "A_2025-12-10"
+    },
+    {
+      "userId": "ao_07",
+      "slotId": "B_2025-12-10"
+    },
+    {
+      "userId": "ao_08",
+      "slotId": "A_2025-12-10"
+    },
+    {
+      "userId": "ao_08",
+      "slotId": "B_2025-12-10"
+    },
+    {
+      "userId": "ao_09",
+      "slotId": "A_2025-12-10"
+    },
+    {
+      "userId": "ao_09",
+      "slotId": "B_2025-12-10"
+    },
+    {
+      "userId": "ao_10",
+      "slotId": "A_2025-12-10"
+    },
+    {
+      "userId": "ao_10",
+      "slotId": "B_2025-12-10"
+    },
+    {
+      "userId": "ao_11",
+      "slotId": "A_2025-12-10"
+    },
+    {
+      "userId": "ao_11",
+      "slotId": "B_2025-12-10"
+    },
+    {
+      "userId": "ao_12",
+      "slotId": "A_2025-12-10"
+    },
+    {
+      "userId": "ao_12",
+      "slotId": "B_2025-12-10"
+    },
+    {
+      "userId": "ao_13",
+      "slotId": "A_2025-12-10"
+    },
+    {
+      "userId": "ao_13",
+      "slotId": "B_2025-12-10"
+    },
+    {
+      "userId": "ao_14",
+      "slotId": "A_2025-12-10"
+    },
+    {
+      "userId": "ao_14",
+      "slotId": "B_2025-12-10"
+    },
+    {
+      "userId": "ao_15",
+      "slotId": "A_2025-12-10"
+    },
+    {
+      "userId": "ao_15",
+      "slotId": "B_2025-12-10"
+    },
+    {
+      "userId": "ao_16",
+      "slotId": "A_2025-12-10"
+    },
+    {
+      "userId": "ao_16",
+      "slotId": "B_2025-12-10"
+    },
+    {
+      "userId": "ao_17",
+      "slotId": "A_2025-12-10"
+    },
+    {
+      "userId": "ao_17",
+      "slotId": "B_2025-12-10"
+    },
+    {
+      "userId": "ao_18",
+      "slotId": "A_2025-12-10"
+    },
+    {
+      "userId": "ao_18",
+      "slotId": "B_2025-12-10"
+    },
+    {
+      "userId": "ao_19",
+      "slotId": "A_2025-12-10"
+    },
+    {
+      "userId": "ao_19",
+      "slotId": "B_2025-12-10"
+    },
+    {
+      "userId": "ao_00",
+      "slotId": "B_2025-12-12"
+    },
+    {
+      "userId": "ao_00",
+      "slotId": "C_2025-12-12"
+    },
+    {
+      "userId": "ao_01",
+      "slotId": "B_2025-12-12"
+    },
+    {
+      "userId": "ao_01",
+      "slotId": "C_2025-12-12"
+    },
+    {
+      "userId": "ao_02",
+      "slotId": "B_2025-12-12"
+    },
+    {
+      "userId": "ao_02",
+      "slotId": "C_2025-12-12"
+    },
+    {
+      "userId": "ao_03",
+      "slotId": "B_2025-12-12"
+    },
+    {
+      "userId": "ao_03",
+      "slotId": "C_2025-12-12"
+    },
+    {
+      "userId": "ao_04",
+      "slotId": "B_2025-12-12"
+    },
+    {
+      "userId": "ao_04",
+      "slotId": "C_2025-12-12"
+    },
+    {
+      "userId": "ao_05",
+      "slotId": "B_2025-12-12"
+    },
+    {
+      "userId": "ao_05",
+      "slotId": "C_2025-12-12"
+    },
+    {
+      "userId": "ao_06",
+      "slotId": "B_2025-12-12"
+    },
+    {
+      "userId": "ao_06",
+      "slotId": "C_2025-12-12"
+    },
+    {
+      "userId": "ao_07",
+      "slotId": "B_2025-12-12"
+    },
+    {
+      "userId": "ao_07",
+      "slotId": "C_2025-12-12"
+    },
+    {
+      "userId": "ao_08",
+      "slotId": "B_2025-12-12"
+    },
+    {
+      "userId": "ao_08",
+      "slotId": "C_2025-12-12"
+    },
+    {
+      "userId": "ao_09",
+      "slotId": "B_2025-12-12"
+    },
+    {
+      "userId": "ao_09",
+      "slotId": "C_2025-12-12"
+    },
+    {
+      "userId": "ao_10",
+      "slotId": "B_2025-12-12"
+    },
+    {
+      "userId": "ao_10",
+      "slotId": "C_2025-12-12"
+    },
+    {
+      "userId": "ao_11",
+      "slotId": "B_2025-12-12"
+    },
+    {
+      "userId": "ao_11",
+      "slotId": "C_2025-12-12"
+    },
+    {
+      "userId": "ao_12",
+      "slotId": "B_2025-12-12"
+    },
+    {
+      "userId": "ao_12",
+      "slotId": "C_2025-12-12"
+    },
+    {
+      "userId": "ao_13",
+      "slotId": "B_2025-12-12"
+    },
+    {
+      "userId": "ao_13",
+      "slotId": "C_2025-12-12"
+    },
+    {
+      "userId": "ao_14",
+      "slotId": "B_2025-12-12"
+    },
+    {
+      "userId": "ao_14",
+      "slotId": "C_2025-12-12"
+    },
+    {
+      "userId": "ao_00",
+      "slotId": "D_2025-12-13"
+    },
+    {
+      "userId": "ao_00",
+      "slotId": "E_2025-12-13"
+    },
+    {
+      "userId": "ao_01",
+      "slotId": "D_2025-12-13"
+    },
+    {
+      "userId": "ao_01",
+      "slotId": "E_2025-12-13"
+    },
+    {
+      "userId": "ao_02",
+      "slotId": "D_2025-12-13"
+    },
+    {
+      "userId": "ao_02",
+      "slotId": "E_2025-12-13"
+    },
+    {
+      "userId": "ao_03",
+      "slotId": "D_2025-12-13"
+    },
+    {
+      "userId": "ao_03",
+      "slotId": "E_2025-12-13"
+    },
+    {
+      "userId": "ao_04",
+      "slotId": "D_2025-12-13"
+    },
+    {
+      "userId": "ao_04",
+      "slotId": "E_2025-12-13"
+    },
+    {
+      "userId": "ao_05",
+      "slotId": "D_2025-12-13"
+    },
+    {
+      "userId": "ao_05",
+      "slotId": "E_2025-12-13"
+    },
+    {
+      "userId": "ao_06",
+      "slotId": "D_2025-12-13"
+    },
+    {
+      "userId": "ao_06",
+      "slotId": "E_2025-12-13"
+    },
+    {
+      "userId": "ao_07",
+      "slotId": "D_2025-12-13"
+    },
+    {
+      "userId": "ao_07",
+      "slotId": "E_2025-12-13"
+    },
+    {
+      "userId": "ao_08",
+      "slotId": "D_2025-12-13"
+    },
+    {
+      "userId": "ao_08",
+      "slotId": "E_2025-12-13"
+    },
+    {
+      "userId": "ao_09",
+      "slotId": "D_2025-12-13"
+    },
+    {
+      "userId": "ao_09",
+      "slotId": "E_2025-12-13"
+    },
+    {
+      "userId": "ao_10",
+      "slotId": "D_2025-12-13"
+    },
+    {
+      "userId": "ao_10",
+      "slotId": "E_2025-12-13"
+    },
+    {
+      "userId": "ao_11",
+      "slotId": "D_2025-12-13"
+    },
+    {
+      "userId": "ao_11",
+      "slotId": "E_2025-12-13"
+    },
+    {
+      "userId": "ao_12",
+      "slotId": "D_2025-12-13"
+    },
+    {
+      "userId": "ao_12",
+      "slotId": "E_2025-12-13"
+    },
+    {
+      "userId": "ao_13",
+      "slotId": "D_2025-12-13"
+    },
+    {
+      "userId": "ao_13",
+      "slotId": "E_2025-12-13"
+    },
+    {
+      "userId": "ao_14",
+      "slotId": "D_2025-12-13"
+    },
+    {
+      "userId": "ao_14",
+      "slotId": "E_2025-12-13"
+    },
+    {
+      "userId": "ao_15",
+      "slotId": "D_2025-12-13"
+    },
+    {
+      "userId": "ao_15",
+      "slotId": "E_2025-12-13"
+    },
+    {
+      "userId": "ao_16",
+      "slotId": "D_2025-12-13"
+    },
+    {
+      "userId": "ao_16",
+      "slotId": "E_2025-12-13"
+    },
+    {
+      "userId": "ao_17",
+      "slotId": "D_2025-12-13"
+    },
+    {
+      "userId": "ao_17",
+      "slotId": "E_2025-12-13"
+    },
+    {
+      "userId": "ao_00",
+      "slotId": "A_2025-12-17"
+    },
+    {
+      "userId": "ao_00",
+      "slotId": "B_2025-12-17"
+    },
+    {
+      "userId": "ao_01",
+      "slotId": "A_2025-12-17"
+    },
+    {
+      "userId": "ao_01",
+      "slotId": "B_2025-12-17"
+    },
+    {
+      "userId": "ao_02",
+      "slotId": "A_2025-12-17"
+    },
+    {
+      "userId": "ao_02",
+      "slotId": "B_2025-12-17"
+    },
+    {
+      "userId": "ao_03",
+      "slotId": "A_2025-12-17"
+    },
+    {
+      "userId": "ao_03",
+      "slotId": "B_2025-12-17"
+    },
+    {
+      "userId": "ao_04",
+      "slotId": "A_2025-12-17"
+    },
+    {
+      "userId": "ao_04",
+      "slotId": "B_2025-12-17"
+    },
+    {
+      "userId": "ao_05",
+      "slotId": "A_2025-12-17"
+    },
+    {
+      "userId": "ao_05",
+      "slotId": "B_2025-12-17"
+    },
+    {
+      "userId": "ao_06",
+      "slotId": "A_2025-12-17"
+    },
+    {
+      "userId": "ao_06",
+      "slotId": "B_2025-12-17"
+    },
+    {
+      "userId": "ao_07",
+      "slotId": "A_2025-12-17"
+    },
+    {
+      "userId": "ao_07",
+      "slotId": "B_2025-12-17"
+    },
+    {
+      "userId": "ao_08",
+      "slotId": "A_2025-12-17"
+    },
+    {
+      "userId": "ao_08",
+      "slotId": "B_2025-12-17"
+    },
+    {
+      "userId": "ao_09",
+      "slotId": "A_2025-12-17"
+    },
+    {
+      "userId": "ao_09",
+      "slotId": "B_2025-12-17"
+    },
+    {
+      "userId": "ao_10",
+      "slotId": "A_2025-12-17"
+    },
+    {
+      "userId": "ao_10",
+      "slotId": "B_2025-12-17"
+    },
+    {
+      "userId": "ao_11",
+      "slotId": "A_2025-12-17"
+    },
+    {
+      "userId": "ao_11",
+      "slotId": "B_2025-12-17"
+    },
+    {
+      "userId": "ao_12",
+      "slotId": "A_2025-12-17"
+    },
+    {
+      "userId": "ao_12",
+      "slotId": "B_2025-12-17"
+    },
+    {
+      "userId": "ao_13",
+      "slotId": "A_2025-12-17"
+    },
+    {
+      "userId": "ao_13",
+      "slotId": "B_2025-12-17"
+    },
+    {
+      "userId": "ao_14",
+      "slotId": "A_2025-12-17"
+    },
+    {
+      "userId": "ao_14",
+      "slotId": "B_2025-12-17"
+    },
+    {
+      "userId": "ao_15",
+      "slotId": "A_2025-12-17"
+    },
+    {
+      "userId": "ao_15",
+      "slotId": "B_2025-12-17"
+    },
+    {
+      "userId": "ao_16",
+      "slotId": "A_2025-12-17"
+    },
+    {
+      "userId": "ao_16",
+      "slotId": "B_2025-12-17"
+    },
+    {
+      "userId": "ao_17",
+      "slotId": "A_2025-12-17"
+    },
+    {
+      "userId": "ao_17",
+      "slotId": "B_2025-12-17"
+    },
+    {
+      "userId": "ao_18",
+      "slotId": "A_2025-12-17"
+    },
+    {
+      "userId": "ao_18",
+      "slotId": "B_2025-12-17"
+    },
+    {
+      "userId": "ao_19",
+      "slotId": "A_2025-12-17"
+    },
+    {
+      "userId": "ao_19",
+      "slotId": "B_2025-12-17"
+    },
+    {
+      "userId": "ao_00",
+      "slotId": "B_2025-12-19"
+    },
+    {
+      "userId": "ao_00",
+      "slotId": "C_2025-12-19"
+    },
+    {
+      "userId": "ao_01",
+      "slotId": "B_2025-12-19"
+    },
+    {
+      "userId": "ao_01",
+      "slotId": "C_2025-12-19"
+    },
+    {
+      "userId": "ao_02",
+      "slotId": "B_2025-12-19"
+    },
+    {
+      "userId": "ao_02",
+      "slotId": "C_2025-12-19"
+    },
+    {
+      "userId": "ao_03",
+      "slotId": "B_2025-12-19"
+    },
+    {
+      "userId": "ao_03",
+      "slotId": "C_2025-12-19"
+    },
+    {
+      "userId": "ao_04",
+      "slotId": "B_2025-12-19"
+    },
+    {
+      "userId": "ao_04",
+      "slotId": "C_2025-12-19"
+    },
+    {
+      "userId": "ao_05",
+      "slotId": "B_2025-12-19"
+    },
+    {
+      "userId": "ao_05",
+      "slotId": "C_2025-12-19"
+    },
+    {
+      "userId": "ao_06",
+      "slotId": "B_2025-12-19"
+    },
+    {
+      "userId": "ao_06",
+      "slotId": "C_2025-12-19"
+    },
+    {
+      "userId": "ao_07",
+      "slotId": "B_2025-12-19"
+    },
+    {
+      "userId": "ao_07",
+      "slotId": "C_2025-12-19"
+    },
+    {
+      "userId": "ao_08",
+      "slotId": "B_2025-12-19"
+    },
+    {
+      "userId": "ao_08",
+      "slotId": "C_2025-12-19"
+    },
+    {
+      "userId": "ao_09",
+      "slotId": "B_2025-12-19"
+    },
+    {
+      "userId": "ao_09",
+      "slotId": "C_2025-12-19"
+    },
+    {
+      "userId": "ao_10",
+      "slotId": "B_2025-12-19"
+    },
+    {
+      "userId": "ao_10",
+      "slotId": "C_2025-12-19"
+    },
+    {
+      "userId": "ao_11",
+      "slotId": "B_2025-12-19"
+    },
+    {
+      "userId": "ao_11",
+      "slotId": "C_2025-12-19"
+    },
+    {
+      "userId": "ao_12",
+      "slotId": "B_2025-12-19"
+    },
+    {
+      "userId": "ao_12",
+      "slotId": "C_2025-12-19"
+    },
+    {
+      "userId": "ao_13",
+      "slotId": "B_2025-12-19"
+    },
+    {
+      "userId": "ao_13",
+      "slotId": "C_2025-12-19"
+    },
+    {
+      "userId": "ao_14",
+      "slotId": "B_2025-12-19"
+    },
+    {
+      "userId": "ao_14",
+      "slotId": "C_2025-12-19"
+    },
+    {
+      "userId": "ao_00",
+      "slotId": "D_2025-12-20"
+    },
+    {
+      "userId": "ao_00",
+      "slotId": "E_2025-12-20"
+    },
+    {
+      "userId": "ao_01",
+      "slotId": "D_2025-12-20"
+    },
+    {
+      "userId": "ao_01",
+      "slotId": "E_2025-12-20"
+    },
+    {
+      "userId": "ao_02",
+      "slotId": "D_2025-12-20"
+    },
+    {
+      "userId": "ao_02",
+      "slotId": "E_2025-12-20"
+    },
+    {
+      "userId": "ao_03",
+      "slotId": "D_2025-12-20"
+    },
+    {
+      "userId": "ao_03",
+      "slotId": "E_2025-12-20"
+    },
+    {
+      "userId": "ao_04",
+      "slotId": "D_2025-12-20"
+    },
+    {
+      "userId": "ao_04",
+      "slotId": "E_2025-12-20"
+    },
+    {
+      "userId": "ao_05",
+      "slotId": "D_2025-12-20"
+    },
+    {
+      "userId": "ao_05",
+      "slotId": "E_2025-12-20"
+    },
+    {
+      "userId": "ao_06",
+      "slotId": "D_2025-12-20"
+    },
+    {
+      "userId": "ao_06",
+      "slotId": "E_2025-12-20"
+    },
+    {
+      "userId": "ao_07",
+      "slotId": "D_2025-12-20"
+    },
+    {
+      "userId": "ao_07",
+      "slotId": "E_2025-12-20"
+    },
+    {
+      "userId": "ao_08",
+      "slotId": "D_2025-12-20"
+    },
+    {
+      "userId": "ao_08",
+      "slotId": "E_2025-12-20"
+    },
+    {
+      "userId": "ao_09",
+      "slotId": "D_2025-12-20"
+    },
+    {
+      "userId": "ao_09",
+      "slotId": "E_2025-12-20"
+    },
+    {
+      "userId": "ao_10",
+      "slotId": "D_2025-12-20"
+    },
+    {
+      "userId": "ao_10",
+      "slotId": "E_2025-12-20"
+    },
+    {
+      "userId": "ao_11",
+      "slotId": "D_2025-12-20"
+    },
+    {
+      "userId": "ao_11",
+      "slotId": "E_2025-12-20"
+    },
+    {
+      "userId": "ao_12",
+      "slotId": "D_2025-12-20"
+    },
+    {
+      "userId": "ao_12",
+      "slotId": "E_2025-12-20"
+    },
+    {
+      "userId": "ao_13",
+      "slotId": "D_2025-12-20"
+    },
+    {
+      "userId": "ao_13",
+      "slotId": "E_2025-12-20"
+    },
+    {
+      "userId": "ao_14",
+      "slotId": "D_2025-12-20"
+    },
+    {
+      "userId": "ao_14",
+      "slotId": "E_2025-12-20"
+    },
+    {
+      "userId": "ao_15",
+      "slotId": "D_2025-12-20"
+    },
+    {
+      "userId": "ao_15",
+      "slotId": "E_2025-12-20"
+    },
+    {
+      "userId": "ao_16",
+      "slotId": "D_2025-12-20"
+    },
+    {
+      "userId": "ao_16",
+      "slotId": "E_2025-12-20"
+    },
+    {
+      "userId": "ao_17",
+      "slotId": "D_2025-12-20"
+    },
+    {
+      "userId": "ao_17",
+      "slotId": "E_2025-12-20"
+    },
+    {
+      "userId": "ao_00",
+      "slotId": "A_2025-12-24"
+    },
+    {
+      "userId": "ao_00",
+      "slotId": "B_2025-12-24"
+    },
+    {
+      "userId": "ao_01",
+      "slotId": "A_2025-12-24"
+    },
+    {
+      "userId": "ao_01",
+      "slotId": "B_2025-12-24"
+    },
+    {
+      "userId": "ao_02",
+      "slotId": "A_2025-12-24"
+    },
+    {
+      "userId": "ao_02",
+      "slotId": "B_2025-12-24"
+    },
+    {
+      "userId": "ao_03",
+      "slotId": "A_2025-12-24"
+    },
+    {
+      "userId": "ao_03",
+      "slotId": "B_2025-12-24"
+    },
+    {
+      "userId": "ao_04",
+      "slotId": "A_2025-12-24"
+    },
+    {
+      "userId": "ao_04",
+      "slotId": "B_2025-12-24"
+    },
+    {
+      "userId": "ao_05",
+      "slotId": "A_2025-12-24"
+    },
+    {
+      "userId": "ao_05",
+      "slotId": "B_2025-12-24"
+    },
+    {
+      "userId": "ao_06",
+      "slotId": "A_2025-12-24"
+    },
+    {
+      "userId": "ao_06",
+      "slotId": "B_2025-12-24"
+    },
+    {
+      "userId": "ao_07",
+      "slotId": "A_2025-12-24"
+    },
+    {
+      "userId": "ao_07",
+      "slotId": "B_2025-12-24"
+    },
+    {
+      "userId": "ao_08",
+      "slotId": "A_2025-12-24"
+    },
+    {
+      "userId": "ao_08",
+      "slotId": "B_2025-12-24"
+    },
+    {
+      "userId": "ao_09",
+      "slotId": "A_2025-12-24"
+    },
+    {
+      "userId": "ao_09",
+      "slotId": "B_2025-12-24"
+    },
+    {
+      "userId": "ao_10",
+      "slotId": "A_2025-12-24"
+    },
+    {
+      "userId": "ao_10",
+      "slotId": "B_2025-12-24"
+    },
+    {
+      "userId": "ao_11",
+      "slotId": "A_2025-12-24"
+    },
+    {
+      "userId": "ao_11",
+      "slotId": "B_2025-12-24"
+    },
+    {
+      "userId": "ao_12",
+      "slotId": "A_2025-12-24"
+    },
+    {
+      "userId": "ao_12",
+      "slotId": "B_2025-12-24"
+    },
+    {
+      "userId": "ao_13",
+      "slotId": "A_2025-12-24"
+    },
+    {
+      "userId": "ao_13",
+      "slotId": "B_2025-12-24"
+    },
+    {
+      "userId": "ao_14",
+      "slotId": "A_2025-12-24"
+    },
+    {
+      "userId": "ao_14",
+      "slotId": "B_2025-12-24"
+    },
+    {
+      "userId": "ao_15",
+      "slotId": "A_2025-12-24"
+    },
+    {
+      "userId": "ao_15",
+      "slotId": "B_2025-12-24"
+    },
+    {
+      "userId": "ao_16",
+      "slotId": "A_2025-12-24"
+    },
+    {
+      "userId": "ao_16",
+      "slotId": "B_2025-12-24"
+    },
+    {
+      "userId": "ao_17",
+      "slotId": "A_2025-12-24"
+    },
+    {
+      "userId": "ao_17",
+      "slotId": "B_2025-12-24"
+    },
+    {
+      "userId": "ao_18",
+      "slotId": "A_2025-12-24"
+    },
+    {
+      "userId": "ao_18",
+      "slotId": "B_2025-12-24"
+    },
+    {
+      "userId": "ao_19",
+      "slotId": "A_2025-12-24"
+    },
+    {
+      "userId": "ao_19",
+      "slotId": "B_2025-12-24"
+    },
+    {
+      "userId": "ao_00",
+      "slotId": "B_2025-12-26"
+    },
+    {
+      "userId": "ao_00",
+      "slotId": "C_2025-12-26"
+    },
+    {
+      "userId": "ao_01",
+      "slotId": "B_2025-12-26"
+    },
+    {
+      "userId": "ao_01",
+      "slotId": "C_2025-12-26"
+    },
+    {
+      "userId": "ao_02",
+      "slotId": "B_2025-12-26"
+    },
+    {
+      "userId": "ao_02",
+      "slotId": "C_2025-12-26"
+    },
+    {
+      "userId": "ao_03",
+      "slotId": "B_2025-12-26"
+    },
+    {
+      "userId": "ao_03",
+      "slotId": "C_2025-12-26"
+    },
+    {
+      "userId": "ao_04",
+      "slotId": "B_2025-12-26"
+    },
+    {
+      "userId": "ao_04",
+      "slotId": "C_2025-12-26"
+    },
+    {
+      "userId": "ao_05",
+      "slotId": "B_2025-12-26"
+    },
+    {
+      "userId": "ao_05",
+      "slotId": "C_2025-12-26"
+    },
+    {
+      "userId": "ao_06",
+      "slotId": "B_2025-12-26"
+    },
+    {
+      "userId": "ao_06",
+      "slotId": "C_2025-12-26"
+    },
+    {
+      "userId": "ao_07",
+      "slotId": "B_2025-12-26"
+    },
+    {
+      "userId": "ao_07",
+      "slotId": "C_2025-12-26"
+    },
+    {
+      "userId": "ao_08",
+      "slotId": "B_2025-12-26"
+    },
+    {
+      "userId": "ao_08",
+      "slotId": "C_2025-12-26"
+    },
+    {
+      "userId": "ao_09",
+      "slotId": "B_2025-12-26"
+    },
+    {
+      "userId": "ao_09",
+      "slotId": "C_2025-12-26"
+    },
+    {
+      "userId": "ao_10",
+      "slotId": "B_2025-12-26"
+    },
+    {
+      "userId": "ao_10",
+      "slotId": "C_2025-12-26"
+    },
+    {
+      "userId": "ao_11",
+      "slotId": "B_2025-12-26"
+    },
+    {
+      "userId": "ao_11",
+      "slotId": "C_2025-12-26"
+    },
+    {
+      "userId": "ao_12",
+      "slotId": "B_2025-12-26"
+    },
+    {
+      "userId": "ao_12",
+      "slotId": "C_2025-12-26"
+    },
+    {
+      "userId": "ao_13",
+      "slotId": "B_2025-12-26"
+    },
+    {
+      "userId": "ao_13",
+      "slotId": "C_2025-12-26"
+    },
+    {
+      "userId": "ao_14",
+      "slotId": "B_2025-12-26"
+    },
+    {
+      "userId": "ao_14",
+      "slotId": "C_2025-12-26"
+    },
+    {
+      "userId": "ao_00",
+      "slotId": "D_2025-12-27"
+    },
+    {
+      "userId": "ao_00",
+      "slotId": "E_2025-12-27"
+    },
+    {
+      "userId": "ao_01",
+      "slotId": "D_2025-12-27"
+    },
+    {
+      "userId": "ao_01",
+      "slotId": "E_2025-12-27"
+    },
+    {
+      "userId": "ao_02",
+      "slotId": "D_2025-12-27"
+    },
+    {
+      "userId": "ao_02",
+      "slotId": "E_2025-12-27"
+    },
+    {
+      "userId": "ao_03",
+      "slotId": "D_2025-12-27"
+    },
+    {
+      "userId": "ao_03",
+      "slotId": "E_2025-12-27"
+    },
+    {
+      "userId": "ao_04",
+      "slotId": "D_2025-12-27"
+    },
+    {
+      "userId": "ao_04",
+      "slotId": "E_2025-12-27"
+    },
+    {
+      "userId": "ao_05",
+      "slotId": "D_2025-12-27"
+    },
+    {
+      "userId": "ao_05",
+      "slotId": "E_2025-12-27"
+    },
+    {
+      "userId": "ao_06",
+      "slotId": "D_2025-12-27"
+    },
+    {
+      "userId": "ao_06",
+      "slotId": "E_2025-12-27"
+    },
+    {
+      "userId": "ao_07",
+      "slotId": "D_2025-12-27"
+    },
+    {
+      "userId": "ao_07",
+      "slotId": "E_2025-12-27"
+    },
+    {
+      "userId": "ao_08",
+      "slotId": "D_2025-12-27"
+    },
+    {
+      "userId": "ao_08",
+      "slotId": "E_2025-12-27"
+    },
+    {
+      "userId": "ao_09",
+      "slotId": "D_2025-12-27"
+    },
+    {
+      "userId": "ao_09",
+      "slotId": "E_2025-12-27"
+    },
+    {
+      "userId": "ao_10",
+      "slotId": "D_2025-12-27"
+    },
+    {
+      "userId": "ao_10",
+      "slotId": "E_2025-12-27"
+    },
+    {
+      "userId": "ao_11",
+      "slotId": "D_2025-12-27"
+    },
+    {
+      "userId": "ao_11",
+      "slotId": "E_2025-12-27"
+    },
+    {
+      "userId": "ao_12",
+      "slotId": "D_2025-12-27"
+    },
+    {
+      "userId": "ao_12",
+      "slotId": "E_2025-12-27"
+    },
+    {
+      "userId": "ao_13",
+      "slotId": "D_2025-12-27"
+    },
+    {
+      "userId": "ao_13",
+      "slotId": "E_2025-12-27"
+    },
+    {
+      "userId": "ao_14",
+      "slotId": "D_2025-12-27"
+    },
+    {
+      "userId": "ao_14",
+      "slotId": "E_2025-12-27"
+    },
+    {
+      "userId": "ao_15",
+      "slotId": "D_2025-12-27"
+    },
+    {
+      "userId": "ao_15",
+      "slotId": "E_2025-12-27"
+    },
+    {
+      "userId": "ao_16",
+      "slotId": "D_2025-12-27"
+    },
+    {
+      "userId": "ao_16",
+      "slotId": "E_2025-12-27"
+    },
+    {
+      "userId": "ao_17",
+      "slotId": "D_2025-12-27"
+    },
+    {
+      "userId": "ao_17",
+      "slotId": "E_2025-12-27"
+    }
+  ]
+}

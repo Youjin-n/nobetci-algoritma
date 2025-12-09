@@ -1,0 +1,830 @@
+{
+  "period": {
+    "id": "dec-2025",
+    "name": "Aralık 2025",
+    "startDate": "2025-12-01",
+    "endDate": "2025-12-14"
+  },
+  "users": [
+    {
+      "id": "na_00",
+      "name": "Uzm. 1",
+      "email": null,
+      "role": "SENIOR_ASSISTANT",
+      "likesMorning": false,
+      "likesEvening": false,
+      "history": {
+        "totalAllTime": 0,
+        "countAAllTime": 0,
+        "countMorningAllTime": 0,
+        "countEveningAllTime": 0
+      }
+    },
+    {
+      "id": "na_01",
+      "name": "Uzm. 2",
+      "email": null,
+      "role": "SENIOR_ASSISTANT",
+      "likesMorning": false,
+      "likesEvening": false,
+      "history": {
+        "totalAllTime": 0,
+        "countAAllTime": 0,
+        "countMorningAllTime": 0,
+        "countEveningAllTime": 0
+      }
+    },
+    {
+      "id": "na_02",
+      "name": "Uzm. 3",
+      "email": null,
+      "role": "SENIOR_ASSISTANT",
+      "likesMorning": false,
+      "likesEvening": false,
+      "history": {
+        "totalAllTime": 0,
+        "countAAllTime": 0,
+        "countMorningAllTime": 0,
+        "countEveningAllTime": 0
+      }
+    },
+    {
+      "id": "na_03",
+      "name": "Uzm. 4",
+      "email": null,
+      "role": "SENIOR_ASSISTANT",
+      "likesMorning": false,
+      "likesEvening": false,
+      "history": {
+        "totalAllTime": 0,
+        "countAAllTime": 0,
+        "countMorningAllTime": 0,
+        "countEveningAllTime": 0
+      }
+    },
+    {
+      "id": "na_04",
+      "name": "Uzm. 5",
+      "email": null,
+      "role": "SENIOR_ASSISTANT",
+      "likesMorning": false,
+      "likesEvening": false,
+      "history": {
+        "totalAllTime": 0,
+        "countAAllTime": 0,
+        "countMorningAllTime": 0,
+        "countEveningAllTime": 0
+      }
+    },
+    {
+      "id": "na_05",
+      "name": "Uzm. 6",
+      "email": null,
+      "role": "SENIOR_ASSISTANT",
+      "likesMorning": false,
+      "likesEvening": false,
+      "history": {
+        "totalAllTime": 0,
+        "countAAllTime": 0,
+        "countMorningAllTime": 0,
+        "countEveningAllTime": 0
+      }
+    },
+    {
+      "id": "na_06",
+      "name": "Uzm. 7",
+      "email": null,
+      "role": "SENIOR_ASSISTANT",
+      "likesMorning": false,
+      "likesEvening": false,
+      "history": {
+        "totalAllTime": 0,
+        "countAAllTime": 0,
+        "countMorningAllTime": 0,
+        "countEveningAllTime": 0
+      }
+    },
+    {
+      "id": "na_07",
+      "name": "Uzm. 8",
+      "email": null,
+      "role": "SENIOR_ASSISTANT",
+      "likesMorning": false,
+      "likesEvening": false,
+      "history": {
+        "totalAllTime": 0,
+        "countAAllTime": 0,
+        "countMorningAllTime": 0,
+        "countEveningAllTime": 0
+      }
+    }
+  ],
+  "slots": [
+    {
+      "id": "M_2025-12-01",
+      "slot_date": "2025-12-01",
+      "dutyType": "A",
+      "segment": "MORNING",
+      "seats": [
+        {
+          "id": "M_2025-12-01_s0",
+          "role": null
+        },
+        {
+          "id": "M_2025-12-01_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "E_2025-12-01",
+      "slot_date": "2025-12-01",
+      "dutyType": "A",
+      "segment": "EVENING",
+      "seats": [
+        {
+          "id": "E_2025-12-01_s0",
+          "role": null
+        },
+        {
+          "id": "E_2025-12-01_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "M_2025-12-02",
+      "slot_date": "2025-12-02",
+      "dutyType": "A",
+      "segment": "MORNING",
+      "seats": [
+        {
+          "id": "M_2025-12-02_s0",
+          "role": null
+        },
+        {
+          "id": "M_2025-12-02_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "E_2025-12-02",
+      "slot_date": "2025-12-02",
+      "dutyType": "A",
+      "segment": "EVENING",
+      "seats": [
+        {
+          "id": "E_2025-12-02_s0",
+          "role": null
+        },
+        {
+          "id": "E_2025-12-02_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "M_2025-12-03",
+      "slot_date": "2025-12-03",
+      "dutyType": "A",
+      "segment": "MORNING",
+      "seats": [
+        {
+          "id": "M_2025-12-03_s0",
+          "role": null
+        },
+        {
+          "id": "M_2025-12-03_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "E_2025-12-03",
+      "slot_date": "2025-12-03",
+      "dutyType": "A",
+      "segment": "EVENING",
+      "seats": [
+        {
+          "id": "E_2025-12-03_s0",
+          "role": null
+        },
+        {
+          "id": "E_2025-12-03_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "M_2025-12-04",
+      "slot_date": "2025-12-04",
+      "dutyType": "A",
+      "segment": "MORNING",
+      "seats": [
+        {
+          "id": "M_2025-12-04_s0",
+          "role": null
+        },
+        {
+          "id": "M_2025-12-04_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "E_2025-12-04",
+      "slot_date": "2025-12-04",
+      "dutyType": "A",
+      "segment": "EVENING",
+      "seats": [
+        {
+          "id": "E_2025-12-04_s0",
+          "role": null
+        },
+        {
+          "id": "E_2025-12-04_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "M_2025-12-05",
+      "slot_date": "2025-12-05",
+      "dutyType": "A",
+      "segment": "MORNING",
+      "seats": [
+        {
+          "id": "M_2025-12-05_s0",
+          "role": null
+        },
+        {
+          "id": "M_2025-12-05_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "E_2025-12-05",
+      "slot_date": "2025-12-05",
+      "dutyType": "A",
+      "segment": "EVENING",
+      "seats": [
+        {
+          "id": "E_2025-12-05_s0",
+          "role": null
+        },
+        {
+          "id": "E_2025-12-05_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "M_2025-12-08",
+      "slot_date": "2025-12-08",
+      "dutyType": "A",
+      "segment": "MORNING",
+      "seats": [
+        {
+          "id": "M_2025-12-08_s0",
+          "role": null
+        },
+        {
+          "id": "M_2025-12-08_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "E_2025-12-08",
+      "slot_date": "2025-12-08",
+      "dutyType": "A",
+      "segment": "EVENING",
+      "seats": [
+        {
+          "id": "E_2025-12-08_s0",
+          "role": null
+        },
+        {
+          "id": "E_2025-12-08_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "M_2025-12-09",
+      "slot_date": "2025-12-09",
+      "dutyType": "A",
+      "segment": "MORNING",
+      "seats": [
+        {
+          "id": "M_2025-12-09_s0",
+          "role": null
+        },
+        {
+          "id": "M_2025-12-09_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "E_2025-12-09",
+      "slot_date": "2025-12-09",
+      "dutyType": "A",
+      "segment": "EVENING",
+      "seats": [
+        {
+          "id": "E_2025-12-09_s0",
+          "role": null
+        },
+        {
+          "id": "E_2025-12-09_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "M_2025-12-10",
+      "slot_date": "2025-12-10",
+      "dutyType": "A",
+      "segment": "MORNING",
+      "seats": [
+        {
+          "id": "M_2025-12-10_s0",
+          "role": null
+        },
+        {
+          "id": "M_2025-12-10_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "E_2025-12-10",
+      "slot_date": "2025-12-10",
+      "dutyType": "A",
+      "segment": "EVENING",
+      "seats": [
+        {
+          "id": "E_2025-12-10_s0",
+          "role": null
+        },
+        {
+          "id": "E_2025-12-10_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "M_2025-12-11",
+      "slot_date": "2025-12-11",
+      "dutyType": "A",
+      "segment": "MORNING",
+      "seats": [
+        {
+          "id": "M_2025-12-11_s0",
+          "role": null
+        },
+        {
+          "id": "M_2025-12-11_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "E_2025-12-11",
+      "slot_date": "2025-12-11",
+      "dutyType": "A",
+      "segment": "EVENING",
+      "seats": [
+        {
+          "id": "E_2025-12-11_s0",
+          "role": null
+        },
+        {
+          "id": "E_2025-12-11_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "M_2025-12-12",
+      "slot_date": "2025-12-12",
+      "dutyType": "A",
+      "segment": "MORNING",
+      "seats": [
+        {
+          "id": "M_2025-12-12_s0",
+          "role": null
+        },
+        {
+          "id": "M_2025-12-12_s1",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "E_2025-12-12",
+      "slot_date": "2025-12-12",
+      "dutyType": "A",
+      "segment": "EVENING",
+      "seats": [
+        {
+          "id": "E_2025-12-12_s0",
+          "role": null
+        },
+        {
+          "id": "E_2025-12-12_s1",
+          "role": null
+        }
+      ]
+    }
+  ],
+  "unavailability": [
+    {
+      "userId": "na_00",
+      "slotId": "M_2025-12-01"
+    },
+    {
+      "userId": "na_00",
+      "slotId": "E_2025-12-01"
+    },
+    {
+      "userId": "na_01",
+      "slotId": "M_2025-12-01"
+    },
+    {
+      "userId": "na_01",
+      "slotId": "E_2025-12-01"
+    },
+    {
+      "userId": "na_02",
+      "slotId": "M_2025-12-01"
+    },
+    {
+      "userId": "na_02",
+      "slotId": "E_2025-12-01"
+    },
+    {
+      "userId": "na_03",
+      "slotId": "M_2025-12-01"
+    },
+    {
+      "userId": "na_03",
+      "slotId": "E_2025-12-01"
+    },
+    {
+      "userId": "na_04",
+      "slotId": "M_2025-12-01"
+    },
+    {
+      "userId": "na_04",
+      "slotId": "E_2025-12-01"
+    },
+    {
+      "userId": "na_05",
+      "slotId": "M_2025-12-01"
+    },
+    {
+      "userId": "na_05",
+      "slotId": "E_2025-12-01"
+    },
+    {
+      "userId": "na_06",
+      "slotId": "M_2025-12-01"
+    },
+    {
+      "userId": "na_06",
+      "slotId": "E_2025-12-01"
+    },
+    {
+      "userId": "na_07",
+      "slotId": "M_2025-12-01"
+    },
+    {
+      "userId": "na_07",
+      "slotId": "E_2025-12-01"
+    },
+    {
+      "userId": "na_00",
+      "slotId": "M_2025-12-02"
+    },
+    {
+      "userId": "na_00",
+      "slotId": "E_2025-12-02"
+    },
+    {
+      "userId": "na_01",
+      "slotId": "M_2025-12-02"
+    },
+    {
+      "userId": "na_01",
+      "slotId": "E_2025-12-02"
+    },
+    {
+      "userId": "na_02",
+      "slotId": "M_2025-12-02"
+    },
+    {
+      "userId": "na_02",
+      "slotId": "E_2025-12-02"
+    },
+    {
+      "userId": "na_03",
+      "slotId": "M_2025-12-02"
+    },
+    {
+      "userId": "na_03",
+      "slotId": "E_2025-12-02"
+    },
+    {
+      "userId": "na_04",
+      "slotId": "M_2025-12-02"
+    },
+    {
+      "userId": "na_04",
+      "slotId": "E_2025-12-02"
+    },
+    {
+      "userId": "na_05",
+      "slotId": "M_2025-12-02"
+    },
+    {
+      "userId": "na_05",
+      "slotId": "E_2025-12-02"
+    },
+    {
+      "userId": "na_06",
+      "slotId": "M_2025-12-02"
+    },
+    {
+      "userId": "na_06",
+      "slotId": "E_2025-12-02"
+    },
+    {
+      "userId": "na_07",
+      "slotId": "M_2025-12-02"
+    },
+    {
+      "userId": "na_07",
+      "slotId": "E_2025-12-02"
+    },
+    {
+      "userId": "na_00",
+      "slotId": "M_2025-12-03"
+    },
+    {
+      "userId": "na_00",
+      "slotId": "E_2025-12-03"
+    },
+    {
+      "userId": "na_01",
+      "slotId": "M_2025-12-03"
+    },
+    {
+      "userId": "na_01",
+      "slotId": "E_2025-12-03"
+    },
+    {
+      "userId": "na_02",
+      "slotId": "M_2025-12-03"
+    },
+    {
+      "userId": "na_02",
+      "slotId": "E_2025-12-03"
+    },
+    {
+      "userId": "na_03",
+      "slotId": "M_2025-12-03"
+    },
+    {
+      "userId": "na_03",
+      "slotId": "E_2025-12-03"
+    },
+    {
+      "userId": "na_04",
+      "slotId": "M_2025-12-03"
+    },
+    {
+      "userId": "na_04",
+      "slotId": "E_2025-12-03"
+    },
+    {
+      "userId": "na_05",
+      "slotId": "M_2025-12-03"
+    },
+    {
+      "userId": "na_05",
+      "slotId": "E_2025-12-03"
+    },
+    {
+      "userId": "na_06",
+      "slotId": "M_2025-12-03"
+    },
+    {
+      "userId": "na_06",
+      "slotId": "E_2025-12-03"
+    },
+    {
+      "userId": "na_07",
+      "slotId": "M_2025-12-03"
+    },
+    {
+      "userId": "na_07",
+      "slotId": "E_2025-12-03"
+    },
+    {
+      "userId": "na_00",
+      "slotId": "M_2025-12-08"
+    },
+    {
+      "userId": "na_00",
+      "slotId": "E_2025-12-08"
+    },
+    {
+      "userId": "na_01",
+      "slotId": "M_2025-12-08"
+    },
+    {
+      "userId": "na_01",
+      "slotId": "E_2025-12-08"
+    },
+    {
+      "userId": "na_02",
+      "slotId": "M_2025-12-08"
+    },
+    {
+      "userId": "na_02",
+      "slotId": "E_2025-12-08"
+    },
+    {
+      "userId": "na_03",
+      "slotId": "M_2025-12-08"
+    },
+    {
+      "userId": "na_03",
+      "slotId": "E_2025-12-08"
+    },
+    {
+      "userId": "na_04",
+      "slotId": "M_2025-12-08"
+    },
+    {
+      "userId": "na_04",
+      "slotId": "E_2025-12-08"
+    },
+    {
+      "userId": "na_05",
+      "slotId": "M_2025-12-08"
+    },
+    {
+      "userId": "na_05",
+      "slotId": "E_2025-12-08"
+    },
+    {
+      "userId": "na_06",
+      "slotId": "M_2025-12-08"
+    },
+    {
+      "userId": "na_06",
+      "slotId": "E_2025-12-08"
+    },
+    {
+      "userId": "na_07",
+      "slotId": "M_2025-12-08"
+    },
+    {
+      "userId": "na_07",
+      "slotId": "E_2025-12-08"
+    },
+    {
+      "userId": "na_00",
+      "slotId": "M_2025-12-09"
+    },
+    {
+      "userId": "na_00",
+      "slotId": "E_2025-12-09"
+    },
+    {
+      "userId": "na_01",
+      "slotId": "M_2025-12-09"
+    },
+    {
+      "userId": "na_01",
+      "slotId": "E_2025-12-09"
+    },
+    {
+      "userId": "na_02",
+      "slotId": "M_2025-12-09"
+    },
+    {
+      "userId": "na_02",
+      "slotId": "E_2025-12-09"
+    },
+    {
+      "userId": "na_03",
+      "slotId": "M_2025-12-09"
+    },
+    {
+      "userId": "na_03",
+      "slotId": "E_2025-12-09"
+    },
+    {
+      "userId": "na_04",
+      "slotId": "M_2025-12-09"
+    },
+    {
+      "userId": "na_04",
+      "slotId": "E_2025-12-09"
+    },
+    {
+      "userId": "na_05",
+      "slotId": "M_2025-12-09"
+    },
+    {
+      "userId": "na_05",
+      "slotId": "E_2025-12-09"
+    },
+    {
+      "userId": "na_06",
+      "slotId": "M_2025-12-09"
+    },
+    {
+      "userId": "na_06",
+      "slotId": "E_2025-12-09"
+    },
+    {
+      "userId": "na_07",
+      "slotId": "M_2025-12-09"
+    },
+    {
+      "userId": "na_07",
+      "slotId": "E_2025-12-09"
+    },
+    {
+      "userId": "na_00",
+      "slotId": "M_2025-12-10"
+    },
+    {
+      "userId": "na_00",
+      "slotId": "E_2025-12-10"
+    },
+    {
+      "userId": "na_01",
+      "slotId": "M_2025-12-10"
+    },
+    {
+      "userId": "na_01",
+      "slotId": "E_2025-12-10"
+    },
+    {
+      "userId": "na_02",
+      "slotId": "M_2025-12-10"
+    },
+    {
+      "userId": "na_02",
+      "slotId": "E_2025-12-10"
+    },
+    {
+      "userId": "na_03",
+      "slotId": "M_2025-12-10"
+    },
+    {
+      "userId": "na_03",
+      "slotId": "E_2025-12-10"
+    },
+    {
+      "userId": "na_04",
+      "slotId": "M_2025-12-10"
+    },
+    {
+      "userId": "na_04",
+      "slotId": "E_2025-12-10"
+    },
+    {
+      "userId": "na_05",
+      "slotId": "M_2025-12-10"
+    },
+    {
+      "userId": "na_05",
+      "slotId": "E_2025-12-10"
+    },
+    {
+      "userId": "na_06",
+      "slotId": "M_2025-12-10"
+    },
+    {
+      "userId": "na_06",
+      "slotId": "E_2025-12-10"
+    },
+    {
+      "userId": "na_07",
+      "slotId": "M_2025-12-10"
+    },
+    {
+      "userId": "na_07",
+      "slotId": "E_2025-12-10"
+    }
+  ]
+}
