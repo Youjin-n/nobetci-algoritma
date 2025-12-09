@@ -148,7 +148,7 @@ interface SeniorSlot {
   segment: "MORNING" | "EVENING";  // Which half?
   seats: Array<{
     id: string;
-    role: null;                    // Always null for seniors
+    role: "DESK" | "OPERATOR" | null;  // Can specify role or null
   }>;
 }
 ```
@@ -169,9 +169,17 @@ interface SeniorSlot {
 | 4 | Same day both segments | 100 |
 | 5 | Preferences (likesMorning/likesEvening) | -5 bonus |
 
+#### DESK/OPERATOR Assignment (NA)
+
+| People | DESK | OPERATOR |
+|--------|------|----------|
+| 1 | 0 | 1 |
+| 2 | 1 | 1 |
+| 3 | 2 | 1 |
+
 #### Response
 
-Same `ScheduleResponse` format as main endpoint (seatRole = null for seniors).
+Same `ScheduleResponse` format as main endpoint. `seatRole` contains "DESK" or "OPERATOR".
 
 ---
 

@@ -43,6 +43,14 @@ NA HARD CONSTRAINTS (Değişmez Kurallar):
 2. Base+2 Limiti: Kimse base+2'den fazla yarım A alamaz
 3. Günde Max 2 Segment: Sabah + öğleden sonra alınabilir (max 2)
 
+NA DESK/OPERATOR DAĞILIMI:
+--------------------------
+Kişi Sayısı    DESK    OPERATOR
+-----------    ----    --------
+1              0       1
+2              1       1
+3              2       1
+
 NA SOFT PENALTIES:
 ------------------
 Seviye    Kural                        Ceza        Açıklama
@@ -83,7 +91,8 @@ Request (Senior):
     - slotId
 
 Response (Senior):
-  Aynı ScheduleResponse formatı (seatRole = null)
+  Aynı ScheduleResponse formatı
+  - seatRole: "DESK" veya "OPERATOR" (1 kişi=OPERATOR, 2 kişi=1D+1O, 3 kişi=2D+1O)
 
 ==============================================================================
 
