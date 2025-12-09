@@ -95,11 +95,18 @@ interface ScheduleResponse {
 
 ---
 
-### 2. Senior Schedule Endpoint
+### 2. Senior Schedule Endpoint (Nöbetçi Asistan / NA)
 
 **POST** `/schedule/compute-senior`
 
-Distributes **A-shift segments** (MORNING/EVENING) for "Nöbetçi Asistan" users.
+Distributes **A-shift segments** for "Nöbetçi Asistan" users. Each day has MORNING (08:30-13:00) and EVENING (13:00-17:30) segments.
+
+#### Segments
+
+| Segment | Time | Description |
+|---------|------|-------------|
+| **MORNING** | 08:30-13:00 | Morning half-shift |
+| **EVENING** | 13:00-17:30 | Afternoon half-shift |
 
 #### Request Body
 
@@ -108,7 +115,7 @@ interface SeniorScheduleRequest {
   period: {
     id: string;
     name: string;
-    startDate: string;
+    startDate: string;       // "YYYY-MM-DD"
     endDate: string;
   };
   users: SeniorUser[];
@@ -123,32 +130,48 @@ interface SeniorUser {
   id: string;
   name: string;
   email?: string;
-  role: string;              // "SENIOR_ASSISTANT" or similar
-  likesMorning: boolean;     // Prefers morning segment?
-  likesEvening: boolean;     // Prefers evening segment?
+  role: string;                    // "SENIOR_ASSISTANT"
+  likesMorning: boolean;           // Prefers morning segment?
+  likesEvening: boolean;           // Prefers afternoon segment?
   history: {
-    totalAllTime: number;    // Total half-A count (all time)
-    countAAllTime: number;
-    countMorningAllTime: number;
-    countEveningAllTime: number;
+    totalAllTime: number;          // Total half-A count (all time)
+    countAAllTime: number;         // Same as totalAllTime for seniors
+    countMorningAllTime: number;   // Morning segment count
+    countEveningAllTime: number;   // Afternoon segment count
   };
 }
 
 interface SeniorSlot {
   id: string;
-  date: string;              // ISO date
-  dutyType: "A";             // Always "A" for seniors
-  segment: "MORNING" | "EVENING";
+  date: string;                    // "YYYY-MM-DD"
+  dutyType: "A";                   // Always "A"
+  segment: "MORNING" | "EVENING";  // Which half?
   seats: Array<{
     id: string;
-    role: null;              // Typically null for seniors
+    role: null;                    // Always null for seniors
   }>;
 }
 ```
 
+#### NA Algorithm Rules
+
+**Hard Constraints:**
+1. Coverage: Every segment filled completely
+2. Max base+2 half-shifts per person
+3. Max 2 segments per day (morning + afternoon allowed)
+
+**Soft Penalties (Priority Order):**
+| Priority | Rule | Penalty |
+|----------|------|---------|
+| 1 | Unavailability violation | 200,000 |
+| 2 | 3+ consecutive days | 7,000 |
+| 3 | Fairness (equal distribution) | 1,000-3,000 |
+| 4 | Same day both segments | 100 |
+| 5 | Preferences (likesMorning/likesEvening) | -5 bonus |
+
 #### Response
 
-Same `ScheduleResponse` format as main endpoint.
+Same `ScheduleResponse` format as main endpoint (seatRole = null for seniors).
 
 ---
 

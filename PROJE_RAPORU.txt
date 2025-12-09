@@ -17,11 +17,75 @@ Ne Yapıyor?
 İKİ ANA ENDPOINT
 ----------------
 
-1. /schedule/compute - Ana Asistan Öğrenci Nöbet Dağıtımı
+1. /schedule/compute - Ana Asistan Öğrenci (AÖ) Nöbet Dağıtımı
    Hafta içi A/B/C, hafta sonu D/E/F nöbetlerini dağıtır.
 
-2. /schedule/compute-senior - Nöbetçi Asistan Dağıtımı
-   Sadece A nöbetinin sabah/akşam segmentlerini (yarım nöbet) dağıtır.
+2. /schedule/compute-senior - Nöbetçi Asistan (NA) Dağıtımı
+   Sadece A nöbetinin SABAH/ÖĞLEDEN SONRA segmentlerini dağıtır.
+
+
+==============================================================================
+NÖBETÇİ ASİSTAN (NA) SCHEDULER DETAYI
+==============================================================================
+
+NA'lar sadece A nöbeti tutar ve bu nöbet iki segmente ayrılır:
+
+Segment          Saat              Açıklama
+-------          ----              --------
+MORNING          08:30-13:00       Sabah yarısı
+EVENING          13:00-17:30       Öğleden sonra yarısı
+
+Her segment ayrı bir "yarım nöbet" olarak sayılır.
+
+NA HARD CONSTRAINTS (Değişmez Kurallar):
+----------------------------------------
+1. Coverage: Her segment requiredCount kadar dolu olmalı
+2. Base+2 Limiti: Kimse base+2'den fazla yarım A alamaz
+3. Günde Max 2 Segment: Sabah + öğleden sonra alınabilir (max 2)
+
+NA SOFT PENALTIES:
+------------------
+Seviye    Kural                        Ceza        Açıklama
+------    -----                        ----        --------
+Level 1   Unavailability ihlali        200,000     Müsait olmayan segmente atama
+Level 1   Ideal+2 üstüne çıkma         120,000     Fazla yarım A alma
+Level 2   3 gün üst üste               7,000       Art arda 3 gün yarım A tutma
+Level 3   Yarım A fairness             1,000       Segment sayısı eşitliği
+Level 3   Geçmiş denge                 3,000       Tarihsel A sayısı dengesi
+Level 4   Haftalık yığılma             100         Haftada 2'den fazla segment
+Level 4   Aynı gün sabah+akşam         100         Full gün alma cezası
+Level 5   Tercih bonusu                -5          likesMorning/likesEvening
+
+NA VERİ MODELLERİ:
+------------------
+
+Request (Senior):
+  period: Dönem bilgisi (aynı)
+  users: SeniorUser listesi
+    - id, name, role ("SENIOR_ASSISTANT")
+    - history:
+      - totalAllTime: Toplam yarım A sayısı
+      - countAAllTime: A nöbeti sayısı (= totalAllTime)
+      - countMorningAllTime: Sabah yarısı sayısı
+      - countEveningAllTime: Öğleden sonra yarısı sayısı
+    - likesMorning: Sabah tercih eder mi?
+    - likesEvening: Öğleden sonra tercih eder mi?
+  
+  slots: SeniorSlot listesi
+    - id
+    - date
+    - dutyType: "A" (her zaman)
+    - segment: "MORNING" veya "EVENING"
+    - seats: [{ id, role: null }]
+  
+  unavailability: Müsaitlik kapama listesi
+    - userId
+    - slotId
+
+Response (Senior):
+  Aynı ScheduleResponse formatı (seatRole = null)
+
+==============================================================================
 
 
 NÖBET TÜRLERİ
