@@ -396,8 +396,8 @@ class TestSeniorMeta:
 class TestSeniorSeatRole:
     """Seat role testleri"""
 
-    def test_no_seat_role_for_senior(self, solver, base_period):
-        """Senior için seatRole None olmalı"""
+    def test_seat_role_for_senior_1_person(self, solver, base_period):
+        """1 kişi: 0 DESK, 1 OPERATOR -> OPERATOR olmalı"""
         users = [create_senior_user("senior-1", "Dr. Ahmet")]
         slots = [create_senior_slot("s1", date(2025, 12, 1), Segment.MORNING)]
 
@@ -410,5 +410,28 @@ class TestSeniorSeatRole:
 
         response = solver.solve(request)
 
-        for assignment in response.assignments:
-            assert assignment.seatRole is None
+        assert len(response.assignments) == 1
+        # 1 kişi = OPERATOR
+        assert response.assignments[0].seatRole.value == "OPERATOR"
+
+    def test_seat_role_for_senior_2_persons(self, solver, base_period):
+        """2 kişi: 1 DESK, 1 OPERATOR"""
+        users = [
+            create_senior_user("senior-1", "Dr. Ahmet"),
+            create_senior_user("senior-2", "Dr. Mehmet"),
+        ]
+        slots = [create_senior_slot("s1", date(2025, 12, 1), Segment.MORNING, required_count=2)]
+
+        request = SeniorScheduleRequest(
+            period=base_period,
+            users=users,
+            slots=slots,
+            unavailability=[],
+        )
+
+        response = solver.solve(request)
+
+        assert len(response.assignments) == 2
+        roles = [a.seatRole.value for a in response.assignments]
+        assert roles.count("DESK") == 1
+        assert roles.count("OPERATOR") == 1

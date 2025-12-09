@@ -78,6 +78,7 @@ class SeniorAssignmentResult:
     slot_id: str
     seat_id: str
     user_id: str
+    seat_role: str | None = None  # "DESK" or "OPERATOR"
 
 
 @dataclass
@@ -125,6 +126,27 @@ def get_week_index(slot_date: date, period_start: date) -> int:
     """Slot'un dönem içindeki hafta indeksini hesapla"""
     days_diff = (slot_date - period_start).days
     return days_diff // 7
+
+
+def get_senior_desk_operator_count(total_people: int) -> tuple[int, int]:
+    """
+    NA için DESK/OPERATOR sayısını hesapla.
+    
+    Kurallar:
+    - 1 kişi: 0 DESK, 1 OPERATOR
+    - 2 kişi: 1 DESK, 1 OPERATOR  
+    - 3 kişi: 2 DESK, 1 OPERATOR
+    - 4+ kişi: (n-1) DESK, 1 OPERATOR (genel kural)
+    
+    Returns:
+        (desk_count, operator_count)
+    """
+    if total_people <= 0:
+        return (0, 0)
+    if total_people == 1:
+        return (0, 1)
+    # 2+ kişi için: hep 1 OPERATOR, geri kalan DESK
+    return (total_people - 1, 1)
 
 
 # --- Main Solver ---
@@ -341,16 +363,23 @@ class SeniorSchedulerSolver:
                     if solver.Value(x[user.index, slot.index]) == 1:
                         slot_users.append(user)
                 
-                # Assign seats
+                # Assign seats with DESK/OPERATOR roles
+                total_people = len(slot_users)
+                desk_count, _ = get_senior_desk_operator_count(total_people)
+                
                 for seat_idx, user in enumerate(slot_users):
                     seat = slot.seats[seat_idx] if seat_idx < len(slot.seats) else None
                     seat_id = seat.id if seat else f"{slot.id}-seat-{seat_idx}"
+                    
+                    # İlk desk_count kişi DESK, geri kalanlar OPERATOR
+                    seat_role = "DESK" if seat_idx < desk_count else "OPERATOR"
                     
                     assignments.append(
                         SeniorAssignmentResult(
                             slot_id=slot.id,
                             seat_id=seat_id,
                             user_id=user.id,
+                            seat_role=seat_role,
                         )
                     )
 
@@ -575,7 +604,7 @@ class SeniorSchedulerSolver:
                     slotId=assignment.slot_id,
                     seatId=assignment.seat_id,
                     userId=assignment.user_id,
-                    seatRole=None,  # Senior için rol yok
+                    seatRole=assignment.seat_role,  # DESK or OPERATOR
                     isExtra=is_extra,
                 )
             )
