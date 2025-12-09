@@ -1,0 +1,391 @@
+NÖBETÇİ DAĞITIM MOTORU - KAPSAMLI PROJE RAPORU
+================================================
+
+GENEL BAKIŞ
+-----------
+
+Projenin Amacı:
+Hastane/kurum nöbet çizelgelerini otomatik ve adil bir şekilde oluşturan bir optimizasyon motoru. Google'ın OR-Tools CP-SAT (Constraint Programming - Satisfiability) çözücüsünü kullanarak matematiksel optimizasyon yapıyor.
+
+Ne Yapıyor?
+- Gelen kullanıcı listesi, slot listesi ve müsaitlik bilgilerine göre optimal nöbet ataması üretiyor
+- Tarihsel adaleti gözetiyor (geçmişte az tutanlar bu dönem fazla alsın)
+- Yeni girenleri dezavantajlı başlatmıyor (fark=0 ile başlıyorlar)
+- Tüm kuralları öncelik sırasına göre dengeliyor
+
+
+İKİ ANA ENDPOINT
+----------------
+
+1. /schedule/compute - Ana Asistan Öğrenci Nöbet Dağıtımı
+   Hafta içi A/B/C, hafta sonu D/E/F nöbetlerini dağıtır.
+
+2. /schedule/compute-senior - Nöbetçi Asistan Dağıtımı
+   Sadece A nöbetinin sabah/akşam segmentlerini (yarım nöbet) dağıtır.
+
+
+NÖBET TÜRLERİ
+-------------
+
+Tür   Zaman           Gün Tipi      Açıklama
+---   -----           --------      --------
+A     08:30-17:30     Hafta içi     Gündüz (DESK/OPERATOR rolü var)
+B     17:30-23:30     Hafta içi     Akşam
+C     23:30-08:30     Hafta içi     Gece
+D     08:00-16:00     Hafta sonu    Sabah
+E     16:00-23:30     Hafta sonu    Akşam
+F     23:20-08:00     Hafta sonu    Gece
+
+
+A NÖBETİ DESK/OPERATOR DAĞILIMI
+-------------------------------
+
+A nöbetinde kişiler DESK veya OPERATOR rolü alıyor:
+
+Kişi Sayısı    DESK    OPERATOR
+-----------    ----    --------
+1              0       1
+2              1       1
+3              1       2
+4              2       2
+5              3       2
+6              3       3
+7              4       3
+
+
+KURAL HİYERARŞİSİ (ÖNCELİK SIRASI)
+==================================
+
+LEVEL 0 - DEĞİŞMEZ SERT KISITLAR (Asla Esnetilmez)
+--------------------------------------------------
+
+1. Slot Doldurma: Her slot tam olarak requiredCount kadar kişi almalı. Eksik/fazla olmaz.
+2. Tek Atama: Aynı kişi aynı slotta sadece 1 kez yazılabilir
+3. Günde Max 2 Nöbet: Aynı gün en fazla 2 nöbet tutulabilir (ABC/DEF üçlüsü otomatik engellenir)
+4. Yasak Geçişler: C->A, C->D, F->A, F->D YASAK (gece nöbetinden ertesi gün sabah nöbetine geçiş yok)
+5. base+3 Yasağı: Kimse base+2'den fazla nöbet alamaz
+
+
+LEVEL 1 - EN AĞIR SOFT CEZALAR (≈80-200k)
+-----------------------------------------
+
+Kural              Ceza Ağırlığı    Açıklama
+-----              -------------    --------
+Müsait Değilim     200,000          EN AĞIR! Kişinin kapadığı slota atama yapılırsa ceza
+Müsaitlik Fairness 1,000            Herkes kapattıysa en çok kapatanı yerleştir (tie-breaker)
+Below Ideal        140,000          ideal_current - 2 altına düşme (eksik nöbet)
+Above Ideal        120,000          ideal_current + 2 üstüne çıkma (fazla nöbet)  
+Sıfır Nöbet        80,000           Kimse dönem içinde 0 nöbet kalmamalı
+
+ÖNEMLİ: ideal ±1 güvenli bölge (ceza yok), ±2 çok pahalı, ±3 hard olarak imkansız.
+
+
+LEVEL 2 - AĞIR CEZALAR (7k)
+---------------------------
+
+Kural              Ceza Ağırlığı    Açıklama
+-----              -------------    --------
+3 Gün Üst Üste     7,000            Arka arkaya 3+ gün nöbet tutma (her ekstra gün için)
+
+
+LEVEL 3 - FAIRNESS (Adalet Cezaları)
+------------------------------------
+
+Kural                        Ceza Ağırlığı    Açıklama
+-----                        -------------    --------
+İdeal Soft (±1 Sapma)        4,000            ideal_current'tan ±1 sapma için hafif ceza
+Tarihsel Denge               3,000            expectedTotal bazlı ince ayar (düşürüldü!)
+Nöbet Türü Eşitliği          1,000            A, B, C, Weekend sayıları kişiler arası eşit olsun
+Gece Eşitliği                1,000            C+F (gece) sayıları eşit olsun
+Hafta Sonu Slot Eşitliği     50               D, E, F ayrı ayrı eşit dağılsın (düşük öncelik)
+
+ÖNEMLİ: Tarihsel denge artık müsaitlik (200k) ve base sapması (120-140k) cezalarından 
+ÇOK daha hafif. Solver, tarihsel adaleti düzeltmek için "müsait değilim"i çiğnemez!
+
+
+LEVEL 4 - KONFOR
+----------------
+
+Kural                Ceza Ağırlığı    Açıklama
+-----                -------------    --------
+Haftalık Yığılma     100              Haftada 2'den fazla nöbet varsa ceza
+Aynı Gün 2 Nöbet     100              Aynı gün 2 nöbet tutma (mümkünse farklı günlere dağıt)
+Arka Arkaya Gece     100              İki gün üst üste gece (C/F) nöbeti tutma
+
+
+LEVEL 5 - TERCİHLER (En Düşük Öncelik)
+--------------------------------------
+
+Kural              Ağırlık      Açıklama
+-----              -------      --------
+dislikesWeekend    +10 ceza     Hafta sonu sevmeyen kişiye hafta sonu verince
+likesNight         -5 bonus     Gece seven kişiye gece verince bonus
+
+
+TARİHSEL DENGE MANTIĞI (expectedTotal)
+======================================
+
+Problem:
+Yeni giren kişi 0 nöbet geçmişiyle başlıyor. Eski sistemde "geçmişi az olanlar fazla alsın" denince yeni giren aşırı yükleniyordu.
+
+Çözüm - expectedTotal Alanı:
+Her kullanıcının iki değeri var:
+- totalAllTime: Gerçekte tuttuğu toplam nöbet
+- expectedTotal: Çalıştığı dönemlerin base toplamı (kaç nöbet tutması bekleniyordu)
+
+Formül:
+  fark = totalAllTime - expectedTotal
+  ideal = base - fark
+
+Örnekler (4. dönem, base=9):
+
+Kullanıcı        Toplam    Beklenen    Fark    İdeal Nöbet
+---------        ------    --------    ----    -----------
+Ahmet (eski)     29        27          +2      7 (az alsın)
+Ayşe (eski)      25        27          -2      11 (fazla alsın)
+Mehmet (yeni)    0         0           0       9 (normal alsın)
+
+SONUÇ: Yeni giren dezavantajlı başlamıyor! Fark=0 ile base nöbet alıyor.
+
+
+VERİ MODELLERİ
+==============
+
+Request (Giriş):
+----------------
+period: Dönem bilgisi
+  - id, name, startDate, endDate
+
+users: Kullanıcı listesi
+  - id, name
+  - history:
+    - totalAllTime
+    - expectedTotal
+    - countAAllTime
+    - countBAllTime
+    - countCAllTime
+    - countWeekendAllTime
+    - countNightAllTime
+  - preferences:
+    - likesNight
+    - dislikesWeekend
+
+slots: Slot listesi
+  - id
+  - date
+  - dutyType (A/B/C/D/E/F)
+  - dayType (WEEKDAY/WEEKEND)
+  - requiredCount
+
+unavailability: Müsaitlik kapama listesi
+  - userId
+  - slotId
+
+
+Response (Çıkış):
+-----------------
+assignments: Atama listesi
+  - slotId
+  - seatId
+  - userId
+  - seatRole (DESK/OPERATOR/null)
+  - isExtra (base+1 üstü mü)
+
+meta: İstatistikler
+  - base
+  - maxShifts
+  - minShifts
+  - totalSlots
+  - totalAssignments
+  - usersAtBasePlus2
+  - unavailabilityViolations
+  - warnings
+  - solverStatus
+  - solveTimeMs
+
+
+KISIT AÇIKLAMALARI
+==================
+
+LEVEL 0 - HARD CONSTRAINTS (Asla İhlal Edilemez)
+-------------------------------------------------
+
+1. Slot Doldurma (Coverage):
+-----------------------------
+Her slot tam olarak requiredCount kadar kişi almalı. Eksik veya fazla atama YOK.
+OR-Tools CP-SAT modelinde: sum(x[user, slot]) == slot.required_count
+Bu kural ASLA esnetilmez - solver çözüm bulamazsa INFEASIBLE döner.
+
+
+2. Tek Atama:
+------------
+Aynı kişi aynı slotta sadece 1 kez yazılabilir.
+CP-SAT modelinde x[user_idx, slot_idx] boolean değişkeni (0 veya 1) olduğu için
+otomatik olarak sağlanır. Bir kişi bir slota birden fazla kez atanamaz.
+
+
+3. Günde Max 2 Nöbet:
+---------------------
+Aynı takvim gününde bir kullanıcı en fazla 2 nöbet alabilir.
+Bu kural ABC veya DEF üçlüsünü otomatik olarak engeller.
+OR-Tools modelinde: sum(x[user, slot_günü]) <= 2
+
+
+4. Yasak Geçişler (Geceden Sabaha):
+------------------------------------
+C (23:30-08:30) sonrası A (08:30-17:30) YASAK
+C (23:30-08:30) sonrası D (08:00-16:00) YASAK
+F (23:20-08:00) sonrası A (08:30-17:30) YASAK
+F (23:20-08:00) sonrası D (08:00-16:00) YASAK
+
+Gece nöbetinden çıkan kişi ertesi gün sabah nöbetine giremez.
+OR-Tools modelinde: x[user, gece_slotu] + x[user, yarın_sabah_slotu] <= 1
+
+
+5. base+3 Yasağı:
+-----------------
+Kimse base+2'den fazla nöbet alamaz (hard limit).
+OR-Tools modelinde: sum(x[user, tüm_slotlar]) <= base + 2
+Bu kural ASLA ihlal edilemez - solver çözüm bulamazsa INFEASIBLE döner.
+
+
+DİĞER AÇIKLAMALAR
+=================
+
+1. base Hesabı:
+---------------
+base = toplam_koltuk_sayısı / kullanıcı_sayısı
+
+Örnek: 180 slot, 20 kişi -> base = 9
+
+
+2. Aralık Sınırları:
+--------------------
+Minimum: base - 1 (altı çok pahalı - Level 1 penalty)
+Maksimum: base + 2 (hard limit, Level 0 constraint - aşılamaz)
+
+
+TEST SENARYOLARİ
+================
+
+Dosya                          Açıklama
+-----                          --------
+test_history_fairness.py       expectedTotal bazlı tarihsel denge testleri
+test_december_2025.py          28 günlük gerçekçi senaryo (Aralık 2025)
+test_realistic_scenario.py     20 eski + 25 yeni AÖ senaryosu
+test_scheduler_basic.py        Temel fonksiyonellik testleri
+test_edge_cases.py             Sınır durumları
+test_api.py                    API endpoint testleri
+test_scheduler_senior.py       Senior (yarım A) testleri
+
+Toplam: 71 Test
+
+
+ÖNCELİK ÖZETİ
+=============
+
+1. EN ÖNEMLİ: Toplam nöbet eşitliği (herkes base civarı)
+2. ORTA: Nöbet türü eşitliği (A, B, C, Weekend)
+3. DÜŞÜK: Hafta sonu slot eşitliği (D, E, F ayrı ayrı)
+4. EN DÜŞÜK: Kullanıcı tercihleri
+
+
+İŞ AKIŞI
+========
+
+1. Request alınır (users, slots, unavailability)
+2. Internal modellere dönüştürülür
+3. OR-Tools CP-SAT modeli oluşturulur
+   - Hard constraints eklenir (Level 0)
+   - Soft penalties eklenir (Level 1-5)
+4. Solver çalışır (max 60 saniye)
+5. A nöbetleri için DESK/OPERATOR rolleri atanır
+6. Response oluşturulur ve döndürülür
+
+
+KONFİGÜRASYON
+=============
+
+Environment değişkenleri veya .env dosyası ile ayarlanabilir:
+
+DEBUG=false
+SCHEDULER_TIME_LIMIT_SECONDS=60
+SCHEDULER_RANDOM_SEED=42
+
+# Level 1 - Çok Ağır Soft Ceza
+PENALTY_UNAVAILABILITY=200000
+PENALTY_UNAVAILABILITY_FAIRNESS=1000
+PENALTY_BELOW_IDEAL_STRONG=140000
+PENALTY_ABOVE_IDEAL_STRONG=120000
+PENALTY_ZERO_SHIFTS=80000
+
+# Level 2 - Ağır Ceza
+PENALTY_CONSECUTIVE_DAYS=7000
+
+# Level 3 - Fairness
+PENALTY_IDEAL_SOFT=4000
+PENALTY_HISTORY_FAIRNESS=3000
+PENALTY_FAIRNESS_DUTY_TYPE=1000
+PENALTY_FAIRNESS_NIGHT=1000
+PENALTY_FAIRNESS_WEEKEND_SLOTS=50
+
+# Level 4 - Konfor
+PENALTY_WEEKLY_CLUSTERING=100
+PENALTY_CONSECUTIVE_NIGHTS=100
+PENALTY_TWO_SHIFTS_SAME_DAY=100
+
+# Level 5 - Tercihler
+PENALTY_DISLIKES_WEEKEND=10
+BONUS_LIKES_NIGHT=5
+
+
+PROJE YAPISI
+============
+
+nobetci-v2-algoritma/
+  app/
+    main.py                    -> FastAPI app factory
+    api/routes/
+      schedule.py              -> /compute endpoint
+      schedule_senior.py       -> /compute-senior endpoint
+    core/
+      config.py                -> Settings ve penalty ağırlıkları
+    schemas/
+      schedule.py              -> Ana Pydantic modelleri
+      schedule_senior.py       -> Senior modelleri
+    services/scheduler/
+      models.py                -> Internal domain modelleri
+      constraints.py           -> Hard constraints (Level 0)
+      score.py                 -> Soft constraints (Level 1-5)
+      solver.py                -> Ana solver
+      senior_solver.py         -> Senior solver
+  tests/                       -> 71 test
+  scripts/
+    demo_random_scenario.py    -> Demo script
+  requirements.txt
+  Dockerfile
+  README.md
+
+
+ÇALIŞTIRMA
+==========
+
+Development:
+  uvicorn app.main:app --reload --port 8000
+
+Test:
+  pytest tests/ -v
+
+Demo:
+  python scripts/demo_random_scenario.py
+
+
+ÖNEMLİ NOTLAR
+=============
+
+1. Yeni giren dezavantaj yok: expectedTotal=0 ile fark=0 başlıyor
+2. Müsaitlik soft: Zorunlu hallerde ihlal edilebilir
+3. base-2 çok pahalı: Minimum base-1 hedefleniyor
+4. D/E/F ayrı dengeleme: Düşük öncelikli ama deneniyor
+5. Solver timeout: 60 saniye (ayarlanabilir)
+6. Deterministik: Random seed=42 ile aynı sonuçlar

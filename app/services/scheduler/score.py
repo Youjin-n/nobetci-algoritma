@@ -1,0 +1,859 @@
+"""
+Penalty/Score Functions for Scheduler
+
+Soft constraint penalty hesaplamaları (Level 0-5).
+Toplam penalty minimize edilecek.
+
+Ağırlık Seviyeleri:
+- Level 0: Değişmez sert kısıtlar (asla esnetilmez)
+- Level 1: ~100,000 (base+2 aşımı, base-1 altı, 0 nöbet, unavailability, 3 gün üst üste)
+- Level 2: ~10,000 / 7,000 (şu an boş - Level 1'e taşındı)
+- Level 3: ~1,000 - 50,000 (fairness)
+- Level 4: ~100 (konfor)
+- Level 5: ~10 (tercihler)
+"""
+
+from collections import defaultdict
+from datetime import date, timedelta
+from typing import TYPE_CHECKING
+
+from .constraints import get_week_index, is_night_duty, is_weekend_duty
+
+if TYPE_CHECKING:
+    from ortools.sat.python import cp_model
+
+    from app.core.config import Settings
+
+    from .models import InternalSlot, InternalUser, SchedulerContext
+
+
+class PenaltyBuilder:
+    """
+    Soft constraint penalty'lerini OR-Tools objective'ine ekleyen builder.
+    Toplam penalty minimize edilir.
+    """
+
+    def __init__(
+        self,
+        model: "cp_model.CpModel",
+        context: "SchedulerContext",
+        x: dict[tuple[int, int], "cp_model.IntVar"],
+        settings: "Settings",
+    ):
+        self.model = model
+        self.ctx = context
+        self.x = x
+        self.settings = settings
+        self.penalty_terms: list["cp_model.LinearExpr"] = []
+
+    def add_penalty(self, expr: "cp_model.LinearExpr", weight: int) -> None:
+        """Penalty term ekle (negatif weight = bonus)"""
+        if weight != 0:
+            self.penalty_terms.append(expr * weight)
+
+    def build_all_penalties(
+        self,
+        user_shift_counts: dict[int, "cp_model.IntVar"],
+    ) -> None:
+        """Tüm penalty'leri ekle.
+
+        Level 0 (değişmez sert kısıtlar) solver tarafında zaten zorunlu:
+        - Her slot requiredCount kadar dolmak zorunda
+        - Aynı slotta aynı kişi bir kez yazılabilir
+        - Günde max 2 nöbet (ABC/DEF üçlüsü otomatik engellenir)
+        Bu kısıtlar asla esnetilmez.
+
+        Level 1 (penalty tabanlı, EN ağır):
+        - Unavailability: 200k - EN ağır soft kural
+        - ideal±2 sapması: 120-140k
+        - 0 nöbet: 80k
+        
+        Level 2: 3 gün üst üste (7k)
+        Level 3: Fairness (history 3k, type 1k)
+        Level 4: Konfor (100)
+        Level 5: Tercihler (10)
+        """
+        # Her kullanıcı için ideal_current hesapla
+        ideal_current = self._compute_ideal_current()
+        
+        # Level 1: En ağır soft kurallar
+        self._add_unavailability_penalty()  # 200k - EN AĞIR
+        self._add_above_ideal_penalty(user_shift_counts, ideal_current)  # 120k
+        self._add_below_ideal_penalty(user_shift_counts, ideal_current)  # 140k
+        self._add_zero_shifts_penalty(user_shift_counts)  # 80k
+
+        # Level 2: Ağır
+        self._add_consecutive_days_penalty()  # 7k
+
+        # Level 3: Fairness (history çok düşürüldü)
+        self._add_ideal_soft_penalty(user_shift_counts, ideal_current)  # 4k - |diff|==1 için
+        self._add_history_fairness_penalty(user_shift_counts, ideal_current)  # 3k
+        self._add_duty_type_fairness_penalty()  # 1k
+        self._add_night_fairness_penalty()  # 1k
+        self._add_weekend_slot_fairness_penalty()  # 50
+
+        # Level 4: Konfor
+        self._add_weekly_clustering_penalty()  # 100
+        self._add_consecutive_nights_penalty()  # 100
+        self._add_two_shifts_same_day_penalty()  # 100 - YENİ
+
+        # Level 5: Tercihler
+        self._add_preference_penalties()  # 10, 5
+
+    def _compute_ideal_current(self) -> dict[int, int]:
+        """
+        Her kullanıcı için ideal_current hesapla.
+        
+        Formül:
+            fark_long = totalAllTime - expectedTotal
+            ideal_current = base - fark_long
+        
+        Sınırlama: [max(0, base-2), base+2]
+        
+        Yeni giren: totalAllTime=0, expectedTotal=0 → fark=0 → ideal=base
+        
+        Edge case: base=0 iken ideal=0 (küçük slot senaryoları)
+        """
+        base = self.ctx.base_shifts
+        ideal_current: dict[int, int] = {}
+        
+        for user in self.ctx.users:
+            # Uzun vadeli fark
+            fark_long = user.history_total - user.history_expected
+            
+            # İdeal = base - fark
+            ideal_float = base - fark_long
+            
+            # Sınırla: [max(0, base-2), base+2]
+            # base=0 iken min_ideal=0 olur, conflict yaratmaz
+            min_ideal = max(0, base - 2)
+            max_ideal = base + 2
+            ideal = max(min_ideal, min(max_ideal, round(ideal_float)))
+            
+            ideal_current[user.index] = ideal
+        
+        return ideal_current
+
+    def _add_above_ideal_penalty(
+        self,
+        user_shift_counts: dict[int, "cp_model.IntVar"],
+        ideal_current: dict[int, int],
+    ) -> None:
+        """
+        Level 1 (60,000): ideal_current + 2 ve üstüne çıkma cezası.
+        
+        Güvenli bölge: ideal ± 1 → ceza YOK
+        Tehlikeli: ideal + 2 ve ötesi → 60k/fazla nöbet
+        """
+        weight = self.settings.penalty_above_ideal_strong
+        max_possible = len(self.ctx.slots)
+
+        for user in self.ctx.users:
+            count_var = user_shift_counts[user.index]
+            ideal = ideal_current[user.index]
+            safe_limit = ideal + 1  # ±1 güvenli
+
+            # diff = count - safe_limit
+            diff = self.model.NewIntVar(-max_possible, max_possible, f"diff_above_{user.index}")
+            self.model.Add(diff == count_var - safe_limit)
+
+            # excess = max(0, diff)
+            excess = self.model.NewIntVar(0, max_possible, f"excess_above_{user.index}")
+            self.model.AddMaxEquality(excess, [diff, self.model.NewConstant(0)])
+
+            self.add_penalty(excess, weight)
+
+    def _add_below_ideal_penalty(
+        self,
+        user_shift_counts: dict[int, "cp_model.IntVar"],
+        ideal_current: dict[int, int],
+    ) -> None:
+        """
+        Level 1 (60,000): ideal_current - 2 ve altına düşme cezası.
+        
+        Güvenli bölge: ideal ± 1 → ceza YOK
+        Tehlikeli: ideal - 2 ve altı → 60k/eksik nöbet
+        """
+        weight = self.settings.penalty_below_ideal_strong
+        max_possible = len(self.ctx.slots)
+
+        for user in self.ctx.users:
+            count_var = user_shift_counts[user.index]
+            ideal = ideal_current[user.index]
+            safe_limit = max(0, ideal - 1)  # ±1 güvenli, min 0 (base=0 için)
+
+            # diff = safe_limit - count (pozitifse eksik var)
+            diff = self.model.NewIntVar(-max_possible, max_possible, f"diff_below_{user.index}")
+            self.model.Add(diff == safe_limit - count_var)
+
+            # deficit = max(0, diff)
+            deficit = self.model.NewIntVar(0, max_possible, f"deficit_below_{user.index}")
+            self.model.AddMaxEquality(deficit, [diff, self.model.NewConstant(0)])
+
+            self.add_penalty(deficit, weight)
+
+    def _add_ideal_soft_penalty(
+        self,
+        user_shift_counts: dict[int, "cp_model.IntVar"],
+        ideal_current: dict[int, int],
+    ) -> None:
+        """
+        Level 3 (4,000): |current - ideal_current| == 1 cezası.
+        
+        Güvenli bölge (ceza yok): diff = 0 (tam ideal)
+        Hafif ceza: |diff| = 1
+        
+        Bu, solver'ı tam eşitliğe (diff=0) doğru iter.
+        Daha ağır kurallarla (unavailability, ±2) çatışmadığı sürece
+        solver tam eşitliği tercih eder.
+        """
+        weight = self.settings.penalty_ideal_soft  # 4k
+        max_possible = len(self.ctx.slots)
+
+        for user in self.ctx.users:
+            count_var = user_shift_counts[user.index]
+            ideal = ideal_current[user.index]
+
+            # diff = count - ideal
+            diff = self.model.NewIntVar(-max_possible, max_possible, f"diff_soft_{user.index}")
+            self.model.Add(diff == count_var - ideal)
+
+            # abs_diff = |diff|
+            abs_diff = self.model.NewIntVar(0, max_possible, f"absdiff_soft_{user.index}")
+            self.model.AddAbsEquality(abs_diff, diff)
+
+            # is_one = abs_diff == 1
+            is_one = self.model.NewBoolVar(f"is_one_{user.index}")
+            self.model.Add(abs_diff == 1).OnlyEnforceIf(is_one)
+            self.model.Add(abs_diff != 1).OnlyEnforceIf(is_one.Not())
+
+            self.add_penalty(is_one, weight)
+
+    def _add_zero_shifts_penalty(
+        self,
+        user_shift_counts: dict[int, "cp_model.IntVar"],
+    ) -> None:
+        """
+        Level 1 (80,000): 0 nöbet kalma cezası.
+        
+        Kimse bu dönem 0 nöbet kalmamalı.
+        totalShifts == 0 ise ceza uygulanır.
+        """
+        weight = self.settings.penalty_zero_shifts
+
+        for user in self.ctx.users:
+            count_var = user_shift_counts[user.index]
+
+            # is_zero = 1 iff count_var == 0
+            is_zero = self.model.NewBoolVar(f"is_zero_{user.index}")
+            
+            # is_zero == 1 iff count_var == 0
+            # Using: is_zero == 1 => count_var == 0
+            #        is_zero == 0 => count_var >= 1
+            self.model.Add(count_var == 0).OnlyEnforceIf(is_zero)
+            self.model.Add(count_var >= 1).OnlyEnforceIf(is_zero.Not())
+
+            self.add_penalty(is_zero, weight)
+
+    def _add_unavailability_penalty(self) -> None:
+        """
+        Level 1 (200,000): Unavailability ihlali - EN AĞIR SOFT KURAL.
+        Kullanıcı "müsait değilim" dediği slota atanırsa çok ağır ceza.
+        
+        Bu ceza, tarihsel denge ve base sapmalarından bile daha ağır.
+        Solver, tarihsel adalet için "müsait değilim"i feda etmemeli.
+        
+        FAIRNESS TIE-BREAKER (1,000):
+        "Herkes kapattıysa en çok kapatanı yerleştir" kuralı.
+        Eğer bir slota tüm kullanıcılar kapalıysa ve solver zorunda kalırsa,
+        o kategoride en çok slot kapatan kullanıcıya atama yapılsın.
+        
+        VIOLATION COUNT (25,000):
+        Dönem içi ihlal sayısına göre ek ceza.
+        - 1. ihlal: base ceza
+        - 2. ihlal: base + 25k
+        - 3. ihlal: base + 50k
+        Böylece aynı kişiye sürekli abanmak yerine ihlaller dağıtılır.
+        
+        Categories: A, B, C, Weekend (D+E+F combined)
+        """
+        base_weight = self.settings.penalty_unavailability  # 200,000
+        fairness_weight = self.settings.penalty_unavailability_fairness  # 1,000
+        violation_weight = self.settings.penalty_unavailability_violation  # 25,000
+
+        def _get_category(duty_type: str) -> str:
+            """DutyType'ı kategoriye çevir (D/E/F -> Weekend)"""
+            if duty_type in ("D", "E", "F"):
+                return "Weekend"
+            return duty_type  # A, B, C as-is
+
+        # Per-user violation count IntVars oluştur
+        num_users = len(self.ctx.users)
+        max_violations = len(self.ctx.slots)  # Teorik maximum
+        
+        user_violation_counts: dict[int, "cp_model.IntVar"] = {}
+        
+        for user in self.ctx.users:
+            # Bu kullanıcının unavailable olduğu slotlar
+            unavail_slots = [
+                slot_idx for (u_idx, slot_idx) in self.ctx.unavailability_set
+                if u_idx == user.index
+            ]
+            
+            if not unavail_slots:
+                # Bu kullanıcının hiç unavailability'si yok
+                user_violation_counts[user.index] = self.model.NewConstant(0)
+            else:
+                # violation_count = sum of x[user, slot] for unavailable slots
+                vcount = self.model.NewIntVar(0, len(unavail_slots), f"viol_cnt_{user.index}")
+                viol_vars = [self.x[user.index, s_idx] for s_idx in unavail_slots]
+                self.model.Add(vcount == sum(viol_vars))
+                user_violation_counts[user.index] = vcount
+
+        # Her unavailability için penalty ekle
+        for user_idx, slot_idx in self.ctx.unavailability_set:
+            slot = self.ctx.slots[slot_idx]
+            category = _get_category(slot.duty_type)
+            
+            # Bu kullanıcı bu kategoride kaç slot kapatmış?
+            blocked = self.ctx.blocked_count_per_category.get(user_idx, {}).get(category, 0)
+            # Bu kategoride en çok kapatan kaç slot kapatmış?
+            max_blocked = self.ctx.max_blocked_per_category.get(category, 0)
+            
+            # Daha az kapatan → (max_blocked - blocked) daha büyük → daha fazla extra ceza
+            # Daha çok kapatan → (max_blocked - blocked) daha küçük/0 → daha az extra ceza
+            extra_fairness = (max_blocked - blocked) * fairness_weight
+            
+            # Sabit kısım: base + fairness extra
+            fixed_weight = base_weight + extra_fairness
+            
+            # Bu atama yapılmışsa sabit ceza
+            self.add_penalty(self.x[user_idx, slot_idx], fixed_weight)
+            
+            # Violation count'a dayalı ek ceza:
+            # violation_count * violation_weight * x[user, slot]
+            # Ama CP-SAT'ta çarpım zor, basitleştirelim:
+            # Eğer bu slot atanırsa, VE user'ın başka violation'ları da varsa extra ceza
+            # Yaklaşım: violation_count * violation_weight ifadesini objective'e ekle
+            # Ama bu tüm violation'lar için eklenir, sadece bu slot için değil
+            # 
+            # Daha basit yaklaşım: 
+            # Her violation için (violation_count - 1) * violation_weight / N ekle
+            # Yani ilk violation serbest, 2. ve sonrası için penalty
+            # 
+            # En basit: violation_count toplamını penalty olarak ekle (yukarıda zaten hesapladık)
+            pass  # Violation count aşağıda ayrıca ekleniyor
+
+        # Her kullanıcı için violation_count^2 veya violation_count * weight
+        # Daha basit: Her kullanıcı için, violation_count > 1 ise ekstra ceza
+        # violation_count * (violation_count - 1) / 2 * weight ≈ n(n-1)/2 penalty
+        # 
+        # CP-SAT'ta basitçe: (violation_count - 1)+ * weight
+        # excess = max(0, violation_count - 1) → 2. violation'dan itibaren penalty
+        for user in self.ctx.users:
+            vcount = user_violation_counts[user.index]
+            
+            # excess = max(0, violation_count - 1)
+            # Bu, 2., 3., 4. violation için penalty verir
+            excess = self.model.NewIntVar(0, len(self.ctx.slots), f"viol_excess_{user.index}")
+            diff = self.model.NewIntVar(-1, len(self.ctx.slots), f"viol_diff_{user.index}")
+            self.model.Add(diff == vcount - 1)
+            self.model.AddMaxEquality(excess, [diff, self.model.NewConstant(0)])
+            
+            # excess * violation_weight penalty
+            self.add_penalty(excess, violation_weight)
+
+    def _add_total_shift_fairness_penalty(
+        self,
+        user_shift_counts: dict[int, "cp_model.IntVar"],
+    ) -> None:
+        """
+        Level 3 (1,000): Toplam nöbet sayısı dengelemesi.
+        Bu dönemde herkes mümkün olduğunca eşit sayıda nöbet alsın.
+        """
+        weight = self.settings.penalty_fairness_duty_type
+        num_users = len(self.ctx.users)
+
+        if num_users < 2:
+            return
+
+        # ideal = total_seats / N
+        total_seats = self.ctx.total_seats
+        ideal = total_seats // num_users
+
+        for user in self.ctx.users:
+            count_var = user_shift_counts[user.index]
+
+            # excess = max(0, count - ideal)
+            max_possible = len(self.ctx.slots)
+            excess = self.model.NewIntVar(0, max_possible, f"shift_excess_{user.index}")
+            diff = self.model.NewIntVar(-max_possible, max_possible, f"shift_diff_{user.index}")
+            self.model.Add(diff == count_var - ideal)
+            self.model.AddMaxEquality(excess, [diff, self.model.NewConstant(0)])
+
+            self.add_penalty(excess, weight)
+
+    def _add_history_fairness_penalty(
+        self,
+        user_shift_counts: dict[int, "cp_model.IntVar"],
+        ideal_current: dict[int, int],
+    ) -> None:
+        """
+        Level 3 (3,000): Tarihsel denge - İNCE AYAR.
+        
+        ideal_current zaten expectedTotal bazlı hesaplanıyor.
+        Bu ceza sadece hafif bir smoothing sağlar.
+        
+        ÖNEMLİ: Bu ceza müsaitlik (200k) ve base sapması (120-140k) cezalarından
+        ÇOK daha hafif. Solver, tarihsel adaleti sağlamak için müsaitliği
+        veya base'i ihlal ETMEZ.
+        
+        NOT: ideal_current hesabı _compute_ideal_current'de yapılıyor.
+        """
+        weight = self.settings.penalty_history_fairness  # 3k
+        num_users = len(self.ctx.users)
+
+        if num_users < 2:
+            return
+        
+        for user in self.ctx.users:
+            count_var = user_shift_counts[user.index]
+            ideal = ideal_current[user.index]
+            
+            # Penalty: idealden her sapma için hafif ceza
+            max_possible = len(self.ctx.slots)
+            
+            # diff = count - ideal
+            diff = self.model.NewIntVar(-max_possible, max_possible, f"hist_diff_{user.index}")
+            self.model.Add(diff == count_var - ideal)
+            
+            # abs_diff = |diff|
+            abs_diff = self.model.NewIntVar(0, max_possible, f"hist_abs_{user.index}")
+            self.model.AddAbsEquality(abs_diff, diff)
+            
+            self.add_penalty(abs_diff, weight)
+
+    def _add_consecutive_days_penalty(self) -> None:
+        """
+        Level 2 (7,000): 3 gün üst üste nöbet cezası.
+        runLength >= 3 için: penalty = 7000 * (runLength - 2)
+
+        CP-SAT'ta bunu modellemek için:
+        Her 3'lü ardışık gün penceresi için, 3'ü de dolu ise 7000 ceza.
+        Her 4'lü için ekstra 7000, vs.
+        """
+        weight = self.settings.penalty_consecutive_days
+        sorted_dates = sorted(self.ctx.date_to_slot_indices.keys())
+
+        for user in self.ctx.users:
+            # Her kullanıcı için günlük "nöbet var mı" değişkenleri
+            day_has_shift: dict[date, "cp_model.IntVar"] = {}
+
+            for d in sorted_dates:
+                slot_indices = self.ctx.date_to_slot_indices[d]
+                day_var = self.model.NewBoolVar(f"day_{user.index}_{d}")
+                day_slots = [self.x[user.index, s_idx] for s_idx in slot_indices]
+
+                if day_slots:
+                    # day_var = 1 iff any slot assigned that day
+                    self.model.AddMaxEquality(day_var, day_slots)
+                else:
+                    self.model.Add(day_var == 0)
+
+                day_has_shift[d] = day_var
+
+            # Her 3'lü ardışık gün penceresi kontrol et
+            for i in range(len(sorted_dates) - 2):
+                d1, d2, d3 = sorted_dates[i], sorted_dates[i + 1], sorted_dates[i + 2]
+
+                # Ardışık mı?
+                if (d2 - d1).days != 1 or (d3 - d2).days != 1:
+                    continue
+
+                # 3 gün de dolu ise ceza
+                # penalty_var = 1 iff all three days have shifts
+                all_three = self.model.NewBoolVar(f"consec3_{user.index}_{i}")
+                self.model.AddMinEquality(all_three, [
+                    day_has_shift[d1],
+                    day_has_shift[d2],
+                    day_has_shift[d3],
+                ])
+                self.add_penalty(all_three, weight)
+
+    def _add_duty_type_fairness_penalty(self) -> None:
+        """
+        Level 3 (1,000): A/B/C/Weekend fairness.
+        Her tür için idealden fazla olanları cezalandır.
+        excess = max(0, count - ideal)
+        """
+        weight = self.settings.penalty_fairness_duty_type
+        num_users = len(self.ctx.users)
+
+        if num_users == 0:
+            return
+
+        # Her duty type grubu için slot sayısı
+        type_slots: dict[str, list["InternalSlot"]] = {
+            "A": [],
+            "B": [],
+            "C": [],
+            "WEEKEND": [],
+        }
+
+        for slot in self.ctx.slots:
+            if slot.duty_type == "A":
+                type_slots["A"].append(slot)
+            elif slot.duty_type == "B":
+                type_slots["B"].append(slot)
+            elif slot.duty_type == "C":
+                type_slots["C"].append(slot)
+
+            if is_weekend_duty(slot.duty_type):
+                type_slots["WEEKEND"].append(slot)
+
+        for type_name, slots in type_slots.items():
+            if not slots:
+                continue
+
+            total_seats = sum(s.required_count for s in slots)
+            # ideal (float) → CP-SAT için integer yaklaşımı
+            # ideal_scaled = total_seats (yani N kişi için toplam)
+            # Her kişi için ideal = total_seats / N
+
+            for user in self.ctx.users:
+                # Bu kullanıcının bu tür slotlardaki toplam ataması
+                count_var = self.model.NewIntVar(
+                    0, total_seats, f"count_{type_name}_{user.index}"
+                )
+                slot_vars = [self.x[user.index, s.index] for s in slots]
+                self.model.Add(count_var == sum(slot_vars))
+
+                # excess = max(0, count * N - total_seats) / N ≈ count - ideal
+                # Scaled version: excess_scaled = max(0, count * N - total_seats)
+                excess_scaled = self.model.NewIntVar(
+                    0, total_seats * num_users, f"excess_{type_name}_{user.index}"
+                )
+                diff_scaled = self.model.NewIntVar(
+                    -total_seats * num_users,
+                    total_seats * num_users,
+                    f"diff_{type_name}_{user.index}"
+                )
+                self.model.Add(diff_scaled == count_var * num_users - total_seats)
+                self.model.AddMaxEquality(
+                    excess_scaled,
+                    [diff_scaled, self.model.NewConstant(0)]
+                )
+
+                # Ağırlığı N'e böl (scaled olduğu için)
+                # Veya direkt excess_scaled kullan, weight'i küçült
+                # Basitlik için: excess_scaled / N ≈ excess
+                # CP-SAT integer, bölme yok → weight'i N'e böl
+                adjusted_weight = max(1, weight // num_users)
+                self.add_penalty(excess_scaled, adjusted_weight)
+
+    def _add_night_fairness_penalty(self) -> None:
+        """
+        Level 3 (1,000): Night (C+F) fairness.
+        history.countNightAllTime + currentNight dengelemesi.
+        """
+        weight = self.settings.penalty_fairness_night
+        num_users = len(self.ctx.users)
+
+        if num_users == 0:
+            return
+
+        night_slots = [s for s in self.ctx.slots if is_night_duty(s.duty_type)]
+        if not night_slots:
+            return
+
+        total_night_seats = sum(s.required_count for s in night_slots)
+
+        # Toplam tarihsel night
+        total_history_night = sum(u.history_night for u in self.ctx.users)
+
+        for user in self.ctx.users:
+            # Current night count
+            current_night = self.model.NewIntVar(
+                0, total_night_seats, f"current_night_{user.index}"
+            )
+            night_vars = [self.x[user.index, s.index] for s in night_slots]
+            self.model.Add(current_night == sum(night_vars))
+
+            # Combined = history + current
+            combined = self.model.NewIntVar(
+                0, user.history_night + total_night_seats,
+                f"combined_night_{user.index}"
+            )
+            self.model.Add(combined == user.history_night + current_night)
+
+            # Ortalama hesabı için scaled approach
+            # avg = (total_history + total_current) / N
+            # excess = max(0, combined - avg)
+            # Scaled: excess_scaled = max(0, combined * N - total_expected)
+            # total_expected ≈ total_history_night + total_night_seats
+
+            total_expected = total_history_night + total_night_seats
+            excess_scaled = self.model.NewIntVar(
+                0, (user.history_night + total_night_seats) * num_users,
+                f"excess_night_{user.index}"
+            )
+            diff_scaled = self.model.NewIntVar(
+                -(user.history_night + total_night_seats) * num_users,
+                (user.history_night + total_night_seats) * num_users,
+                f"diff_night_{user.index}"
+            )
+            self.model.Add(diff_scaled == combined * num_users - total_expected)
+            self.model.AddMaxEquality(
+                excess_scaled,
+                [diff_scaled, self.model.NewConstant(0)]
+            )
+
+            adjusted_weight = max(1, weight // num_users)
+            self.add_penalty(excess_scaled, adjusted_weight)
+
+    def _add_weekend_slot_fairness_penalty(self) -> None:
+        """
+        Level 3.5 (50): D/E/F hafta sonu slotları ayrı ayrı fairness.
+        Her weekend slot tipi (D, E, F) için kullanıcılar arası eşit dağılım.
+        Bu düşük öncelikli - sağlanamazsa sorun yok ama denesin.
+        """
+        weight = self.settings.penalty_fairness_weekend_slots
+        num_users = len(self.ctx.users)
+
+        if num_users == 0:
+            return
+
+        # D, E, F slotlarını ayrı ayrı grupla
+        weekend_types = ["D", "E", "F"]
+        
+        for duty_type in weekend_types:
+            type_slots = [s for s in self.ctx.slots if s.duty_type == duty_type]
+            if not type_slots:
+                continue
+
+            total_seats = sum(s.required_count for s in type_slots)
+            
+            for user in self.ctx.users:
+                # Bu kullanıcının bu tür slotlardaki toplam ataması
+                count_var = self.model.NewIntVar(
+                    0, total_seats, f"count_{duty_type}_{user.index}"
+                )
+                slot_vars = [self.x[user.index, s.index] for s in type_slots]
+                self.model.Add(count_var == sum(slot_vars))
+
+                # excess = max(0, count * N - total_seats)
+                excess_scaled = self.model.NewIntVar(
+                    0, total_seats * num_users, f"excess_wknd_{duty_type}_{user.index}"
+                )
+                diff_scaled = self.model.NewIntVar(
+                    -total_seats * num_users,
+                    total_seats * num_users,
+                    f"diff_wknd_{duty_type}_{user.index}"
+                )
+                self.model.Add(diff_scaled == count_var * num_users - total_seats)
+                self.model.AddMaxEquality(
+                    excess_scaled,
+                    [diff_scaled, self.model.NewConstant(0)]
+                )
+
+                # Çok düşük ağırlık - diğer öncelikleri etkilemesin
+                adjusted_weight = max(1, weight // num_users)
+                self.add_penalty(excess_scaled, adjusted_weight)
+
+    def _add_weekly_clustering_penalty(self) -> None:
+        """
+        Level 4 (100): Haftalık yığılma.
+        Haftada 2'den fazla nöbet varsa ceza.
+        penalty = 100 * (weekShifts - 2) for weekShifts > 2
+        """
+        weight = self.settings.penalty_weekly_clustering
+
+        if not self.ctx.slots:
+            return
+
+        # Haftaları belirle
+        sorted_dates = sorted(self.ctx.date_to_slot_indices.keys())
+        if not sorted_dates:
+            return
+
+        start_date = sorted_dates[0]
+
+        # Hafta bazında slotları grupla
+        week_slots: dict[int, list[int]] = defaultdict(list)
+        for slot in self.ctx.slots:
+            week_idx = get_week_index(slot.date, start_date)
+            week_slots[week_idx].append(slot.index)
+
+        for user in self.ctx.users:
+            for week_idx, slot_indices in week_slots.items():
+                if len(slot_indices) < 3:
+                    # Maximum 2 nöbet mümkün, ceza yok
+                    continue
+
+                # Bu haftadaki toplam
+                week_count = self.model.NewIntVar(
+                    0, len(slot_indices), f"week_{week_idx}_{user.index}"
+                )
+                week_vars = [self.x[user.index, s_idx] for s_idx in slot_indices]
+                self.model.Add(week_count == sum(week_vars))
+
+                # excess = max(0, count - 2)
+                excess = self.model.NewIntVar(
+                    0, len(slot_indices), f"week_excess_{week_idx}_{user.index}"
+                )
+                diff = self.model.NewIntVar(
+                    -2, len(slot_indices), f"week_diff_{week_idx}_{user.index}"
+                )
+                self.model.Add(diff == week_count - 2)
+                self.model.AddMaxEquality(excess, [diff, self.model.NewConstant(0)])
+
+                self.add_penalty(excess, weight)
+
+    def _add_consecutive_nights_penalty(self) -> None:
+        """
+        Level 4 (100): Arka arkaya gece nöbetleri.
+        Day D ve D+1'de ikisi de C/F ise ceza.
+        """
+        weight = self.settings.penalty_consecutive_nights
+        sorted_dates = sorted(self.ctx.date_to_slot_indices.keys())
+
+        for user in self.ctx.users:
+            for i in range(len(sorted_dates) - 1):
+                d1, d2 = sorted_dates[i], sorted_dates[i + 1]
+
+                # Ardışık mı?
+                if (d2 - d1).days != 1:
+                    continue
+
+                # d1'deki gece slotları
+                night_slots_d1 = [
+                    s_idx for s_idx in self.ctx.date_to_slot_indices[d1]
+                    if is_night_duty(self.ctx.slots[s_idx].duty_type)
+                ]
+                # d2'deki gece slotları
+                night_slots_d2 = [
+                    s_idx for s_idx in self.ctx.date_to_slot_indices[d2]
+                    if is_night_duty(self.ctx.slots[s_idx].duty_type)
+                ]
+
+                if not night_slots_d1 or not night_slots_d2:
+                    continue
+
+                # d1'de gece var mı
+                has_night_d1 = self.model.NewBoolVar(f"night_d1_{user.index}_{i}")
+                self.model.AddMaxEquality(
+                    has_night_d1,
+                    [self.x[user.index, s_idx] for s_idx in night_slots_d1]
+                )
+
+                # d2'de gece var mı
+                has_night_d2 = self.model.NewBoolVar(f"night_d2_{user.index}_{i}")
+                self.model.AddMaxEquality(
+                    has_night_d2,
+                    [self.x[user.index, s_idx] for s_idx in night_slots_d2]
+                )
+
+                # İkisi de varsa ceza
+                both_nights = self.model.NewBoolVar(f"both_nights_{user.index}_{i}")
+                self.model.AddMinEquality(both_nights, [has_night_d1, has_night_d2])
+
+                self.add_penalty(both_nights, weight)
+
+    def _add_two_shifts_same_day_penalty(self) -> None:
+        """
+        Level 4 (100): Aynı gün 2 nöbet tutma cezası (konfor).
+        
+        Hard constraint ile zaten günde max 2 nöbet.
+        Burada 2 nöbet tutmayı hafif cezalandırıyoruz.
+        Böylece solver mümkünse farklı günlere dağıtmayı tercih eder.
+        
+        NOT: A+B veya B+C gibi kombinasyonları YASAKLAMAZ,
+        sadece mümkünse farklı günlere dağıtmayı teşvik eder.
+        """
+        weight = self.settings.penalty_two_shifts_same_day  # 100
+
+        for current_date, slot_indices in self.ctx.date_to_slot_indices.items():
+            if len(slot_indices) < 2:
+                # Tek slot varsa 2 nöbet mümkün değil
+                continue
+
+            for user in self.ctx.users:
+                day_vars = [self.x[user.index, si] for si in slot_indices]
+                
+                # day_count = bu gündeki toplam nöbet sayısı
+                day_count = self.model.NewIntVar(0, len(day_vars), f"day_cnt_{user.index}_{current_date}")
+                self.model.Add(day_count == sum(day_vars))
+
+                # is_two = day_count == 2
+                is_two = self.model.NewBoolVar(f"is_two_{user.index}_{current_date}")
+                self.model.Add(day_count == 2).OnlyEnforceIf(is_two)
+                self.model.Add(day_count != 2).OnlyEnforceIf(is_two.Not())
+
+                self.add_penalty(is_two, weight)
+
+    def _add_preference_penalties(self) -> None:
+        """
+        Level 5 (10/-5): Kullanıcı tercihleri.
+        dislikesWeekend → weekend verince +10
+        likesNight → night verince -5 (bonus)
+        """
+        penalty_weekend = self.settings.penalty_dislikes_weekend
+        bonus_night = self.settings.bonus_likes_night
+
+        weekend_slots = [s for s in self.ctx.slots if is_weekend_duty(s.duty_type)]
+        night_slots = [s for s in self.ctx.slots if is_night_duty(s.duty_type)]
+
+        for user in self.ctx.users:
+            # dislikesWeekend
+            if user.dislikes_weekend and weekend_slots:
+                for slot in weekend_slots:
+                    self.add_penalty(self.x[user.index, slot.index], penalty_weekend)
+
+            # likesNight (bonus = negatif penalty)
+            if user.likes_night and night_slots:
+                for slot in night_slots:
+                    self.add_penalty(self.x[user.index, slot.index], -bonus_night)
+
+    def get_total_objective(self) -> "cp_model.LinearExpr":
+        """Toplam penalty'yi döndür (minimize edilecek)"""
+        if not self.penalty_terms:
+            return self.model.NewConstant(0)
+        return sum(self.penalty_terms)
+
+
+def calculate_desk_operator_distribution(count: int) -> tuple[int, int]:
+    """
+    A nöbeti için kişi sayısına göre desk/operator dağılımı.
+
+    K=1 → 0 desk, 1 operator
+    K=2 → 1 desk, 1 operator
+    K=3 → 1 desk, 2 operator
+    K=4 → 2 desk, 2 operator
+    K=5 → 3 desk, 2 operator
+    K=6 → 3 desk, 3 operator
+    K=7 → 4 desk, 3 operator
+
+    Returns: (desk_count, operator_count)
+    """
+    if count <= 0:
+        return (0, 0)
+    if count == 1:
+        return (0, 1)
+    if count == 2:
+        return (1, 1)
+
+    distribution = {
+        3: (1, 2),
+        4: (2, 2),
+        5: (3, 2),
+        6: (3, 3),
+        7: (4, 3),
+    }
+
+    if count in distribution:
+        return distribution[count]
+
+    # K > 7 için genel formül
+    desk = (count + 1) // 2
+    operator = count - desk
+    return (desk, operator)
