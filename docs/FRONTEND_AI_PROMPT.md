@@ -4,7 +4,7 @@
 
 This is a **Python FastAPI** backend service that provides optimal shift scheduling using Google OR-Tools CP-SAT constraint solver. The frontend should send scheduling data and receive optimized assignments.
 
-**Base URL**: `http://127.0.0.1:8000` (development)
+**Base URL**: `https://nobeta-a-goritma.onrender.com`
 
 ---
 
@@ -197,7 +197,7 @@ Same `ScheduleResponse` format as main endpoint.
 ## Example Request (TypeScript/Fetch)
 
 ```typescript
-const response = await fetch('http://127.0.0.1:8000/schedule/compute', {
+const response = await fetch('https://nobeta-a-goritma.onrender.com/schedule/compute', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
@@ -265,6 +265,6 @@ const result = await response.json();
 ## Swagger/OpenAPI Docs
 
 Interactive API documentation available at:
-- **Swagger UI**: http://127.0.0.1:8000/docs
-- **ReDoc**: http://127.0.0.1:8000/redoc
-- **OpenAPI JSON**: http://127.0.0.1:8000/openapi.json
+- **Swagger UI**: https://nobeta-a-goritma.onrender.com/docs
+- **ReDoc**: https://nobeta-a-goritma.onrender.com/redoc
+- **OpenAPI JSON**: https://nobeta-a-goritma.onrender.com/openapi.json
