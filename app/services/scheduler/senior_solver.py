@@ -115,10 +115,6 @@ PENALTY_FAIRNESS_HALF_A = 1_000         # Yarım A sayısı eşitliği
 PENALTY_WEEKLY_CLUSTER = 100            # Haftalık yığılma
 PENALTY_FULL_DAY = 100                  # Aynı gün sabah+akşam
 
-# Level 5 – Tercihler
-BONUS_LIKES_SEGMENT = 5                 # Segment tercihi bonus
-
-
 # --- Helper Functions ---
 
 def get_week_index(slot_date: date, period_start: date) -> int:

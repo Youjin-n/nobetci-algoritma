@@ -181,8 +181,6 @@ period:
 users: NAUser listesi
   - id, name, email
   - role: "SENIOR_ASSISTANT"
-  - likesMorning: Sabah segmenti tercih eder mi?
-  - likesEvening: Öğleden sonra segmenti tercih eder mi?
   - history:
     - totalAllTime: Toplam yarım A sayısı
     - countAAllTime: Aynı (= totalAllTime)
@@ -239,18 +237,12 @@ Seviye  Kural                        Ceza        Açıklama
 3       Tarihsel denge               3,000       Geçmiş A sayısı dengesi
 4       Haftalık yığılma             100         Haftada 2'den fazla segment
 4       Aynı gün her iki segment     100         Full gün (sabah+öğleden sonra)
-5       likesMorning                 -5          Sabah seven + sabah (bonus)
-5       likesEvening                 -5          Ö.sonra seven + ö.sonra (bonus)
 
 
-NA TERCİHLER (AÖ'DEN FARKLI!)
------------------------------
 
-- likesMorning: Sabah segmentini (08:30-13:00) tercih eder
-- likesEvening: Öğleden sonra segmentini (13:00-17:30) tercih eder
+NOT: NA'lar için tercih (preference) sistemi KALDIRILMIŞTIR.
+     Adil dağıtım tercihlerden daha önceliklidir.
 
-NOT: likesNight ve dislikesWeekend NA için GEÇERLİ DEĞİL!
-     NA'lar gece veya hafta sonu nöbet tutmuyor.
 
 
 ================================================================================
@@ -264,7 +256,7 @@ Solver               solver.py                   senior_solver.py
 Nöbet türleri        A, B, C, D, E, F            MORNING, EVENING
 Hafta sonu?          Evet (D, E, F)              Hayır
 Gece nöbeti?         Evet (C, F)                 Hayır
-Tercihler            likesNight, dislikesWeekend likesMorning, likesEvening
+Tercihler            likesNight, dislikesWeekend Yok (kaldırıldı)
 3 kişi DESK/OP       1 DESK + 2 OPERATOR         2 DESK + 1 OPERATOR
 
 
