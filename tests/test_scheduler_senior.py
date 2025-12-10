@@ -87,8 +87,8 @@ class TestSeniorBasicDistribution:
     def test_equal_distribution_2_users_4_slots(self, solver, base_period):
         """2 kullanıcı, 4 slot: eşit dağıtım"""
         users = [
-            create_senior_user("senior-1", "Dr. Ahmet"),
-            create_senior_user("senior-2", "Dr. Mehmet"),
+            create_senior_user("senior-1", "NA Ahmet"),
+            create_senior_user("senior-2", "NA Mehmet"),
         ]
 
         slots = [
@@ -121,7 +121,7 @@ class TestSeniorBasicDistribution:
 
     def test_10_users_20_slots(self, solver, base_period):
         """10 kullanıcı, 20 slot: eşit dağıtım"""
-        users = [create_senior_user(f"senior-{i}", f"Dr. User {i}") for i in range(1, 11)]
+        users = [create_senior_user(f"senior-{i}", f"NA User {i}") for i in range(1, 11)]
 
         slots = []
         for day in range(10):
@@ -157,8 +157,8 @@ class TestSeniorUnavailability:
     def test_unavailability_respected(self, solver, base_period):
         """Unavailability'e saygı duyulmalı"""
         users = [
-            create_senior_user("senior-1", "Dr. Ahmet"),
-            create_senior_user("senior-2", "Dr. Mehmet"),
+            create_senior_user("senior-1", "NA Ahmet"),
+            create_senior_user("senior-2", "NA Mehmet"),
         ]
 
         slots = [
@@ -188,8 +188,8 @@ class TestSeniorUnavailability:
     def test_unavailability_violation_warning(self, solver, base_period):
         """Herkes kapalıysa uyarı verilmeli"""
         users = [
-            create_senior_user("senior-1", "Dr. Ahmet"),
-            create_senior_user("senior-2", "Dr. Mehmet"),
+            create_senior_user("senior-1", "NA Ahmet"),
+            create_senior_user("senior-2", "NA Mehmet"),
         ]
 
         slots = [
@@ -252,8 +252,8 @@ class TestSeniorConsecutiveDays:
     def test_avoid_3_consecutive_days(self, solver, base_period):
         """3 gün üst üste mümkünse kaçınılmalı"""
         users = [
-            create_senior_user("senior-1", "Dr. Ahmet"),
-            create_senior_user("senior-2", "Dr. Mehmet"),
+            create_senior_user("senior-1", "NA Ahmet"),
+            create_senior_user("senior-2", "NA Mehmet"),
         ]
 
         # 3 ardışık gün, her gün 1 slot
@@ -302,8 +302,8 @@ class TestSeniorPreferences:
     def test_morning_preference_respected(self, solver, base_period):
         """Sabah tercihi dikkate alınmalı"""
         users = [
-            create_senior_user("senior-1", "Dr. Ahmet", likes_morning=True),
-            create_senior_user("senior-2", "Dr. Mehmet", likes_evening=True),
+            create_senior_user("senior-1", "NA Ahmet", likes_morning=True),
+            create_senior_user("senior-2", "NA Mehmet", likes_evening=True),
         ]
 
         slots = [
@@ -336,8 +336,8 @@ class TestSeniorBasePlus2:
     def test_base_plus_2_respected(self, solver, base_period):
         """Base+2 limiti aşılmamalı"""
         users = [
-            create_senior_user("senior-1", "Dr. Ahmet"),
-            create_senior_user("senior-2", "Dr. Mehmet"),
+            create_senior_user("senior-1", "NA Ahmet"),
+            create_senior_user("senior-2", "NA Mehmet"),
         ]
 
         # 6 slot, base=3, base+2=5
@@ -371,7 +371,7 @@ class TestSeniorMeta:
 
     def test_meta_contains_required_fields(self, solver, base_period):
         """Meta tüm gerekli alanları içermeli"""
-        users = [create_senior_user("senior-1", "Dr. Ahmet")]
+        users = [create_senior_user("senior-1", "NA Ahmet")]
         slots = [create_senior_slot("s1", date(2025, 12, 1), Segment.MORNING)]
 
         request = SeniorScheduleRequest(
@@ -398,7 +398,7 @@ class TestSeniorSeatRole:
 
     def test_seat_role_for_senior_1_person(self, solver, base_period):
         """1 kişi: 0 DESK, 1 OPERATOR -> OPERATOR olmalı"""
-        users = [create_senior_user("senior-1", "Dr. Ahmet")]
+        users = [create_senior_user("senior-1", "NA Ahmet")]
         slots = [create_senior_slot("s1", date(2025, 12, 1), Segment.MORNING)]
 
         request = SeniorScheduleRequest(
@@ -417,8 +417,8 @@ class TestSeniorSeatRole:
     def test_seat_role_for_senior_2_persons(self, solver, base_period):
         """2 kişi: 1 DESK, 1 OPERATOR"""
         users = [
-            create_senior_user("senior-1", "Dr. Ahmet"),
-            create_senior_user("senior-2", "Dr. Mehmet"),
+            create_senior_user("senior-1", "NA Ahmet"),
+            create_senior_user("senior-2", "NA Mehmet"),
         ]
         slots = [create_senior_slot("s1", date(2025, 12, 1), Segment.MORNING, required_count=2)]
 

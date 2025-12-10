@@ -103,7 +103,7 @@ class SeniorScheduleRequest(BaseModel):
                 "users": [
                     {
                         "id": "senior-1",
-                        "name": "Dr. Ayşe Kaya",
+                        "name": "NA Ayşe Kaya",
                         "email": "ayse@example.com",
                         "role": "SENIOR_ASSISTANT",
                         "likesMorning": True,
