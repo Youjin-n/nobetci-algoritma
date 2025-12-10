@@ -45,14 +45,14 @@
     {
       "slotId": "E_2025-12-02",
       "seatId": "E_2025-12-02_s0",
-      "userId": "na_04",
+      "userId": "na_02",
       "seatRole": "DESK",
       "isExtra": false
     },
     {
       "slotId": "E_2025-12-02",
       "seatId": "E_2025-12-02_s1",
-      "userId": "na_05",
+      "userId": "na_04",
       "seatRole": "OPERATOR",
       "isExtra": false
     },
@@ -66,63 +66,63 @@
     {
       "slotId": "M_2025-12-03",
       "seatId": "M_2025-12-03_s1",
-      "userId": "na_04",
+      "userId": "na_05",
       "seatRole": "OPERATOR",
       "isExtra": false
     },
     {
       "slotId": "E_2025-12-03",
       "seatId": "E_2025-12-03_s0",
-      "userId": "na_00",
+      "userId": "na_03",
       "seatRole": "DESK",
       "isExtra": false
     },
     {
       "slotId": "E_2025-12-03",
       "seatId": "E_2025-12-03_s1",
-      "userId": "na_07",
+      "userId": "na_04",
       "seatRole": "OPERATOR",
       "isExtra": false
     },
     {
       "slotId": "M_2025-12-04",
       "seatId": "M_2025-12-04_s0",
-      "userId": "na_01",
+      "userId": "na_00",
       "seatRole": "DESK",
       "isExtra": false
     },
     {
       "slotId": "M_2025-12-04",
       "seatId": "M_2025-12-04_s1",
-      "userId": "na_02",
+      "userId": "na_05",
       "seatRole": "OPERATOR",
       "isExtra": false
     },
     {
       "slotId": "E_2025-12-04",
       "seatId": "E_2025-12-04_s0",
-      "userId": "na_03",
+      "userId": "na_01",
       "seatRole": "DESK",
       "isExtra": false
     },
     {
       "slotId": "E_2025-12-04",
       "seatId": "E_2025-12-04_s1",
-      "userId": "na_05",
+      "userId": "na_06",
       "seatRole": "OPERATOR",
       "isExtra": false
     },
     {
       "slotId": "M_2025-12-05",
       "seatId": "M_2025-12-05_s0",
-      "userId": "na_01",
+      "userId": "na_03",
       "seatRole": "DESK",
       "isExtra": false
     },
     {
       "slotId": "M_2025-12-05",
       "seatId": "M_2025-12-05_s1",
-      "userId": "na_03",
+      "userId": "na_07",
       "seatRole": "OPERATOR",
       "isExtra": false
     },
@@ -136,7 +136,7 @@
     {
       "slotId": "E_2025-12-05",
       "seatId": "E_2025-12-05_s1",
-      "userId": "na_06",
+      "userId": "na_01",
       "seatRole": "OPERATOR",
       "isExtra": false
     },
@@ -192,7 +192,7 @@
     {
       "slotId": "E_2025-12-09",
       "seatId": "E_2025-12-09_s1",
-      "userId": "na_05",
+      "userId": "na_02",
       "seatRole": "OPERATOR",
       "isExtra": false
     },
@@ -206,7 +206,7 @@
     {
       "slotId": "M_2025-12-10",
       "seatId": "M_2025-12-10_s1",
-      "userId": "na_04",
+      "userId": "na_02",
       "seatRole": "OPERATOR",
       "isExtra": false
     },
@@ -220,63 +220,63 @@
     {
       "slotId": "E_2025-12-10",
       "seatId": "E_2025-12-10_s1",
-      "userId": "na_06",
+      "userId": "na_07",
       "seatRole": "OPERATOR",
       "isExtra": false
     },
     {
       "slotId": "M_2025-12-11",
       "seatId": "M_2025-12-11_s0",
-      "userId": "na_02",
+      "userId": "na_03",
       "seatRole": "DESK",
       "isExtra": false
     },
     {
       "slotId": "M_2025-12-11",
       "seatId": "M_2025-12-11_s1",
-      "userId": "na_03",
+      "userId": "na_05",
       "seatRole": "OPERATOR",
       "isExtra": false
     },
     {
       "slotId": "E_2025-12-11",
       "seatId": "E_2025-12-11_s0",
-      "userId": "na_04",
+      "userId": "na_01",
       "seatRole": "DESK",
       "isExtra": false
     },
     {
       "slotId": "E_2025-12-11",
       "seatId": "E_2025-12-11_s1",
-      "userId": "na_07",
+      "userId": "na_04",
       "seatRole": "OPERATOR",
       "isExtra": false
     },
     {
       "slotId": "M_2025-12-12",
       "seatId": "M_2025-12-12_s0",
-      "userId": "na_01",
+      "userId": "na_00",
       "seatRole": "DESK",
       "isExtra": false
     },
     {
       "slotId": "M_2025-12-12",
       "seatId": "M_2025-12-12_s1",
-      "userId": "na_03",
+      "userId": "na_04",
       "seatRole": "OPERATOR",
       "isExtra": false
     },
     {
       "slotId": "E_2025-12-12",
       "seatId": "E_2025-12-12_s0",
-      "userId": "na_00",
+      "userId": "na_03",
       "seatRole": "DESK",
       "isExtra": false
     },
     {
       "slotId": "E_2025-12-12",
       "seatId": "E_2025-12-12_s1",
-      "userId": "na_02",
+      "userId": "na_06",
       "seatRole": "OPERATOR",
       "isExtra": false
     },
@@ -325,14 +325,14 @@
     {
       "slotId": "E_2025-12-16",
       "seatId": "E_2025-12-16_s0",
-      "userId": "na_01",
+      "userId": "na_00",
       "seatRole": "DESK",
       "isExtra": false
     },
     {
       "slotId": "E_2025-12-16",
       "seatId": "E_2025-12-16_s1",
-      "userId": "na_03",
+      "userId": "na_04",
       "seatRole": "OPERATOR",
       "isExtra": false
     },
@@ -346,49 +346,49 @@
     {
       "slotId": "M_2025-12-17",
       "seatId": "M_2025-12-17_s1",
-      "userId": "na_04",
+      "userId": "na_05",
       "seatRole": "OPERATOR",
       "isExtra": false
     },
     {
       "slotId": "E_2025-12-17",
       "seatId": "E_2025-12-17_s0",
-      "userId": "na_05",
+      "userId": "na_01",
       "seatRole": "DESK",
       "isExtra": false
     },
     {
       "slotId": "E_2025-12-17",
       "seatId": "E_2025-12-17_s1",
-      "userId": "na_07",
+      "userId": "na_04",
       "seatRole": "OPERATOR",
       "isExtra": false
     },
     {
       "slotId": "M_2025-12-18",
       "seatId": "M_2025-12-18_s0",
-      "userId": "na_00",
+      "userId": "na_02",
       "seatRole": "DESK",
       "isExtra": false
     },
     {
       "slotId": "M_2025-12-18",
       "seatId": "M_2025-12-18_s1",
-      "userId": "na_04",
+      "userId": "na_05",
       "seatRole": "OPERATOR",
       "isExtra": false
     },
     {
       "slotId": "E_2025-12-18",
       "seatId": "E_2025-12-18_s0",
-      "userId": "na_03",
+      "userId": "na_01",
       "seatRole": "DESK",
       "isExtra": false
     },
     {
       "slotId": "E_2025-12-18",
       "seatId": "E_2025-12-18_s1",
-      "userId": "na_05",
+      "userId": "na_03",
       "seatRole": "OPERATOR",
       "isExtra": false
     },
@@ -402,14 +402,14 @@
     {
       "slotId": "M_2025-12-19",
       "seatId": "M_2025-12-19_s1",
-      "userId": "na_01",
+      "userId": "na_07",
       "seatRole": "OPERATOR",
       "isExtra": false
     },
     {
       "slotId": "E_2025-12-19",
       "seatId": "E_2025-12-19_s0",
-      "userId": "na_02",
+      "userId": "na_03",
       "seatRole": "DESK",
       "isExtra": false
     },
@@ -465,98 +465,98 @@
     {
       "slotId": "E_2025-12-23",
       "seatId": "E_2025-12-23_s0",
-      "userId": "na_01",
+      "userId": "na_02",
       "seatRole": "DESK",
       "isExtra": false
     },
     {
       "slotId": "E_2025-12-23",
       "seatId": "E_2025-12-23_s1",
-      "userId": "na_05",
+      "userId": "na_03",
       "seatRole": "OPERATOR",
       "isExtra": false
     },
     {
       "slotId": "M_2025-12-24",
       "seatId": "M_2025-12-24_s0",
-      "userId": "na_01",
+      "userId": "na_00",
       "seatRole": "DESK",
       "isExtra": false
     },
     {
       "slotId": "M_2025-12-24",
       "seatId": "M_2025-12-24_s1",
-      "userId": "na_04",
+      "userId": "na_07",
       "seatRole": "OPERATOR",
       "isExtra": false
     },
     {
       "slotId": "E_2025-12-24",
       "seatId": "E_2025-12-24_s0",
-      "userId": "na_05",
+      "userId": "na_01",
       "seatRole": "DESK",
       "isExtra": false
     },
     {
       "slotId": "E_2025-12-24",
       "seatId": "E_2025-12-24_s1",
-      "userId": "na_07",
+      "userId": "na_06",
       "seatRole": "OPERATOR",
       "isExtra": false
     },
     {
       "slotId": "M_2025-12-25",
       "seatId": "M_2025-12-25_s0",
-      "userId": "na_02",
+      "userId": "na_03",
       "seatRole": "DESK",
       "isExtra": false
     },
     {
       "slotId": "M_2025-12-25",
       "seatId": "M_2025-12-25_s1",
-      "userId": "na_03",
+      "userId": "na_04",
       "seatRole": "OPERATOR",
       "isExtra": false
     },
     {
       "slotId": "E_2025-12-25",
       "seatId": "E_2025-12-25_s0",
-      "userId": "na_00",
+      "userId": "na_02",
       "seatRole": "DESK",
       "isExtra": false
     },
     {
       "slotId": "E_2025-12-25",
       "seatId": "E_2025-12-25_s1",
-      "userId": "na_04",
+      "userId": "na_05",
       "seatRole": "OPERATOR",
       "isExtra": false
     },
     {
       "slotId": "M_2025-12-26",
       "seatId": "M_2025-12-26_s0",
-      "userId": "na_02",
+      "userId": "na_00",
       "seatRole": "DESK",
       "isExtra": false
     },
     {
       "slotId": "M_2025-12-26",
       "seatId": "M_2025-12-26_s1",
-      "userId": "na_03",
+      "userId": "na_01",
       "seatRole": "OPERATOR",
       "isExtra": false
     },
     {
       "slotId": "E_2025-12-26",
       "seatId": "E_2025-12-26_s0",
-      "userId": "na_00",
+      "userId": "na_04",
       "seatRole": "DESK",
       "isExtra": false
     },
     {
       "slotId": "E_2025-12-26",
       "seatId": "E_2025-12-26_s1",
-      "userId": "na_06",
+      "userId": "na_05",
       "seatRole": "OPERATOR",
       "isExtra": false
     },
@@ -601,6 +601,6 @@
       "2 nöbetçi asistan were pushed to base+2 total half A shifts."
     ],
     "solverStatus": "OPTIMAL",
-    "solveTimeMs": 543.2725999853574
+    "solveTimeMs": 490.40900002000853
   }
 }

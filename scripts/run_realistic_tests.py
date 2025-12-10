@@ -58,14 +58,12 @@ def create_ao_slot(slot_id: str, slot_date: date, duty_type: str, seat_count: in
     return Slot(id=slot_id, date=slot_date, dutyType=duty_type, dayType=day_type, seats=seats)
 
 
-def create_na_user(user_id: str, name: str, likes_morning: bool = False, likes_evening: bool = False) -> SeniorUser:
+def create_na_user(user_id: str, name: str) -> SeniorUser:
     """NA kullanıcısı oluştur"""
     return SeniorUser(
         id=user_id,
         name=name,
         role="SENIOR_ASSISTANT",
-        likesMorning=likes_morning,
-        likesEvening=likes_evening,
         history=SeniorUserHistory(
             totalAllTime=0,
             countAAllTime=0,
@@ -195,16 +193,16 @@ def run_ao_realistic_hospital():
 # SCENARIO 2: NA - Gerçekçi Poliklinik Senaryosu (10 kişi, 21 gün)
 # ============================================================================
 
-def run_na_realistic_polyclinic():
+def run_na_realistic_support_unit():
     """
-    Gerçekçi poliklinik senaryosu:
+    Gerçekçi destek birimi senaryosu:
     - 10 nöbetçi asistan
     - 21 günlük dönem (sadece hafta içi)
     - Her gün MORNING + EVENING
     - Pazartesi ve Salı yığılma
     """
     print("\n" + "="*70)
-    print("NA - Gerçekçi Poliklinik Senaryosu (10 kişi, 21 gün)")
+    print("NA - Gerçekçi Destek Birimi Senaryosu (10 kişi, 21 gün)")
     print("="*70)
     
     solver = SeniorSchedulerSolver()
@@ -213,9 +211,7 @@ def run_na_realistic_polyclinic():
     # 10 kullanıcı
     users = []
     for i in range(10):
-        likes_morning = i < 5  # İlk 5 kişi sabahçı
-        likes_evening = i >= 5  # Son 5 kişi akşamcı
-        users.append(create_na_user(f"na_{i:02d}", f"NA {i+1}", likes_morning, likes_evening))
+        users.append(create_na_user(f"na_{i:02d}", f"NA {i+1}"))
     
     # 21 gün slot (sadece hafta içi)
     slots = []
@@ -393,7 +389,7 @@ def main():
     
     # Run all scenarios
     all_stats.append(run_ao_realistic_hospital())
-    all_stats.append(run_na_realistic_polyclinic())
+    all_stats.append(run_na_realistic_support_unit())
     all_stats.append(run_ao_extreme_clustering())
     all_stats.append(run_na_extreme_clustering())
     

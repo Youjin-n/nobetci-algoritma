@@ -205,8 +205,6 @@ interface NAUser {
   name: string;
   email?: string;
   role: string;                    // "SENIOR_ASSISTANT"
-  likesMorning: boolean;           // Prefers morning segment?
-  likesEvening: boolean;           // Prefers afternoon segment?
   history: {
     totalAllTime: number;          // Total half-A count
     countAAllTime: number;         // Same as totalAllTime
@@ -258,8 +256,7 @@ Same structure as AÖ response. `seatRole` contains "DESK" or "OPERATOR".
 | **3** | History fairness | 3,000 | Historical A count balanced |
 | **4** | Weekly clustering | 100 | >2 segments per week |
 | **4** | Same day both segments | 100 | Full day (morning+evening) |
-| **5** | likesMorning | -5 | Morning lover gets morning |
-| **5** | likesEvening | -5 | Afternoon lover gets afternoon |
+
 
 **NOTE**: NA does NOT have likesNight or dislikesWeekend - these don't apply!
 
@@ -283,7 +280,7 @@ Same structure as AÖ response. `seatRole` contains "DESK" or "OPERATOR".
 | **Shift types** | A, B, C, D, E, F | MORNING, EVENING only |
 | **Works weekends?** | Yes (D, E, F) | No |
 | **Night shifts?** | Yes (C, F) | No |
-| **Preferences** | likesNight, dislikesWeekend | likesMorning, likesEvening |
+| **Preferences** | likesNight, dislikesWeekend | None |
 | **DESK/OPERATOR** | 3p = 1D/2O | 3p = 2D/1O |
 | **Solver file** | solver.py | senior_solver.py |
 
@@ -291,5 +288,5 @@ Same structure as AÖ response. `seatRole` contains "DESK" or "OPERATOR".
 
 # Swagger/OpenAPI
 
-- **Swagger UI**: https://nobeta-a-goritma.onrender.com/docs
-- **ReDoc**: https://nobeta-a-goritma.onrender.com/redoc
+- **Swagger UI**: https://nobetci-algoritma.onrender.com/docs
+- **ReDoc**: https://nobetci-algoritma.onrender.com/redoc

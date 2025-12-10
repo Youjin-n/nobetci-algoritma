@@ -11,8 +11,6 @@
       "name": "NA 1",
       "email": null,
       "role": "SENIOR_ASSISTANT",
-      "likesMorning": true,
-      "likesEvening": false,
       "history": {
         "totalAllTime": 0,
         "countAAllTime": 0,
@@ -25,8 +23,6 @@
       "name": "NA 2",
       "email": null,
       "role": "SENIOR_ASSISTANT",
-      "likesMorning": true,
-      "likesEvening": false,
       "history": {
         "totalAllTime": 0,
         "countAAllTime": 0,
@@ -39,8 +35,6 @@
       "name": "NA 3",
       "email": null,
       "role": "SENIOR_ASSISTANT",
-      "likesMorning": true,
-      "likesEvening": false,
       "history": {
         "totalAllTime": 0,
         "countAAllTime": 0,
@@ -53,8 +47,6 @@
       "name": "NA 4",
       "email": null,
       "role": "SENIOR_ASSISTANT",
-      "likesMorning": true,
-      "likesEvening": false,
       "history": {
         "totalAllTime": 0,
         "countAAllTime": 0,
@@ -67,8 +59,6 @@
       "name": "NA 5",
       "email": null,
       "role": "SENIOR_ASSISTANT",
-      "likesMorning": true,
-      "likesEvening": false,
       "history": {
         "totalAllTime": 0,
         "countAAllTime": 0,
@@ -81,8 +71,6 @@
       "name": "NA 6",
       "email": null,
       "role": "SENIOR_ASSISTANT",
-      "likesMorning": false,
-      "likesEvening": true,
       "history": {
         "totalAllTime": 0,
         "countAAllTime": 0,
@@ -95,8 +83,6 @@
       "name": "NA 7",
       "email": null,
       "role": "SENIOR_ASSISTANT",
-      "likesMorning": false,
-      "likesEvening": true,
       "history": {
         "totalAllTime": 0,
         "countAAllTime": 0,
@@ -109,8 +95,6 @@
       "name": "NA 8",
       "email": null,
       "role": "SENIOR_ASSISTANT",
-      "likesMorning": false,
-      "likesEvening": true,
       "history": {
         "totalAllTime": 0,
         "countAAllTime": 0,
@@ -123,8 +107,6 @@
       "name": "NA 9",
       "email": null,
       "role": "SENIOR_ASSISTANT",
-      "likesMorning": false,
-      "likesEvening": true,
       "history": {
         "totalAllTime": 0,
         "countAAllTime": 0,
@@ -137,8 +119,6 @@
       "name": "NA 10",
       "email": null,
       "role": "SENIOR_ASSISTANT",
-      "likesMorning": false,
-      "likesEvening": true,
       "history": {
         "totalAllTime": 0,
         "countAAllTime": 0,

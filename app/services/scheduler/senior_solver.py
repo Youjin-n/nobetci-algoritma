@@ -42,8 +42,7 @@ class SeniorInternalUser:
     history_a: int = 0
     history_morning: int = 0
     history_evening: int = 0
-    likes_morning: bool = False
-    likes_evening: bool = False
+
 
 
 @dataclass
@@ -191,10 +190,7 @@ class SeniorSchedulerSolver:
                 history_total=user.history.totalAllTime,
                 history_a=user.history.countAAllTime,
                 history_morning=user.history.countMorningAllTime,
-                history_evening=user.history.countEveningAllTime,
-                likes_morning=user.likesMorning,
-                likes_evening=user.likesEvening,
-            )
+                history_evening=user.history.countEveningAllTime)
             context.users.append(internal_user)
             context.user_id_to_index[user.id] = idx
 
@@ -330,16 +326,6 @@ class SeniorSchedulerSolver:
 
         # Level 4b: Aynı gün sabah+akşam (100)
         self._add_full_day_penalty(model, context, x, penalties)
-
-        # Level 5: Tercihler (bonus)
-        for user in context.users:
-            for slot in context.slots:
-                # Sabah seviyor ve sabah slotu
-                if user.likes_morning and slot.segment == "MORNING":
-                    penalties.append(x[user.index, slot.index] * (-BONUS_LIKES_SEGMENT))
-                # Akşam seviyor ve akşam slotu
-                if user.likes_evening and slot.segment == "EVENING":
-                    penalties.append(x[user.index, slot.index] * (-BONUS_LIKES_SEGMENT))
 
         # Objective
         model.Minimize(sum(penalties))

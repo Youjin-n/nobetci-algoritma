@@ -44,8 +44,6 @@ def create_senior_user(
     user_id: str,
     name: str,
     history_a: int = 0,
-    likes_morning: bool = False,
-    likes_evening: bool = False,
 ) -> SeniorUser:
     """Helper to create senior user"""
     return SeniorUser(
@@ -57,8 +55,6 @@ def create_senior_user(
             totalAllTime=history_a,
             countAAllTime=history_a,
         ),
-        likesMorning=likes_morning,
-        likesEvening=likes_evening,
     )
 
 
@@ -296,38 +292,7 @@ class TestSeniorConsecutiveDays:
             assert not has_3_consecutive, f"{user_id} has 3 consecutive days"
 
 
-class TestSeniorPreferences:
-    """Tercih testleri"""
 
-    def test_morning_preference_respected(self, solver, base_period):
-        """Sabah tercihi dikkate alınmalı"""
-        users = [
-            create_senior_user("senior-1", "NA Ahmet", likes_morning=True),
-            create_senior_user("senior-2", "NA Mehmet", likes_evening=True),
-        ]
-
-        slots = [
-            create_senior_slot("m1", date(2025, 12, 1), Segment.MORNING),
-            create_senior_slot("e1", date(2025, 12, 1), Segment.EVENING),
-        ]
-
-        request = SeniorScheduleRequest(
-            period=base_period,
-            users=users,
-            slots=slots,
-            unavailability=[],
-        )
-
-        response = solver.solve(request)
-
-        assert response.meta.solverStatus in ("OPTIMAL", "FEASIBLE")
-
-        # senior-1 sabahı, senior-2 akşamı almalı (tercihler nedeniyle)
-        morning_assignment = next(a for a in response.assignments if a.slotId == "m1")
-        evening_assignment = next(a for a in response.assignments if a.slotId == "e1")
-
-        assert morning_assignment.userId == "senior-1"
-        assert evening_assignment.userId == "senior-2"
 
 
 class TestSeniorBasePlus2:

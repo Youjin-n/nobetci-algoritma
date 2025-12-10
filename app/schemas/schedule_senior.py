@@ -40,8 +40,6 @@ class SeniorUser(BaseModel):
     name: str = Field(..., description="Kullanıcı adı")
     email: str | None = Field(default=None, description="E-posta (opsiyonel)")
     role: str = Field(default="SENIOR_ASSISTANT", description="Rol (NÖBETÇİ_ASİSTAN veya SENIOR_ASSISTANT)")
-    likesMorning: bool = Field(default=False, description="Sabah yarısını tercih eder mi?")
-    likesEvening: bool = Field(default=False, description="Akşam yarısını tercih eder mi?")
     history: SeniorUserHistory = Field(
         default_factory=SeniorUserHistory, description="Geçmiş istatistikler"
     )
@@ -106,8 +104,6 @@ class SeniorScheduleRequest(BaseModel):
                         "name": "NA Ayşe Kaya",
                         "email": "ayse@example.com",
                         "role": "SENIOR_ASSISTANT",
-                        "likesMorning": True,
-                        "likesEvening": False,
                         "history": {
                             "totalAllTime": 45,
                             "countAAllTime": 45,
