@@ -8,7 +8,7 @@ It provides **TWO SEPARATE scheduling algorithms** for student assistants:
 1. **AÖ (Asistan Öğrenci) Scheduler** - Full shift distribution (A/B/C/D/E/F)
 2. **NA (Nöbetçi Asistan) Scheduler** - Half-shift distribution (MORNING/EVENING segments)
 
-**Base URL**: `https://nobeta-a-goritma.onrender.com`
+**Base URL**: `https://nobetci-algoritma.onrender.com`
 
 ---
 

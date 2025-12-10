@@ -241,7 +241,7 @@ Seviye  Kural                        Ceza        Açıklama
 
 
 NOT: NA'lar için tercih (preference) sistemi KALDIRILMIŞTIR.
-     Adil dağıtım tercihlerden daha önceliklidir.
+     NA'lar sadece A nöbet tutar bu yüzden tercih sistemi yoktur.
 
 
 
