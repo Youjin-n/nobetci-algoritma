@@ -1,0 +1,72 @@
+{
+  "scenario": "Base+2 Zorlamalı - Çok Darboğazlı",
+  "bottlenecks": {
+    "night": {
+      "closed_by": [
+        "u0",
+        "u1",
+        "u2",
+        "u3",
+        "u4"
+      ],
+      "only_available": [
+        "u5"
+      ]
+    },
+    "monday": {
+      "closed_by": [
+        "u0",
+        "u1",
+        "u2"
+      ],
+      "available": [
+        "u3",
+        "u4",
+        "u5"
+      ]
+    },
+    "friday": {
+      "closed_by": [
+        "u3",
+        "u4"
+      ],
+      "available": [
+        "u0",
+        "u1",
+        "u2",
+        "u5"
+      ]
+    }
+  },
+  "parameters": {
+    "users": 6,
+    "total_seats": 32,
+    "base": 5,
+    "night_slots": 8
+  },
+  "result": {
+    "status": "OPTIMAL",
+    "base": 5,
+    "min": 5,
+    "max": 7,
+    "violations": 1,
+    "at_base_plus_2": 1
+  },
+  "distribution": {
+    "u0": 5,
+    "u1": 5,
+    "u2": 5,
+    "u3": 5,
+    "u4": 5,
+    "u5": 7
+  },
+  "night_distribution": {
+    "u0": 1,
+    "u1": 0,
+    "u2": 0,
+    "u3": 0,
+    "u4": 0,
+    "u5": 7
+  },
+  "conclusion": "u5 toplam 7 nöbet aldı (base+2)"
+}

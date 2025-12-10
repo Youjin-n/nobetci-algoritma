@@ -1,0 +1,59 @@
+{
+  "scenario": "Base+2 Zorlamalı Senaryo",
+  "explanation": {
+    "problem": "7 gece slotu var ama sadece 2 kişi (u6, u7) geceye yazılabilir",
+    "expected": "u6 ve u7 gece yükünü paylaşacak, bu yüzden toplam nöbet sayıları base (4)'den fazla olabilir",
+    "result": {
+      "u6_total": 5,
+      "u6_night": 4,
+      "u7_total": 5,
+      "u7_night": 3
+    }
+  },
+  "parameters": {
+    "users": 8,
+    "days": 7,
+    "total_seats": 35,
+    "base": 4,
+    "night_slots": 7,
+    "users_who_closed_nights": [
+      "u0",
+      "u1",
+      "u2",
+      "u3",
+      "u4",
+      "u5"
+    ],
+    "users_available_for_nights": [
+      "u6",
+      "u7"
+    ]
+  },
+  "result": {
+    "status": "OPTIMAL",
+    "min_shifts": 4,
+    "max_shifts": 5,
+    "unavailability_violations": 0,
+    "users_at_base_plus_2": 0
+  },
+  "user_distribution": {
+    "u0": 4,
+    "u1": 5,
+    "u2": 4,
+    "u3": 4,
+    "u4": 4,
+    "u5": 4,
+    "u6": 5,
+    "u7": 5
+  },
+  "night_distribution": {
+    "u0": 0,
+    "u1": 0,
+    "u2": 0,
+    "u3": 0,
+    "u4": 0,
+    "u5": 0,
+    "u6": 4,
+    "u7": 3
+  }
+}

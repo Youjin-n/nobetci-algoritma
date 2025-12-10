@@ -1,0 +1,56 @@
+{
+  "scenario": "Base+2 Analiz Testi",
+  "parameters": {
+    "users": 10,
+    "days": 14,
+    "total_slots": 42,
+    "total_seats": 80,
+    "base": 8,
+    "night_closers": [
+      "u0",
+      "u1",
+      "u2"
+    ],
+    "wednesday_closers": [
+      "u3",
+      "u4",
+      "u5",
+      "u6"
+    ],
+    "fully_available": [
+      "u7",
+      "u8",
+      "u9"
+    ]
+  },
+  "result": {
+    "status": "OPTIMAL",
+    "base": 8,
+    "min_shifts": 8,
+    "max_shifts": 8,
+    "unavailability_violations": 0,
+    "users_at_base_plus_2": 0
+  },
+  "user_distribution": {
+    "u0": 8,
+    "u1": 8,
+    "u2": 8,
+    "u3": 8,
+    "u4": 8,
+    "u5": 8,
+    "u6": 8,
+    "u7": 8,
+    "u8": 8,
+    "u9": 8
+  },
+  "night_distribution": {
+    "u3": 2,
+    "u4": 2,
+    "u7": 2,
+    "u9": 2,
+    "u5": 2,
+    "u8": 2,
+    "u6": 2
+  },
+  "warnings": []
+}

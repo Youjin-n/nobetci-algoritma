@@ -130,7 +130,7 @@ def run_ao_realistic_hospital():
     for i in range(25):
         likes_night = i % 5 == 0  # Her 5. kişi gece sever
         dislikes_weekend = i % 4 == 0  # Her 4. kişi hafta sonu sevmez
-        users.append(create_ao_user(f"ao_{i:02d}", f"Dr. Asistan {i+1}", likes_night, dislikes_weekend))
+        users.append(create_ao_user(f"ao_{i:02d}", f"Asistan {i+1}", likes_night, dislikes_weekend))
     
     # 28 gün slot
     slots = []
@@ -215,7 +215,7 @@ def run_na_realistic_polyclinic():
     for i in range(10):
         likes_morning = i < 5  # İlk 5 kişi sabahçı
         likes_evening = i >= 5  # Son 5 kişi akşamcı
-        users.append(create_na_user(f"na_{i:02d}", f"Uzm. Dr. {i+1}", likes_morning, likes_evening))
+        users.append(create_na_user(f"na_{i:02d}", f"NA {i+1}", likes_morning, likes_evening))
     
     # 21 gün slot (sadece hafta içi)
     slots = []
@@ -283,7 +283,7 @@ def run_ao_extreme_clustering():
     solver = SchedulerSolver()
     period = Period(id="dec-2025", name="Aralık 2025", startDate=date(2025, 12, 1), endDate=date(2025, 12, 14))
     
-    users = [create_ao_user(f"ao_{i:02d}", f"Dr. {i+1}") for i in range(20)]
+    users = [create_ao_user(f"ao_{i:02d}", f"Asistan {i+1}") for i in range(20)]
     
     slots = []
     unavailability = []
@@ -344,7 +344,7 @@ def run_na_extreme_clustering():
     solver = SeniorSchedulerSolver()
     period = Period(id="dec-2025", name="Aralık 2025", startDate=date(2025, 12, 1), endDate=date(2025, 12, 14))
     
-    users = [create_na_user(f"na_{i:02d}", f"Uzm. {i+1}") for i in range(8)]
+    users = [create_na_user(f"na_{i:02d}", f"NA {i+1}") for i in range(8)]
     
     slots = []
     unavailability = []

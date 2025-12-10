@@ -4,13 +4,17 @@ NÖBETÇİ DAĞITIM MOTORU - KAPSAMLI PROJE RAPORU
 GENEL BAKIŞ
 -----------
 
-Bu sistem İKİ AYRI ALGORITMA içerir:
+Bu sistem İstanbul Teknik Üniversitesi Bilgi İşlem Daire Başkanlığı için geliştirilmiştir.
+Asistan öğrenciler (AÖ) ve nöbetçi asistanlar (NA) için nöbet dağıtımını otomatize eder.
+
+Sistem İKİ AYRI ALGORITMA içerir:
 
 1. AÖ (Asistan Öğrenci) Scheduler - 6 farklı nöbet türünü dağıtır
 2. NA (Nöbetçi Asistan) Scheduler - A nöbetinin yarım segmentlerini dağıtır
 
 Her iki algoritma da Google OR-Tools CP-SAT (Constraint Programming - Satisfiability) 
 çözücüsünü kullanır ama FARKLI solver dosyaları, FARKLI kurallar ve FARKLI girdiler kullanır.
+
 
 
 ================================================================================

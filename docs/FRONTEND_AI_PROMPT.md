@@ -2,7 +2,8 @@
 
 ## Overview
 
-This backend provides **TWO SEPARATE scheduling algorithms**:
+This backend is developed for **Istanbul Technical University IT Department (Bilgi İşlem Daire Başkanlığı)**.  
+It provides **TWO SEPARATE scheduling algorithms** for student assistants:
 
 1. **AÖ (Asistan Öğrenci) Scheduler** - Full shift distribution (A/B/C/D/E/F)
 2. **NA (Nöbetçi Asistan) Scheduler** - Half-shift distribution (MORNING/EVENING segments)
@@ -17,7 +18,7 @@ This backend provides **TWO SEPARATE scheduling algorithms**:
 
 ## AÖ Overview
 
-Distributes **6 different shift types** across weekdays and weekends for research assistants.
+Distributes **6 different shift types** across weekdays and weekends for student assistants (asistan öğrenci).
 
 ## AÖ Duty Types
 
