@@ -8,7 +8,7 @@
   "users": [
     {
       "id": "ao_00",
-      "name": "Dr. Asistan 1",
+      "name": "Asistan 1",
       "email": null,
       "likesNight": true,
       "dislikesWeekend": true,
@@ -28,7 +28,7 @@
     },
     {
       "id": "ao_01",
-      "name": "Dr. Asistan 2",
+      "name": "Asistan 2",
       "email": null,
       "likesNight": false,
       "dislikesWeekend": false,
@@ -48,7 +48,7 @@
     },
     {
       "id": "ao_02",
-      "name": "Dr. Asistan 3",
+      "name": "Asistan 3",
       "email": null,
       "likesNight": false,
       "dislikesWeekend": false,
@@ -68,7 +68,7 @@
     },
     {
       "id": "ao_03",
-      "name": "Dr. Asistan 4",
+      "name": "Asistan 4",
       "email": null,
       "likesNight": false,
       "dislikesWeekend": false,
@@ -88,7 +88,7 @@
     },
     {
       "id": "ao_04",
-      "name": "Dr. Asistan 5",
+      "name": "Asistan 5",
       "email": null,
       "likesNight": false,
       "dislikesWeekend": true,
@@ -108,7 +108,7 @@
     },
     {
       "id": "ao_05",
-      "name": "Dr. Asistan 6",
+      "name": "Asistan 6",
       "email": null,
       "likesNight": true,
       "dislikesWeekend": false,
@@ -128,7 +128,7 @@
     },
     {
       "id": "ao_06",
-      "name": "Dr. Asistan 7",
+      "name": "Asistan 7",
       "email": null,
       "likesNight": false,
       "dislikesWeekend": false,
@@ -148,7 +148,7 @@
     },
     {
       "id": "ao_07",
-      "name": "Dr. Asistan 8",
+      "name": "Asistan 8",
       "email": null,
       "likesNight": false,
       "dislikesWeekend": false,
@@ -168,7 +168,7 @@
     },
     {
       "id": "ao_08",
-      "name": "Dr. Asistan 9",
+      "name": "Asistan 9",
       "email": null,
       "likesNight": false,
       "dislikesWeekend": true,
@@ -188,7 +188,7 @@
     },
     {
       "id": "ao_09",
-      "name": "Dr. Asistan 10",
+      "name": "Asistan 10",
       "email": null,
       "likesNight": false,
       "dislikesWeekend": false,
@@ -208,7 +208,7 @@
     },
     {
       "id": "ao_10",
-      "name": "Dr. Asistan 11",
+      "name": "Asistan 11",
       "email": null,
       "likesNight": true,
       "dislikesWeekend": false,
@@ -228,7 +228,7 @@
     },
     {
       "id": "ao_11",
-      "name": "Dr. Asistan 12",
+      "name": "Asistan 12",
       "email": null,
       "likesNight": false,
       "dislikesWeekend": false,
@@ -248,7 +248,7 @@
     },
     {
       "id": "ao_12",
-      "name": "Dr. Asistan 13",
+      "name": "Asistan 13",
       "email": null,
       "likesNight": false,
       "dislikesWeekend": true,
@@ -268,7 +268,7 @@
     },
     {
       "id": "ao_13",
-      "name": "Dr. Asistan 14",
+      "name": "Asistan 14",
       "email": null,
       "likesNight": false,
       "dislikesWeekend": false,
@@ -288,7 +288,7 @@
     },
     {
       "id": "ao_14",
-      "name": "Dr. Asistan 15",
+      "name": "Asistan 15",
       "email": null,
       "likesNight": false,
       "dislikesWeekend": false,
@@ -308,7 +308,7 @@
     },
     {
       "id": "ao_15",
-      "name": "Dr. Asistan 16",
+      "name": "Asistan 16",
       "email": null,
       "likesNight": true,
       "dislikesWeekend": false,
@@ -328,7 +328,7 @@
     },
     {
       "id": "ao_16",
-      "name": "Dr. Asistan 17",
+      "name": "Asistan 17",
       "email": null,
       "likesNight": false,
       "dislikesWeekend": true,
@@ -348,7 +348,7 @@
     },
     {
       "id": "ao_17",
-      "name": "Dr. Asistan 18",
+      "name": "Asistan 18",
       "email": null,
       "likesNight": false,
       "dislikesWeekend": false,
@@ -368,7 +368,7 @@
     },
     {
       "id": "ao_18",
-      "name": "Dr. Asistan 19",
+      "name": "Asistan 19",
       "email": null,
       "likesNight": false,
       "dislikesWeekend": false,
@@ -388,7 +388,7 @@
     },
     {
       "id": "ao_19",
-      "name": "Dr. Asistan 20",
+      "name": "Asistan 20",
       "email": null,
       "likesNight": false,
       "dislikesWeekend": false,
@@ -408,7 +408,7 @@
     },
     {
       "id": "ao_20",
-      "name": "Dr. Asistan 21",
+      "name": "Asistan 21",
       "email": null,
       "likesNight": true,
       "dislikesWeekend": true,
@@ -428,7 +428,7 @@
     },
     {
       "id": "ao_21",
-      "name": "Dr. Asistan 22",
+      "name": "Asistan 22",
       "email": null,
       "likesNight": false,
       "dislikesWeekend": false,
@@ -448,7 +448,7 @@
     },
     {
       "id": "ao_22",
-      "name": "Dr. Asistan 23",
+      "name": "Asistan 23",
       "email": null,
       "likesNight": false,
       "dislikesWeekend": false,
@@ -468,7 +468,7 @@
     },
     {
       "id": "ao_23",
-      "name": "Dr. Asistan 24",
+      "name": "Asistan 24",
       "email": null,
       "likesNight": false,
       "dislikesWeekend": false,
@@ -488,7 +488,7 @@
     },
     {
       "id": "ao_24",
-      "name": "Dr. Asistan 25",
+      "name": "Asistan 25",
       "email": null,
       "likesNight": false,
       "dislikesWeekend": true,

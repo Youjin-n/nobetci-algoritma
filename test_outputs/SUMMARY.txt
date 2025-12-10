@@ -14,7 +14,7 @@ ALGORİTMA TEST SONUÇLARI
 | Toplam Atama | 228 |
 | Unavailability Violation | 0 |
 | Base+2'ye Ulaşan | 0 |
-| Çözüm Süresi | 60651.85ms |
+| Çözüm Süresi | 60582.32ms |
 
 Kullanıcı Dağılımı:
   ao_00: 9 nöbet
@@ -36,12 +36,12 @@ Kullanıcı Dağılımı:
   ao_16: 9 nöbet
   ao_17: 9 nöbet
   ao_18: 9 nöbet
-  ao_19: 9 nöbet
+  ao_19: 10 nöbet
   ao_20: 10 nöbet
-  ao_21: 10 nöbet
+  ao_21: 9 nöbet
   ao_22: 9 nöbet
-  ao_23: 10 nöbet
-  ao_24: 9 nöbet
+  ao_23: 9 nöbet
+  ao_24: 10 nöbet
 
 ----------------------------------------------------------------------
 
@@ -57,7 +57,7 @@ Kullanıcı Dağılımı:
 | Toplam Atama | 84 |
 | Unavailability Violation | 0 |
 | Base+2'ye Ulaşan | 2 |
-| Çözüm Süresi | 543.68ms |
+| Çözüm Süresi | 543.27ms |
 
 Kullanıcı Dağılımı:
   na_00: 8 nöbet
@@ -86,28 +86,28 @@ Warnings: 2 nöbetçi asistan were pushed to base+2 total half A shifts.
 | Toplam Atama | 90 |
 | Unavailability Violation | 28 |
 | Base+2'ye Ulaşan | 0 |
-| Çözüm Süresi | 60231.48ms |
+| Çözüm Süresi | 60272.42ms |
 
 Kullanıcı Dağılımı:
   ao_00: 4 nöbet
   ao_01: 5 nöbet
-  ao_02: 5 nöbet
-  ao_03: 4 nöbet
-  ao_04: 5 nöbet
-  ao_05: 4 nöbet
-  ao_06: 5 nöbet
-  ao_07: 4 nöbet
-  ao_08: 4 nöbet
-  ao_09: 4 nöbet
-  ao_10: 4 nöbet
-  ao_11: 5 nöbet
+  ao_02: 4 nöbet
+  ao_03: 5 nöbet
+  ao_04: 4 nöbet
+  ao_05: 5 nöbet
+  ao_06: 4 nöbet
+  ao_07: 5 nöbet
+  ao_08: 5 nöbet
+  ao_09: 5 nöbet
+  ao_10: 5 nöbet
+  ao_11: 4 nöbet
   ao_12: 5 nöbet
-  ao_13: 5 nöbet
+  ao_13: 4 nöbet
   ao_14: 4 nöbet
-  ao_15: 4 nöbet
+  ao_15: 5 nöbet
   ao_16: 5 nöbet
-  ao_17: 5 nöbet
-  ao_18: 5 nöbet
+  ao_17: 4 nöbet
+  ao_18: 4 nöbet
   ao_19: 4 nöbet
 
 Warnings: 28 assignment(s) had to ignore user unavailability.
@@ -125,7 +125,7 @@ Warnings: 28 assignment(s) had to ignore user unavailability.
 | Toplam Atama | 40 |
 | Unavailability Violation | 24 |
 | Base+2'ye Ulaşan | 0 |
-| Çözüm Süresi | 228.47ms |
+| Çözüm Süresi | 179.47ms |
 
 Kullanıcı Dağılımı:
   na_00: 5 nöbet

@@ -8,7 +8,7 @@
   "users": [
     {
       "id": "na_00",
-      "name": "Uzm. Dr. 1",
+      "name": "NA 1",
       "email": null,
       "role": "SENIOR_ASSISTANT",
       "likesMorning": true,
@@ -22,7 +22,7 @@
     },
     {
       "id": "na_01",
-      "name": "Uzm. Dr. 2",
+      "name": "NA 2",
       "email": null,
       "role": "SENIOR_ASSISTANT",
       "likesMorning": true,
@@ -36,7 +36,7 @@
     },
     {
       "id": "na_02",
-      "name": "Uzm. Dr. 3",
+      "name": "NA 3",
       "email": null,
       "role": "SENIOR_ASSISTANT",
       "likesMorning": true,
@@ -50,7 +50,7 @@
     },
     {
       "id": "na_03",
-      "name": "Uzm. Dr. 4",
+      "name": "NA 4",
       "email": null,
       "role": "SENIOR_ASSISTANT",
       "likesMorning": true,
@@ -64,7 +64,7 @@
     },
     {
       "id": "na_04",
-      "name": "Uzm. Dr. 5",
+      "name": "NA 5",
       "email": null,
       "role": "SENIOR_ASSISTANT",
       "likesMorning": true,
@@ -78,7 +78,7 @@
     },
     {
       "id": "na_05",
-      "name": "Uzm. Dr. 6",
+      "name": "NA 6",
       "email": null,
       "role": "SENIOR_ASSISTANT",
       "likesMorning": false,
@@ -92,7 +92,7 @@
     },
     {
       "id": "na_06",
-      "name": "Uzm. Dr. 7",
+      "name": "NA 7",
       "email": null,
       "role": "SENIOR_ASSISTANT",
       "likesMorning": false,
@@ -106,7 +106,7 @@
     },
     {
       "id": "na_07",
-      "name": "Uzm. Dr. 8",
+      "name": "NA 8",
       "email": null,
       "role": "SENIOR_ASSISTANT",
       "likesMorning": false,
@@ -120,7 +120,7 @@
     },
     {
       "id": "na_08",
-      "name": "Uzm. Dr. 9",
+      "name": "NA 9",
       "email": null,
       "role": "SENIOR_ASSISTANT",
       "likesMorning": false,
@@ -134,7 +134,7 @@
     },
     {
       "id": "na_09",
-      "name": "Uzm. Dr. 10",
+      "name": "NA 10",
       "email": null,
       "role": "SENIOR_ASSISTANT",
       "likesMorning": false,
