@@ -44,12 +44,12 @@ class Settings(BaseSettings):
     penalty_ideal_soft: int = 4_000
     # Tarihsel denge (expectedTotal farkı)
     penalty_history_fairness: int = 3_000
-    # Nöbet türü bazında eşitlik (A/B/C/Weekend toplam) - GÜÇLÜ
-    penalty_fairness_duty_type: int = 10_000
-    # Night fairness (C+F toplamı dengesizliği) - GÜÇLÜ
-    penalty_fairness_night: int = 10_000
-    # Weekend slot fairness (D/E/F ayrı ayrı dengeleme) - ÖNEMLİ
-    penalty_fairness_weekend_slots: int = 5_000
+    # Nöbet türü bazında eşitlik (A/B/C/Weekend toplam) - ÇOK GÜÇLÜ
+    penalty_fairness_duty_type: int = 50_000
+    # Night fairness (C+F toplamı dengesizliği) - ÇOK GÜÇLÜ
+    penalty_fairness_night: int = 50_000
+    # Weekend slot fairness (D/E/F ayrı ayrı dengeleme) - GÜÇLÜ
+    penalty_fairness_weekend_slots: int = 25_000
 
     # Level 4 – Konfor (hafif)
     # Haftalık yığılma (haftada 2'den fazla nöbet)
