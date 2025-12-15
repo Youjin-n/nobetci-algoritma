@@ -101,41 +101,41 @@ class HardConstraintBuilder:
     def add_forbidden_transition_constraint(self) -> None:
         """
         Hard #2: Yasak geçişler (geceden sabaha).
-        C → A, C → D, F → A, F → D kombinasyonları yasak.
-
-        Mantık: Eğer user bugün C veya F tuttuysa, yarın A veya D tutamaz.
+        
+        ÖNEMLİ MANTIK:
+        - C nöbeti tarihi: Gece nöbetinin BİTTİĞİ günü temsil eder
+          Örn: C tarihi "15 Aralık" = 14 Aralık 23:30 → 15 Aralık 08:30
+        - A nöbeti tarihi: Sabah nöbetinin BAŞLADIĞI günü temsil eder
+          Örn: A tarihi "15 Aralık" = 15 Aralık 08:30 → 17:30
+        
+        YASAK: Aynı tarihli C ve A aynı kişiye atanamaz!
+        (C biter, A hemen başlar - dinlenme yok)
+        
+        Kombinasyonlar:
+        - C (bugün) + A (bugün) YASAK (C biter 08:30, A başlar 08:30)
+        - F (bugün) + D (bugün) YASAK (F biter 08:00, D başlar 08:00)
         """
-        sorted_dates = sorted(self.ctx.date_to_slot_indices.keys())
-
-        for i, current_date in enumerate(sorted_dates):
-            if i + 1 >= len(sorted_dates):
-                continue
-
-            next_date = sorted_dates[i + 1]
-
-            # Ardışık günler mi?
-            if next_date - current_date != timedelta(days=1):
-                continue
-
-            # Bugünün gece slotları (C, F)
-            night_slots_today = [
-                s_idx for s_idx in self.ctx.date_to_slot_indices[current_date]
+        # AYNI GÜN içindeki C+A veya F+D yasağı
+        for current_date, slot_indices in self.ctx.date_to_slot_indices.items():
+            # Bu günün gece slotları (C, F) - bugün sabah biten
+            night_slots = [
+                s_idx for s_idx in slot_indices
                 if is_night_duty(self.ctx.slots[s_idx].duty_type)
             ]
-
-            # Yarının sabah slotları (A, D)
-            morning_slots_tomorrow = [
-                s_idx for s_idx in self.ctx.date_to_slot_indices[next_date]
+            
+            # Bu günün sabah slotları (A, D) - bugün sabah başlayan
+            morning_slots = [
+                s_idx for s_idx in slot_indices
                 if is_morning_duty(self.ctx.slots[s_idx].duty_type)
             ]
-
-            if not night_slots_today or not morning_slots_tomorrow:
+            
+            if not night_slots or not morning_slots:
                 continue
-
-            # Her kullanıcı için: gece + yarın sabah <= 1
+            
+            # Her kullanıcı için: aynı gün gece + sabah <= 1
             for user in self.ctx.users:
-                for night_idx in night_slots_today:
-                    for morning_idx in morning_slots_tomorrow:
+                for night_idx in night_slots:
+                    for morning_idx in morning_slots:
                         self.model.Add(
                             self.x[user.index, night_idx]
                             + self.x[user.index, morning_idx]
