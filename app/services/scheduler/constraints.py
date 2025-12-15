@@ -144,12 +144,19 @@ class HardConstraintBuilder:
 
     def add_max_shifts_constraint(self, max_allowed: int) -> None:
         """
-        Hard #3: base+3 yasağı.
-        totalShifts > base+2 olamaz → max_allowed = base + 2
+        Hard #3: base±2 sınırı.
+        - Üst limit: totalShifts <= base + 2
+        - Alt limit: totalShifts >= base - 2 (en az bu kadar almalı)
         """
+        # min_allowed = max_allowed - 4 (çünkü max = base+2, min = base-2)
+        min_allowed = max(0, max_allowed - 4)
+        
         for user in self.ctx.users:
             user_vars = [self.x[user.index, slot.index] for slot in self.ctx.slots]
+            # Üst limit: kimse base+2'den fazla alamaz
             self.model.Add(sum(user_vars) <= max_allowed)
+            # Alt limit: kimse base-2'den az alamaz
+            self.model.Add(sum(user_vars) >= min_allowed)
 
 
 def get_week_index(d: date, start_date: date) -> int:

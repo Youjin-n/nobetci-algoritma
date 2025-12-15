@@ -36,28 +36,26 @@ class Settings(BaseSettings):
     penalty_below_ideal_strong: int = 60_000  # current < ideal-1
 
     # Level 2 – Ağır (3 gün üst üste)
-    # 3 gün üst üste nöbet (runLength >= 3 için, her ekstra gün başına)
     penalty_consecutive_days: int = 7_000
 
-    # Level 3 – Fairness
-    # |diff| == 1 için hafif ceza (ideal eşitliğe yaklaştırır)
-    penalty_ideal_soft: int = 4_000
-    # Tarihsel denge (expectedTotal farkı)
-    penalty_history_fairness: int = 3_000
-    # Nöbet türü bazında eşitlik (A/B/C/Weekend toplam) - ÇOK GÜÇLÜ
-    penalty_fairness_duty_type: int = 50_000
-    # Night fairness (C+F toplamı dengesizliği) - ÇOK GÜÇLÜ
-    penalty_fairness_night: int = 50_000
-    # Weekend slot fairness (D/E/F ayrı ayrı dengeleme) - GÜÇLÜ
-    penalty_fairness_weekend_slots: int = 25_000
+    # Level 3 – MinMax Fairness (YENİ)
+    # Total MinMax - toplam nöbet farkını minimize et
+    penalty_total_minmax: int = 50_000
+    # A/B/C/Weekend MinMax - her biri için ayrı ayrı
+    penalty_fairness_duty_type: int = 30_000
+    # D/E/F MinMax - hafta sonu slot türleri
+    penalty_fairness_weekend_slots: int = 20_000
+    # Night MinMax - C+F toplam gece
+    penalty_fairness_night: int = 10_000
 
-    # Level 4 – Konfor (hafif)
-    # Haftalık yığılma (haftada 2'den fazla nöbet)
-    penalty_weekly_clustering: int = 100
-    # Arka arkaya gece nöbetleri (C/F ardışık)
-    penalty_consecutive_nights: int = 100
-    # Aynı gün 2 nöbet tutma (konfor cezası)
-    penalty_two_shifts_same_day: int = 100
+    # Level 4 – Soft Fairness
+    penalty_ideal_soft: int = 4_000
+    penalty_history_fairness: int = 3_000
+
+    # Level 5 – Tie-breakers
+    penalty_weekly_clustering: int = 500
+    penalty_consecutive_nights: int = 500
+    penalty_two_shifts_same_day: int = 500
 
     # Level 5 – Tercihler (en hafif)
     # dislikesWeekend olan kişiye weekend verme
