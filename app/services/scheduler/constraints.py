@@ -72,6 +72,7 @@ class HardConstraintBuilder:
         """Tüm hard constraint'leri ekle"""
         self.add_coverage_constraint()
         self.add_max_two_shifts_per_day_constraint()
+        self.add_same_day_night_morning_constraint()  # Yeni: Aynı gün C+A veya F+D yasak
         self.add_forbidden_transition_constraint()
         self.add_max_shifts_constraint(max_shifts_allowed)
 
@@ -97,6 +98,42 @@ class HardConstraintBuilder:
             for user in self.ctx.users:
                 day_vars = [self.x[user.index, s_idx] for s_idx in slot_indices]
                 self.model.Add(sum(day_vars) <= 2)
+
+    def add_same_day_night_morning_constraint(self) -> None:
+        """
+        Hard #5: Aynı gün içinde gece + sabah vardiyası birlikte atanamaz.
+        
+        C + A aynı gün yasak (hafta içi)
+        F + D aynı gün yasak (hafta sonu)
+        
+        Mantık: Gece vardiyası (C/F) ile sabah vardiyası (A/D) aynı kullanıcıya
+        aynı gün içinde atanamaz.
+        """
+        for current_date, slot_indices in self.ctx.date_to_slot_indices.items():
+            # Bu günün gece slotları (C, F)
+            night_slots = [
+                s_idx for s_idx in slot_indices
+                if is_night_duty(self.ctx.slots[s_idx].duty_type)
+            ]
+            
+            # Bu günün sabah slotları (A, D)
+            morning_slots = [
+                s_idx for s_idx in slot_indices
+                if is_morning_duty(self.ctx.slots[s_idx].duty_type)
+            ]
+            
+            if not night_slots or not morning_slots:
+                continue
+            
+            # Her kullanıcı için: aynı gün gece + sabah <= 1
+            for user in self.ctx.users:
+                for night_idx in night_slots:
+                    for morning_idx in morning_slots:
+                        self.model.Add(
+                            self.x[user.index, night_idx]
+                            + self.x[user.index, morning_idx]
+                            <= 1
+                        )
 
     def add_forbidden_transition_constraint(self) -> None:
         """
