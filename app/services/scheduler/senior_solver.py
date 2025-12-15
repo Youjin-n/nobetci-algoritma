@@ -296,32 +296,36 @@ class SeniorSchedulerSolver:
         # Level 2: 3+ gün üst üste yarım A (7_000)
         self._add_consecutive_days_penalty(model, context, x, penalties)
 
-        # Level 3a: Yarım A sayısı fairness (1_000)
+        # Level 3a: Yarım A sayısı fairness - SİMETRİK (1_000)
+        # Hem fazla hem eksik cezalandırılır
         if num_users > 1:
             ideal = context.total_seats // num_users
             for user in context.users:
-                excess = model.NewIntVar(0, max_allowed, f"fair_excess_{user.index}")
-                model.AddMaxEquality(
-                    excess, [user_shift_counts[user.index] - ideal, 0]
-                )
-                penalties.append(excess * PENALTY_FAIRNESS_HALF_A)
+                diff = model.NewIntVar(-max_allowed, max_allowed, f"fair_diff_{user.index}")
+                model.Add(diff == user_shift_counts[user.index] - ideal)
+                abs_diff = model.NewIntVar(0, max_allowed, f"fair_abs_{user.index}")
+                model.AddAbsEquality(abs_diff, diff)
+                penalties.append(abs_diff * PENALTY_FAIRNESS_HALF_A)
 
-        # Level 3b: Geçmiş A sayısı ile denge (3_000)
+        # Level 3b: Geçmiş A sayısı ile denge - SİMETRİK (3_000)
         if num_users > 1:
             avg_history = sum(u.history_a for u in context.users) // num_users
             for user in context.users:
                 # longTermA = history + current
                 long_term = model.NewIntVar(0, 10000, f"longterm_{user.index}")
                 model.Add(long_term == user.history_a + user_shift_counts[user.index])
-                excess = model.NewIntVar(0, 1000, f"hist_excess_{user.index}")
-                model.AddMaxEquality(excess, [long_term - avg_history, 0])
-                penalties.append(excess * PENALTY_FAIRNESS_HISTORY)
+                diff = model.NewIntVar(-1000, 1000, f"hist_diff_{user.index}")
+                model.Add(diff == long_term - avg_history)
+                abs_diff = model.NewIntVar(0, 1000, f"hist_abs_{user.index}")
+                model.AddAbsEquality(abs_diff, diff)
+                penalties.append(abs_diff * PENALTY_FAIRNESS_HISTORY)
 
         # Level 4a: Haftalık yığılma (100)
         self._add_weekly_clustering_penalty(model, context, x, penalties)
 
-        # Level 4b: Aynı gün sabah+akşam (100)
-        self._add_full_day_penalty(model, context, x, penalties)
+        # Level 4b: Aynı gün sabah+akşam - KALDIRILDI
+        # Kullanıcılar tam gün çalışmak İSTİYOR, cezalandırma yok
+        # self._add_full_day_penalty(model, context, x, penalties)
 
         # Objective
         model.Minimize(sum(penalties))
