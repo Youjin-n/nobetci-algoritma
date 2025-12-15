@@ -503,9 +503,15 @@ class PenaltyBuilder:
 
     def _add_duty_type_fairness_penalty(self) -> None:
         """
-        Level 3 (1,000): A/B/C/Weekend fairness.
-        Her tür için idealden fazla olanları cezalandır.
-        excess = max(0, count - ideal)
+        Level 3: A/B/C/Weekend fairness - SİMETRİK PENALTY.
+        
+        Her tür için idealden SAPMAYI cezalandır (hem fazla hem eksik).
+        abs_diff = |count - ideal| kullanarak simetrik ceza.
+        
+        Bu, MinMax yaklaşımına yakın bir etki sağlar:
+        - Birisi fazla alırsa → ceza
+        - Birisi az alırsa → ceza
+        - Sonuç: Herkes ideale yakın kalır (fark max 1)
         """
         weight = self.settings.penalty_fairness_duty_type
         num_users = len(self.ctx.users)
@@ -537,9 +543,8 @@ class PenaltyBuilder:
                 continue
 
             total_seats = sum(s.required_count for s in slots)
-            # ideal (float) → CP-SAT için integer yaklaşımı
-            # ideal_scaled = total_seats (yani N kişi için toplam)
-            # Her kişi için ideal = total_seats / N
+            # Integer ideal (floor)
+            ideal = total_seats // num_users
 
             for user in self.ctx.users:
                 # Bu kullanıcının bu tür slotlardaki toplam ataması
@@ -549,28 +554,22 @@ class PenaltyBuilder:
                 slot_vars = [self.x[user.index, s.index] for s in slots]
                 self.model.Add(count_var == sum(slot_vars))
 
-                # excess = max(0, count * N - total_seats) / N ≈ count - ideal
-                # Scaled version: excess_scaled = max(0, count * N - total_seats)
-                excess_scaled = self.model.NewIntVar(
-                    0, total_seats * num_users, f"excess_{type_name}_{user.index}"
+                # diff = count - ideal
+                max_possible = total_seats
+                diff = self.model.NewIntVar(
+                    -max_possible, max_possible, f"typediff_{type_name}_{user.index}"
                 )
-                diff_scaled = self.model.NewIntVar(
-                    -total_seats * num_users,
-                    total_seats * num_users,
-                    f"diff_{type_name}_{user.index}"
-                )
-                self.model.Add(diff_scaled == count_var * num_users - total_seats)
-                self.model.AddMaxEquality(
-                    excess_scaled,
-                    [diff_scaled, self.model.NewConstant(0)]
-                )
+                self.model.Add(diff == count_var - ideal)
 
-                # Ağırlığı N'e böl (scaled olduğu için)
-                # Veya direkt excess_scaled kullan, weight'i küçült
-                # Basitlik için: excess_scaled / N ≈ excess
-                # CP-SAT integer, bölme yok → weight'i N'e böl
-                adjusted_weight = max(1, weight // num_users)
-                self.add_penalty(excess_scaled, adjusted_weight)
+                # abs_diff = |diff| - SİMETRİK (hem fazla hem eksik cezalandırılır)
+                abs_diff = self.model.NewIntVar(
+                    0, max_possible, f"typeabs_{type_name}_{user.index}"
+                )
+                self.model.AddAbsEquality(abs_diff, diff)
+
+                # PENALTY: Her 1 birim sapma için weight ceza
+                # N'e BÖLME - tam ağırlık kullan
+                self.add_penalty(abs_diff, weight)
 
     def _add_night_fairness_penalty(self) -> None:
         """
