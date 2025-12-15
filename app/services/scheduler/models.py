@@ -109,6 +109,12 @@ class SchedulerContext:
     blocked_count_per_category: dict[int, dict[str, int]] = field(default_factory=dict)
     # max_blocked_per_category[category] = bu kategoride en çok kapatan kullanıcının kaç slot kapattığı
     max_blocked_per_category: dict[str, int] = field(default_factory=dict)
+    
+    # TOPLAM slot kapama sayısı (tüm kategoriler dahil) - çok kapatan gerçek hayatta cezalandırılır
+    # total_blocked_count[user_index] = bu kullanıcının toplam kaç slot kapattığı
+    total_blocked_count: dict[int, int] = field(default_factory=dict)
+    # max_total_blocked = en çok kapatan kullanıcının toplam kaç slot kapattığı
+    max_total_blocked: int = 0
 
     def get_user_by_index(self, index: int) -> InternalUser:
         return self.users[index]

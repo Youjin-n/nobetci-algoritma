@@ -295,14 +295,25 @@ class PenaltyBuilder:
             slot = self.ctx.slots[slot_idx]
             category = _get_category(slot.duty_type)
             
-            # Bu kullanıcı bu kategoride kaç slot kapatmış?
-            blocked = self.ctx.blocked_count_per_category.get(user_idx, {}).get(category, 0)
-            # Bu kategoride en çok kapatan kaç slot kapatmış?
-            max_blocked = self.ctx.max_blocked_per_category.get(category, 0)
+            # ÖNCELİK 1: Bu KATEGORİDE en çok kapatan ilk atanır
+            # C slotu için → en çok C kapatan ilk
+            user_cat_blocked = self.ctx.blocked_count_per_category.get(user_idx, {}).get(category, 0)
+            max_cat_blocked = self.ctx.max_blocked_per_category.get(category, 0)
             
-            # Daha az kapatan → (max_blocked - blocked) daha büyük → daha fazla extra ceza
-            # Daha çok kapatan → (max_blocked - blocked) daha küçük/0 → daha az extra ceza
-            extra_fairness = (max_blocked - blocked) * fairness_weight
+            # ÖNCELİK 2 (TIE-BREAKER): TOPLAM slot kapama
+            user_total_blocked = self.ctx.total_blocked_count.get(user_idx, 0)
+            max_total = self.ctx.max_total_blocked
+            
+            # Kategori bazlı ceza (ana)
+            # Çok kapatan = düşük ceza → zor slotlara atanır
+            cat_extra = (max_cat_blocked - user_cat_blocked) * fairness_weight
+            
+            # Total bazlı ceza (tie-breaker) - daha düşük ağırlık
+            # Kategori eşitlerse, total'e bakılır
+            total_extra = (max_total - user_total_blocked) * (fairness_weight // 10)
+            
+            # Toplam extra = kategori + total tie-breaker
+            extra_fairness = cat_extra + total_extra
             
             # Sabit kısım: base + fairness extra
             fixed_weight = base_weight + extra_fairness

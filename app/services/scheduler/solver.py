@@ -165,6 +165,14 @@ class SchedulerSolver:
                 if count > context.max_blocked_per_category[cat]:
                     context.max_blocked_per_category[cat] = count
 
+        # TOPLAM slot kapama sayısı hesapla (tüm kategoriler)
+        # Çok kapatan → zor slotlara atanır (gerçek hayat cezası)
+        for user in context.users:
+            total = sum(context.blocked_count_per_category[user.index].values())
+            context.total_blocked_count[user.index] = total
+            if total > context.max_total_blocked:
+                context.max_total_blocked = total
+
         # Base hesapla
         context.total_seats = sum(s.required_count for s in context.slots)
         if context.users:
