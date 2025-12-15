@@ -435,50 +435,71 @@ class PenaltyBuilder:
 
     def _add_consecutive_days_penalty(self) -> None:
         """
-        Level 2 (7,000): 3 gün üst üste nöbet cezası.
-        runLength >= 3 için: penalty = 7000 * (runLength - 2)
-
-        CP-SAT'ta bunu modellemek için:
-        Her 3'lü ardışık gün penceresi için, 3'ü de dolu ise 7000 ceza.
-        Her 4'lü için ekstra 7000, vs.
+        Level 2 (7,000): 3 gün üst üste AYNI TÜR nöbet cezası.
+        
+        Aynı nöbet türünü 3 gün arka arkaya tutmak cezalandırılır:
+        - 3 gün A-A-A: ceza
+        - 3 gün B-B-B: ceza
+        - 3 gün C-C-C: ceza
+        - 3 gün D-D-D: ceza
+        - 3 gün E-E-E: ceza
+        - 3 gün F-F-F: ceza
+        
+        FARKLI türler arka arkaya gelmesi sorun değil (A-B-C gibi).
         """
         weight = self.settings.penalty_consecutive_days
         sorted_dates = sorted(self.ctx.date_to_slot_indices.keys())
-
-        for user in self.ctx.users:
-            # Her kullanıcı için günlük "nöbet var mı" değişkenleri
-            day_has_shift: dict[date, "cp_model.IntVar"] = {}
-
-            for d in sorted_dates:
-                slot_indices = self.ctx.date_to_slot_indices[d]
-                day_var = self.model.NewBoolVar(f"day_{user.index}_{d}")
-                day_slots = [self.x[user.index, s_idx] for s_idx in slot_indices]
-
-                if day_slots:
-                    # day_var = 1 iff any slot assigned that day
-                    self.model.AddMaxEquality(day_var, day_slots)
-                else:
-                    self.model.Add(day_var == 0)
-
-                day_has_shift[d] = day_var
-
-            # Her 3'lü ardışık gün penceresi kontrol et
-            for i in range(len(sorted_dates) - 2):
-                d1, d2, d3 = sorted_dates[i], sorted_dates[i + 1], sorted_dates[i + 2]
-
-                # Ardışık mı?
-                if (d2 - d1).days != 1 or (d3 - d2).days != 1:
-                    continue
-
-                # 3 gün de dolu ise ceza
-                # penalty_var = 1 iff all three days have shifts
-                all_three = self.model.NewBoolVar(f"consec3_{user.index}_{i}")
-                self.model.AddMinEquality(all_three, [
-                    day_has_shift[d1],
-                    day_has_shift[d2],
-                    day_has_shift[d3],
-                ])
-                self.add_penalty(all_three, weight)
+        
+        if len(sorted_dates) < 3:
+            return
+        
+        # Her nöbet türü için ayrı kontrol
+        duty_types = ["A", "B", "C", "D", "E", "F"]
+        
+        for duty_type in duty_types:
+            # Bu türün slotlarını tarihe göre grupla
+            type_slots_by_date: dict[date, list[int]] = {}
+            for d, slot_indices in self.ctx.date_to_slot_indices.items():
+                type_slots = [
+                    s_idx for s_idx in slot_indices
+                    if self.ctx.slots[s_idx].duty_type == duty_type
+                ]
+                if type_slots:
+                    type_slots_by_date[d] = type_slots
+            
+            if not type_slots_by_date:
+                continue
+            
+            for user in self.ctx.users:
+                # Her kullanıcı için bu türde günlük "nöbet var mı" değişkenleri
+                day_has_type: dict[date, "cp_model.IntVar"] = {}
+                
+                for d in sorted_dates:
+                    if d in type_slots_by_date:
+                        day_var = self.model.NewBoolVar(f"day_{duty_type}_{user.index}_{d}")
+                        type_slots = [self.x[user.index, s_idx] for s_idx in type_slots_by_date[d]]
+                        self.model.AddMaxEquality(day_var, type_slots)
+                        day_has_type[d] = day_var
+                    else:
+                        # Bu türde slot yok → 0
+                        day_has_type[d] = self.model.NewConstant(0)
+                
+                # Her 3'lü ardışık gün penceresi kontrol et
+                for i in range(len(sorted_dates) - 2):
+                    d1, d2, d3 = sorted_dates[i], sorted_dates[i + 1], sorted_dates[i + 2]
+                    
+                    # Ardışık mı?
+                    if (d2 - d1).days != 1 or (d3 - d2).days != 1:
+                        continue
+                    
+                    # 3 gün de bu türde nöbet varsa ceza
+                    all_three = self.model.NewBoolVar(f"consec3_{duty_type}_{user.index}_{i}")
+                    self.model.AddMinEquality(all_three, [
+                        day_has_type[d1],
+                        day_has_type[d2],
+                        day_has_type[d3],
+                    ])
+                    self.add_penalty(all_three, weight)
 
     def _add_duty_type_fairness_penalty(self) -> None:
         """
