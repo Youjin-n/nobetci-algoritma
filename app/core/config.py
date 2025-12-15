@@ -39,8 +39,8 @@ class Settings(BaseSettings):
     penalty_consecutive_days: int = 7_000
 
     # Level 3 – MinMax Fairness (YENİ)
-    # Total MinMax - toplam nöbet farkını minimize et
-    penalty_total_minmax: int = 50_000
+    # Total MinMax - toplam nöbet farkını minimize et - EN ÖNEMLİ
+    penalty_total_minmax: int = 150_000
     # A/B/C/Weekend MinMax - her biri için ayrı ayrı
     penalty_fairness_duty_type: int = 30_000
     # D/E/F MinMax - hafta sonu slot türleri
