@@ -178,6 +178,37 @@ class SchedulerSolver:
         if context.users:
             context.base_shifts = context.total_seats // len(context.users)
 
+        # Per-type fairness ideals hesapla (Google pattern)
+        # Her tip için: min = floor(total/n), max = ceil(total/n)
+        num_users = len(context.users)
+        if num_users > 0:
+            # Her tip için toplam slot sayısını hesapla
+            type_totals = {"A": 0, "B": 0, "C": 0, "Weekend": 0}
+            for slot in context.slots:
+                duty_type = slot.duty_type
+                seats = slot.required_count
+                
+                if duty_type == "A":
+                    type_totals["A"] += seats
+                elif duty_type == "B":
+                    type_totals["B"] += seats
+                elif duty_type == "C":
+                    type_totals["C"] += seats
+                
+                # Weekend = D + E + F
+                if duty_type in ("D", "E", "F"):
+                    type_totals["Weekend"] += seats
+            
+            # Min/max hesapla
+            import math
+            for cat, total in type_totals.items():
+                ideal = total / num_users
+                context.type_ideals[cat] = {
+                    "total": total,
+                    "min": math.floor(ideal),
+                    "max": math.ceil(ideal),
+                }
+
         return context
 
     def _solve_with_cpsat(self, context: SchedulerContext) -> SolverResult:

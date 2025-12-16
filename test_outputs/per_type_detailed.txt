@@ -1,0 +1,51 @@
+﻿================================================================================
+PER-TYPE FAIRNESS TEST
+================================================================================
+Status: FEASIBLE
+Total: Min=10, Max=11
+
+================================================================================
+EXPECTED BOUNDS (Google pattern: floor/ceil)
+================================================================================
+A: 90 slots / 26 users = 3.46 → min=3, max=4
+B: 60 slots / 26 users = 2.31 → min=2, max=3
+C: 60 slots / 26 users = 2.31 → min=2, max=3
+Weekend: 72 slots / 26 users = 2.77 → min=2, max=3
+
+================================================================================
+Name                       Tot   A   B   C Wknd
+---------------------------------------------
+Elif Öner                   11   3   2   3    3
+Enes Yumurtacı              11   4   2   3    2
+Melisa Öztürk               11   4   2   3    2
+Elif Rabia Nur Kırlı        11   4   3   2    2
+Emirhan Gök                 11   4   2   3    2
+Eylül Gençoğlu              11   3   2   3    3
+Nurullah Özköse             11   4   2   2    3
+Selin Hayırlı               11   3   3   2    3
+Ahmet Furkan Ünnü           11   3   3   2    3
+Ahmet Selim Öztürk          11   3   3   2    3
+Zeynep Suna Çalık           11   4   2   2    3
+Emirhan Yavuz               11   3   2   3    3
+Osman Değirmenci            11   4   2   2    3
+Süleyman Enis Otağ          11   4   2   2    3
+Muhammed Enes Çetin         11   3   2   3    3
+Nihal Metin                 11   4   2   2    3
+Ali Cem Noyan               11   3   3   2    3
+Sıla Sinem Dağdelen         11   3   3   2    3
+Elif Züleyha Taçyıldız      11   4   2   3    2
+Melih Emre Sönmez           11   3   3   2    3
+İbrahim Etem Mermer         11   4   3   2    2
+Mustafa Küçükcoşkun         11   4   2   2    3
+Zeynep Özyürek              10   3   2   2    3
+Emirhan Baran               10   3   2   2    3
+Fatih Bakır                 10   3   2   2    3
+Melih Borhan                10   3   2   2    3
+
+================================================================================
+ACTUAL RANGES
+================================================================================
+A: actual=[3, 4] expected=[3, 4] ✅
+B: actual=[2, 3] expected=[2, 3] ✅
+C: actual=[2, 3] expected=[2, 3] ✅
+Weekend: actual=[2, 3] expected=[2, 3] ✅

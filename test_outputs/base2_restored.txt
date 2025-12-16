@@ -1,0 +1,15 @@
+﻿================================================================================
+LATEST PRODUCTION REQUEST - LOCAL TEST
+================================================================================
+Users: 26
+Total Seats: 282
+Per User Ideal: 10.85
+
+Solving...
+
+Meta: Status=FEASIBLE
+Min=10, Max=11, Diff=1
+Local Solve Time: 120977ms
+Production Solve Time: 65016ms
+
+Distribution: {10: 4, 11: 22}

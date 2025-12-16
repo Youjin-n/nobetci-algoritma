@@ -115,6 +115,11 @@ class SchedulerContext:
     total_blocked_count: dict[int, int] = field(default_factory=dict)
     # max_total_blocked = en çok kapatan kullanıcının toplam kaç slot kapattığı
     max_total_blocked: int = 0
+    
+    # Per-type fairness: Her tür için ideal min/max (Google pattern)
+    # type_ideals["A"] = {"min": 3, "max": 4, "total": 90}
+    # Her kullanıcı bu aralıkta kalmalı (SOFT constraint ile zorlanır)
+    type_ideals: dict[str, dict[str, int]] = field(default_factory=dict)
 
     def get_user_by_index(self, index: int) -> InternalUser:
         return self.users[index]

@@ -42,7 +42,7 @@ class Settings(BaseSettings):
     # Total MinMax - toplam nöbet farkını minimize et - EN ÖNEMLİ
     penalty_total_minmax: int = 150_000  # Müsaitlik (200k) altında olmalı
     # A/B/C/Weekend MinMax - her biri için ayrı ayrı
-    penalty_fairness_duty_type: int = 10_000  # Düşürüldü
+    penalty_fairness_duty_type: int = 150_000  # Per-user, per-type fairness (Google pattern)
     # D/E/F MinMax - hafta sonu slot türleri
     penalty_fairness_weekend_slots: int = 5_000  # Düşürüldü
     # Night MinMax - C+F toplam gece

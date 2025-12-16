@@ -490,28 +490,27 @@ class PenaltyBuilder:
 
     def _add_duty_type_fairness_penalty(self) -> None:
         """
-        Level 3: A/B/C/Weekend fairness - SİMETRİK PENALTY.
+        Level 3: Per-User, Per-Type Fairness (Google Pattern).
         
-        Her tür için idealden SAPMAYI cezalandır (hem fazla hem eksik).
-        abs_diff = |count - ideal| kullanarak simetrik ceza.
+        Her kullanıcı için her tip (A/B/C/Weekend) için:
+        - count < type_ideals[type]["min"] → penalty
+        - count > type_ideals[type]["max"] → penalty
         
-        Bu, MinMax yaklaşımına yakın bir etki sağlar:
-        - Birisi fazla alırsa → ceza
-        - Birisi az alırsa → ceza
-        - Sonuç: Herkes ideale yakın kalır (fark max 1)
+        Bu, GLOBAL MinMax'tan farklı olarak HER kullanıcıyı bireysel olarak zorlar.
+        Örnek: A ideali 3-4 ise, kimse 2 veya 5 alamaz.
         """
-        weight = self.settings.penalty_fairness_duty_type
+        weight = self.settings.penalty_fairness_duty_type  # 150k olarak ayarlanmalı
         num_users = len(self.ctx.users)
 
-        if num_users == 0:
+        if num_users == 0 or not self.ctx.type_ideals:
             return
 
-        # Her duty type grubu için slot sayısı
-        type_slots: dict[str, list["InternalSlot"]] = {
+        # Her tip için slot listesi oluştur
+        type_slots: dict[str, list] = {
             "A": [],
             "B": [],
             "C": [],
-            "WEEKEND": [],
+            "Weekend": [],
         }
 
         for slot in self.ctx.slots:
@@ -522,39 +521,47 @@ class PenaltyBuilder:
             elif slot.duty_type == "C":
                 type_slots["C"].append(slot)
 
+            # Weekend = D + E + F
             if is_weekend_duty(slot.duty_type):
-                type_slots["WEEKEND"].append(slot)
+                type_slots["Weekend"].append(slot)
 
+        # Her tip için her kullanıcıya min/max enforcement
         for type_name, slots in type_slots.items():
-            if not slots:
+            if not slots or type_name not in self.ctx.type_ideals:
                 continue
 
-            total_seats = sum(s.required_count for s in slots)
-            
-            # Her kullanıcının bu tip için count değişkeni
-            user_counts: dict[int, "cp_model.IntVar"] = {}
+            ideals = self.ctx.type_ideals[type_name]
+            ideal_min = ideals["min"]
+            ideal_max = ideals["max"]
+            total_seats = ideals.get("total", sum(s.required_count for s in slots))
+
             for user in self.ctx.users:
+                # Bu kullanıcının bu tip için count değişkeni
                 count_var = self.model.NewIntVar(
                     0, total_seats, f"typecount_{type_name}_{user.index}"
                 )
                 slot_vars = [self.x[user.index, s.index] for s in slots]
                 self.model.Add(count_var == sum(slot_vars))
-                user_counts[user.index] = count_var
 
-            # MinMax: max ve min değişkenleri
-            max_val = self.model.NewIntVar(0, total_seats, f"max_{type_name}")
-            min_val = self.model.NewIntVar(0, total_seats, f"min_{type_name}")
+                # === BELOW MIN PENALTY ===
+                # below = max(0, ideal_min - count)
+                below = self.model.NewIntVar(0, total_seats, f"below_{type_name}_{user.index}")
+                below_diff = self.model.NewIntVar(-total_seats, total_seats, f"below_diff_{type_name}_{user.index}")
+                self.model.Add(below_diff == ideal_min - count_var)
+                self.model.AddMaxEquality(below, [below_diff, 0])
+                
+                # Her birim eksik için penalty
+                self.add_penalty(below, weight)
 
-            for user in self.ctx.users:
-                self.model.Add(max_val >= user_counts[user.index])
-                self.model.Add(min_val <= user_counts[user.index])
-
-            # Fark = max - min
-            diff = self.model.NewIntVar(0, total_seats, f"range_{type_name}")
-            self.model.Add(diff == max_val - min_val)
-
-            # Penalty: fark * weight
-            self.add_penalty(diff, weight)
+                # === ABOVE MAX PENALTY ===
+                # above = max(0, count - ideal_max)
+                above = self.model.NewIntVar(0, total_seats, f"above_{type_name}_{user.index}")
+                above_diff = self.model.NewIntVar(-total_seats, total_seats, f"above_diff_{type_name}_{user.index}")
+                self.model.Add(above_diff == count_var - ideal_max)
+                self.model.AddMaxEquality(above, [above_diff, 0])
+                
+                # Her birim fazla için penalty
+                self.add_penalty(above, weight)
 
     def _add_night_fairness_penalty(self) -> None:
         """
