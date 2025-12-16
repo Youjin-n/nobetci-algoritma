@@ -99,6 +99,21 @@ Bu servis, nöbet atamalarını optimize eden bir REST API'dir.
             "health": "/schedule/health",
         }
 
+    @app.get("/debug/version", tags=["Debug"])
+    async def debug_version():
+        """Debug endpoint - hangi kod versiyonu çalışıyor?"""
+        return {
+            "build_id": "2025-12-16-0435-minmax-peruser",
+            "commit": "42342c8",
+            "features": [
+                "MinMax fairness (150k weight)",
+                "Per-user abs_diff (4k weight)", 
+                "Total MinMax, A/B/C/Weekend/D/E/F/Night MinMax",
+                "Heavy closer penalty (category-first)",
+            ],
+            "expected_result": "Min=10, Max=11 for 282 slots / 26 users"
+        }
+
     return app
 
 
