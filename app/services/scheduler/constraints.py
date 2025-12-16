@@ -148,8 +148,9 @@ class HardConstraintBuilder:
         - Üst limit: totalShifts <= base + 2
         - Alt limit: totalShifts >= base - 2
         
-        Not: base±1 INFEASIBLE sonuç verdi (C→A yasak vb. constraint'lerle çakışıyor).
-        Adalet için MinMax soft penalty (150k) kullanılıyor.
+        MinMax soft penalty (150k) daha sıkı dağılım için
+        çalışır, ama müsaitlik ihlali gerekirse ±2'ye kadar
+        genişleyebilir.
         """
         # max_allowed = base + 2 olarak geliyor
         min_allowed = max(0, max_allowed - 4)  # base - 2
