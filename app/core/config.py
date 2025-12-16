@@ -40,13 +40,13 @@ class Settings(BaseSettings):
 
     # Level 3 – MinMax Fairness (YENİ)
     # Total MinMax - toplam nöbet farkını minimize et - EN ÖNEMLİ
-    penalty_total_minmax: int = 150_000
+    penalty_total_minmax: int = 500_000  # Çok yüksek - hızlı convergence için
     # A/B/C/Weekend MinMax - her biri için ayrı ayrı
-    penalty_fairness_duty_type: int = 30_000
+    penalty_fairness_duty_type: int = 10_000  # Düşürüldü
     # D/E/F MinMax - hafta sonu slot türleri
-    penalty_fairness_weekend_slots: int = 20_000
+    penalty_fairness_weekend_slots: int = 5_000  # Düşürüldü
     # Night MinMax - C+F toplam gece
-    penalty_fairness_night: int = 10_000
+    penalty_fairness_night: int = 3_000  # Düşürüldü
 
     # Level 4 – Soft Fairness
     penalty_ideal_soft: int = 4_000

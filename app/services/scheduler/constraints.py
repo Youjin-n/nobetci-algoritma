@@ -146,10 +146,13 @@ class HardConstraintBuilder:
         """
         Hard #3: base±2 sınırı.
         - Üst limit: totalShifts <= base + 2
-        - Alt limit: totalShifts >= base - 2 (en az bu kadar almalı)
+        - Alt limit: totalShifts >= base - 2
+        
+        Not: base±1 INFEASIBLE sonuç verdi (C→A yasak vb. constraint'lerle çakışıyor).
+        Adalet için MinMax soft penalty (150k) kullanılıyor.
         """
-        # min_allowed = max_allowed - 4 (çünkü max = base+2, min = base-2)
-        min_allowed = max(0, max_allowed - 4)
+        # max_allowed = base + 2 olarak geliyor
+        min_allowed = max(0, max_allowed - 4)  # base - 2
         
         for user in self.ctx.users:
             user_vars = [self.x[user.index, slot.index] for slot in self.ctx.slots]
