@@ -1,0 +1,24 @@
+﻿================================================================================
+PRODUCTION JSON LOCAL TEST
+================================================================================
+Users: 26
+Slots: 126
+Total Seats: 282
+Per User Ideal: 10.85
+Base (floor): 10
+Unavailability: 0
+
+Solving...
+
+Meta: Status=FEASIBLE
+Min=10, Max=11, Diff=1
+Unavailability Violations: 0
+
+Distribution: {10: 4, 11: 22}
+
+================================================================================
+EXPECTED RESULT
+================================================================================
+Base = 10
+Min allowed = base - 2 = 8
+Max allowed = base + 2 = 12

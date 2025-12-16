@@ -178,14 +178,14 @@ class PenaltyBuilder:
         ideal_current: dict[int, int],
     ) -> None:
         """
-        Level 3 (4,000): |current - ideal_current| == 1 cezası.
+        Level 3.5: Kişi bazında ideal sapma cezası.
         
-        Güvenli bölge (ceza yok): diff = 0 (tam ideal)
-        Hafif ceza: |diff| = 1
+        Her kullanıcı için |current - ideal| kadar ceza.
+        MinMax global eşitliği sağlar, bu fonksiyon bireysel ince ayar yapar.
         
-        Bu, solver'ı tam eşitliğe (diff=0) doğru iter.
-        Daha ağır kurallarla (unavailability, ±2) çatışmadığı sürece
-        solver tam eşitliği tercih eder.
+        MinMax + Per-user birlikte:
+        - MinMax: max-min farkını 1'e zorlar
+        - Per-user: herkesi ideale yaklaştırır
         """
         weight = self.settings.penalty_ideal_soft  # 4k
         max_possible = len(self.ctx.slots)
@@ -198,16 +198,12 @@ class PenaltyBuilder:
             diff = self.model.NewIntVar(-max_possible, max_possible, f"diff_soft_{user.index}")
             self.model.Add(diff == count_var - ideal)
 
-            # abs_diff = |diff|
+            # abs_diff = |diff| - HER SAPMA İÇİN CEZA
             abs_diff = self.model.NewIntVar(0, max_possible, f"absdiff_soft_{user.index}")
             self.model.AddAbsEquality(abs_diff, diff)
 
-            # is_one = abs_diff == 1
-            is_one = self.model.NewBoolVar(f"is_one_{user.index}")
-            self.model.Add(abs_diff == 1).OnlyEnforceIf(is_one)
-            self.model.Add(abs_diff != 1).OnlyEnforceIf(is_one.Not())
-
-            self.add_penalty(is_one, weight)
+            # Her birim sapma için weight ceza
+            self.add_penalty(abs_diff, weight)
 
     def _add_zero_shifts_penalty(
         self,
