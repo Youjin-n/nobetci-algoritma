@@ -103,8 +103,8 @@ Bu servis, nöbet atamalarını optimize eden bir REST API'dir.
     async def debug_version():
         """Debug endpoint - hangi kod versiyonu çalışıyor?"""
         return {
-            "build_id": "2025-12-16-0435-minmax-peruser",
-            "commit": "42342c8",
+            "build_id": "2025-12-16-0445-timeout-120s",
+            "timeout_seconds": 120,
             "features": [
                 "MinMax fairness (150k weight)",
                 "Per-user abs_diff (4k weight)", 

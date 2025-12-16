@@ -19,7 +19,7 @@ class Settings(BaseSettings):
     debug: bool = False
 
     # Scheduler Ayarları
-    scheduler_time_limit_seconds: int = 60  # OR-Tools solver zaman limiti
+    scheduler_time_limit_seconds: int = 120  # OR-Tools solver zaman limiti (arttırıldı)
     scheduler_random_seed: int = 42  # Deterministik sonuçlar için seed
 
     # =========================================================================
