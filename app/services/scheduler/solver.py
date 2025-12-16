@@ -231,6 +231,44 @@ class SchedulerSolver:
         objective = penalty_builder.get_total_objective()
         model.Minimize(objective)
 
+        # --- SOLUTION HINT: Dengeli başlangıç noktası ---
+        # Render free tier yavaş CPU için, solver'a iyi bir başlangıç ver
+        # Her kullanıcıya base veya base+1 shift atayarak başla
+        num_users = len(context.users)
+        base = context.base_shifts
+        remainder = context.total_seats - (base * num_users)  # Kaç kişi base+1 alacak
+        
+        # Kullanıcılara round-robin atama yap (hint olarak)
+        user_target = {}
+        for i, user in enumerate(context.users):
+            if i < remainder:
+                user_target[user.index] = base + 1
+            else:
+                user_target[user.index] = base
+        
+        # Her slot için round-robin atama hint'i
+        slot_assignments = {slot.index: [] for slot in context.slots}
+        user_counts = {user.index: 0 for user in context.users}
+        
+        for slot in sorted(context.slots, key=lambda s: s.date):
+            needed = slot.required_count
+            # En az atama yapılan ve target'a ulaşmamış kullanıcıları seç
+            available_users = sorted(
+                [u for u in context.users if user_counts[u.index] < user_target[u.index]],
+                key=lambda u: user_counts[u.index]
+            )
+            for i in range(min(needed, len(available_users))):
+                slot_assignments[slot.index].append(available_users[i].index)
+                user_counts[available_users[i].index] += 1
+        
+        # Hint olarak model'e ekle
+        for user in context.users:
+            for slot in context.slots:
+                if user.index in slot_assignments[slot.index]:
+                    model.AddHint(x[user.index, slot.index], 1)
+                else:
+                    model.AddHint(x[user.index, slot.index], 0)
+
         # --- Çöz ---
         solver = cp_model.CpSolver()
         solver.parameters.max_time_in_seconds = self.settings.scheduler_time_limit_seconds
